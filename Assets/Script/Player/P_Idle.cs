@@ -10,6 +10,7 @@ namespace Game.Player
     public class P_Idle : P_Base
     {
         public Vector3 velocity;
+        public bool attack;
         public P_Idle(MainPlayer _player) : base(_player)
         {
             player = _player;
@@ -20,6 +21,7 @@ namespace Game.Player
             base.EnterState();
             _input = Vector2.zero;
             _isSprint = false;
+            attack = false;
 
         }
 
@@ -32,7 +34,11 @@ namespace Game.Player
             if (_sprintAction.triggered)
             {
                 _isSprint = true;
-            }            
+            }    
+            if(_attack.triggered)
+            {
+                attack = true;
+            }
         }
 
 
@@ -40,18 +46,24 @@ namespace Game.Player
         {
             base.LogicUpdateState();
 
-            player.animator.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
+            player.P_anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
 
             if (_input.magnitude >= 0.1f) MovementUpdate();
 
-            if (_isSprint)
+            if (_isSprint && !attack)
             {                
                 player.ChangeCurrentState(player.SPRINT);
+            }
+            if (attack && !_isSprint)
+            {
+                player.S_anim.SetTrigger(AnimationVeriable.ATTACK);
+                player.P_anim.SetFloat(AnimationVeriable.SPEED, 0);
+                player.ChangeCurrentState(player.ATTACKING);
             }
         }
         public override void ExitState()
         {
-
+           
         }
     }
 }

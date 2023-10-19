@@ -29,7 +29,8 @@ namespace Game.Player
 
         public CharacterController controller;
         public PlayerInput playerInput;
-        public Animator animator;
+        public Animator P_anim;
+        public Animator S_anim;
         public Transform cameraTransform;
         public Transform targetedEnemy;
 
@@ -44,6 +45,7 @@ namespace Game.Player
         public float jumpForce = 10;
         public float gravityMultiplier = 3.0f;
 
+        public bool isCooldown;
 
         private void Start()
         {
@@ -69,7 +71,7 @@ namespace Game.Player
 
             _currentState = newState;
             _currentState.EnterState();
-            Debug.Log($"{newState}");
+            //Debug.Log($"{newState}");
 
         }
 
@@ -86,5 +88,6 @@ namespace Game.Player
                 targetedEnemy = null;
             }
         }
+
     }
 }

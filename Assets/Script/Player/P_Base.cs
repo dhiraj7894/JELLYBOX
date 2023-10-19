@@ -16,6 +16,11 @@ namespace Game.Player
         protected InputAction _moveAction;
         protected InputAction _sprintAction;        
         protected InputAction _dashAction;
+        protected InputAction _attack;
+        protected InputAction _leftDoubleSlash;
+        protected InputAction _rightSingleSlash;
+        protected InputAction _rightDoubleSlash;
+        protected InputAction _heavyAttack;
 
         protected bool _isIdle = false;
         protected bool _isSprint = false;
@@ -46,6 +51,10 @@ namespace Game.Player
             _moveAction = player.playerInput.actions["Move"];
             _sprintAction = player.playerInput.actions["Sprint"];            
             _dashAction = player.playerInput.actions["Dash"];
+
+            _attack = player.playerInput.actions["Attack"];
+
+            _heavyAttack = player.playerInput.actions["HeavyAttack"];
 
             _playerSpeed = player.playerSpeed;
             _gravityMulitplier = player.gravityMultiplier;
@@ -105,7 +114,7 @@ namespace Game.Player
             if (player.controller.isGrounded)
             {
                 _velocity.y += player.jumpForce;
-                player.animator.Play(AnimationVeriable.JUMP);
+                player.P_anim.Play(AnimationVeriable.JUMP);
             }
         }
     }
