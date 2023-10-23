@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
 
@@ -22,6 +23,7 @@ namespace Game.Player
             _input = Vector2.zero;
             _isSprint = false;
             attack = false;
+            _heavyAttack.performed += OnHeavyAttack;
 
         }
 
@@ -45,25 +47,38 @@ namespace Game.Player
         public override void LogicUpdateState()
         {
             base.LogicUpdateState();
-
-            player.P_anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
-
-            if (_input.magnitude >= 0.1f) MovementUpdate();
-
-            if (_isSprint && !attack)
-            {                
-                player.ChangeCurrentState(player.SPRINT);
-            }
-            if (attack && !_isSprint)
+            
+            if (!_isDead)
             {
-                player.S_anim.SetTrigger(AnimationVeriable.ATTACK);
-                player.P_anim.SetFloat(AnimationVeriable.SPEED, 0);
-                player.ChangeCurrentState(player.ATTACKING);
+                player.anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
+                if (_input.magnitude >= 0.1f) MovementUpdate();
+
+                if (_isSprint && !attack)
+                {
+                    player.ChangeCurrentState(player.SPRINT);
+                }
+                if (attack && !_isSprint)
+                {
+                    /*                player.anim.SetTrigger(AnimationVeriable.ATTACK);
+                                    player.anim.SetFloat(AnimationVeriable.SPEED, 0);*/
+                    player.ChangeCurrentState(player.ATTACKING);
+                }
             }
+            else
+            {
+                player.anim.SetFloat(AnimationVeriable.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
+            }
+            
         }
         public override void ExitState()
         {
-           
+            _heavyAttack.performed -= OnHeavyAttack;
         }
+        public void OnHeavyAttack(InputAction.CallbackContext context)
+        {
+/*            player.anim.SetTrigger(AnimationVeriable.HEAVYATTACK);*/
+            player.ChangeCurrentState(player.HEAVYATTACK);
+        }
+
     }
 }

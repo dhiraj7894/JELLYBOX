@@ -2,7 +2,7 @@ using UnityEngine;
 public class AnimationVeriable {
     public const string SPEED = "speed";
     public const string ATTACK = "attack";
-    public const string HEAVYATTACK = "heavyAttack";
+    public const string HEAVYATTACK = "heavyAtk";
     public const string MOVE = "move";
     public const string JUMP = "Jump";
     public const string BLOCK = "block";

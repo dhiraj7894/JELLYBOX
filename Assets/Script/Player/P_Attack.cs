@@ -7,14 +7,13 @@ using UnityEngine.TextCore.Text;
 
 namespace Game.Player
 {
-    [System.Serializable]public class P_Attack : P_Base
+    public class P_Attack : P_Base
     {
-        public float timePassed;
+        float timePassed;
         float clipLength;
         float clipSpeed;
         bool attack;
 
-        public float time;
         public P_Attack(MainPlayer _player) : base(_player)
         {
             player = _player;
@@ -25,8 +24,9 @@ namespace Game.Player
             //if (player.targetedEnemy) RotateTowardCamera();
             attack = false;
             timePassed = 0;
-            player.S_anim.SetTrigger(AnimationVeriable.ATTACK);
-            player.P_anim.SetFloat(AnimationVeriable.SPEED, 0);
+            player.anim.SetTrigger(AnimationVeriable.ATTACK);
+            player.anim.SetFloat(AnimationVeriable.SPEED, 0);
+            if(!player.isCooldown) player.doDash();
         }
 
         int i;
@@ -50,7 +50,7 @@ namespace Game.Player
         public override void ExitState()
         {
             base.ExitState();
-            player.S_anim.ResetTrigger(AnimationVeriable.ATTACK);
+            player.anim.ResetTrigger(AnimationVeriable.ATTACK);
             player.isCooldown = false;
             // character.animator.applyRootMotion = false;
         }
@@ -58,9 +58,9 @@ namespace Game.Player
         public void LightAttackLogic()
         {
             timePassed += Time.deltaTime;
-            clipLength = player.S_anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-            clipSpeed = player.S_anim.GetCurrentAnimatorStateInfo(0).speed * 1.2f;
-            time = clipLength;
+            clipLength = player.anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            clipSpeed = player.anim.GetCurrentAnimatorStateInfo(0).speed;
+            
             if (!player.isCooldown && timePassed >= clipLength / clipSpeed && attack )
             {
                 player.ChangeCurrentState(player.ATTACKING);
@@ -68,7 +68,7 @@ namespace Game.Player
             if (timePassed >= clipLength / clipSpeed)
             {
                 player.ChangeCurrentState(player.IDLE);
-                player.S_anim.SetTrigger(AnimationVeriable.MOVE);
+                player.anim.SetTrigger(AnimationVeriable.MOVE);
             }
         }
     }

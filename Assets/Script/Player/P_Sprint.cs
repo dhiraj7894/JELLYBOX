@@ -33,7 +33,7 @@ namespace Game.Player
             if (_input.magnitude >= 0.1f) MovementUpdate(player.sprintSpeedMultiplier);
             if (_isSprint)
             {
-                player.P_anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude + 0.5f, player.playerSpeedDamp, Time.deltaTime);                               
+                player.anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude + 0.5f, player.playerSpeedDamp, Time.deltaTime);                               
 
             }
             else
