@@ -24,20 +24,30 @@ namespace Game.Player
             //if (player.targetedEnemy) RotateTowardCamera();
             attack = false;
             timePassed = 0;
-            player.anim.SetTrigger(AnimationVeriable.ATTACK);
-            player.anim.SetFloat(AnimationVeriable.SPEED, 0);
-            if(!player.isCooldown) player.doDash();
-        }
 
-        int i;
+            if(player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
+            {
+                player.anim.SetTrigger(AnimationVeriable.ATTACK);
+                player.anim.SetFloat(AnimationVeriable.SPEED, 0);
+                if (!player.isCooldown) player.doDash();
+                player.currentStamina -= player.stats.stats.StaminaNeedToAttack;
+            }
+            else
+            {
+                player.ChangeCurrentState(player.IDLE);
+                player.anim.SetTrigger(AnimationVeriable.MOVE);
+            }
+
+            
+        }
 
         public override void ManageInput()
         {
             base.ManageInput();
-            if (_attack.triggered /*&& character.currentStamina >= character.GetComponent<WeaponImapct>().stats.StaminaNeed*/)
+            if (_attack.triggered)
             {
                 attack = true;
-            }
+            }            
 
         }
         public override void LogicUpdateState()
@@ -52,7 +62,7 @@ namespace Game.Player
             base.ExitState();
             player.anim.ResetTrigger(AnimationVeriable.ATTACK);
             player.isCooldown = false;
-            // character.animator.applyRootMotion = false;
+            // character.animator.applyRootMotion = false;            
         }
 
         public void LightAttackLogic()

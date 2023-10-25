@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7533272965135760412}
   - component: {fileID: 8837720005722451466}
   - component: {fileID: 7616316198961225356}
-  - component: {fileID: 3877441801791478539}
   - component: {fileID: 936284004696580410}
   - component: {fileID: 4203800355424133668}
+  - component: {fileID: 3877441801791478539}
+  - component: {fileID: 8122886620225834381}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,49 +100,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3877441801791478539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221622553054704616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2cb0ae3d616790419562dd8c9a51e1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrrentState: 
-  IDLE:
-    player: {fileID: 0}
-    _isDead: 0
-    _isRevived: 0
-    velocity: {x: 0, y: 0, z: 0}
-    attack: 0
-  playerSpeedDamp: 0.1
-  turnSmoothDamp: 0.1
-  enemyCheckingRange: 2
-  controller: {fileID: 7616316198961225356}
-  playerInput: {fileID: 8837720005722451466}
-  anim: {fileID: 4203800355424133668}
-  cameraTransform: {fileID: 0}
-  targetedEnemy: {fileID: 0}
-  rb: {fileID: 936284004696580410}
-  nearByEnemy: []
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  currentStamina: 0
-  staminaSpeed: 5
-  playerSpeed: 15
-  dashSpeed: 30
-  dashTime: 0.2
-  sprintSpeedMultiplier: 4
-  jumpForce: 15
-  gravityMultiplier: 3
-  isCooldown: 0
-  dashParticle: {fileID: 8871187446278206916}
-  jumpParticle: {fileID: 1681983355138057918}
 --- !u!54 &936284004696580410
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,6 +148,73 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3877441801791478539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221622553054704616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cb0ae3d616790419562dd8c9a51e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrrentState: 
+  IDLE:
+    player: {fileID: 0}
+    _isDead: 0
+    _isRevived: 0
+    velocity: {x: 0, y: 0, z: 0}
+    attack: 0
+  playerSpeedDamp: 0.1
+  turnSmoothDamp: 0.1
+  enemyCheckingRange: 2
+  controller: {fileID: 7616316198961225356}
+  playerInput: {fileID: 8837720005722451466}
+  anim: {fileID: 4203800355424133668}
+  cameraTransform: {fileID: 0}
+  targetedEnemy: {fileID: 0}
+  rb: {fileID: 936284004696580410}
+  nearByEnemy: []
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  currentStamina: 10
+  staminaSpeed: 5
+  playerSpeed: 15
+  dashSpeed: 30
+  dashTime: 0.2
+  sprintSpeedMultiplier: 4
+  jumpForce: 15
+  gravityMultiplier: 3
+  isCooldown: 0
+  isStaminaCoolDown: 0
+  isUsableStaminaRestored: 0
+  isDead: 0
+  stats: {fileID: 8122886620225834381}
+  dashParticle: {fileID: 8871187446278206916}
+  jumpParticle: {fileID: 1681983355138057918}
+--- !u!114 &8122886620225834381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221622553054704616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49809e65b73ccf343b1bc9463b906011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health:
+    currentHealth: 0
+    reducedHealth: 0
+    HealthDiductionSpeed: 10
+    HealthIncrementSpeed: 20
+    speedMultiplier: 10
+  stats: {fileID: 11400000, guid: f9c9d36b2955a21468dbf09aa16a4b06, type: 2}
+  player: {fileID: 3877441801791478539}
 --- !u!1 &1373201421433425255
 GameObject:
   m_ObjectHideFlags: 0

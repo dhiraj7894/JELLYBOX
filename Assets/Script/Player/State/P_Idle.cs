@@ -23,11 +23,14 @@ namespace Game.Player
             _input = Vector2.zero;
             _isSprint = false;
             attack = false;
-            _heavyAttack.performed += OnHeavyAttack;
-
+            if(player.currentStamina >= (player.stats.stats.StaminaNeedToAttack* player.stats.stats.StaminaMultiplier) )
+            {
+                _heavyAttack.performed += OnHeavyAttack;
+            }         
+            
         }
 
-
+        public float attackCoolDown = 2;
         public override void ManageInput()
         {
             base.ManageInput();
@@ -37,9 +40,17 @@ namespace Game.Player
             {
                 _isSprint = true;
             }    
-            if(_attack.triggered)
+            if(_attack.triggered && player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 attack = true;
+                attackCoolDown = 2;
+            }
+
+            if (attackCoolDown > 0) attackCoolDown -= Time.deltaTime;
+            if (player.currentStamina < player.stats.stats.MaxStamina && !player.isStaminaCoolDown && attackCoolDown <= 0)
+            {
+                player.StartRefilStamina();
+                player.isStaminaCoolDown = true;
             }
         }
 
@@ -76,8 +87,9 @@ namespace Game.Player
         }
         public void OnHeavyAttack(InputAction.CallbackContext context)
         {
-/*            player.anim.SetTrigger(AnimationVeriable.HEAVYATTACK);*/
+            /*            player.anim.SetTrigger(AnimationVeriable.HEAVYATTACK);*/
             player.ChangeCurrentState(player.HEAVYATTACK);
+            player.currentStamina -= (player.stats.stats.StaminaNeedToAttack * player.stats.stats.StaminaMultiplier);
         }
 
     }

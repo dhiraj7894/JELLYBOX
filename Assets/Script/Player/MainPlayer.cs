@@ -37,18 +37,21 @@ namespace Game.Player
         public Collider[] nearByEnemy;
         public LayerMask enemyLayerMask;
 
-        public float currentStamina;
+        public float currentStamina = 10;
         public float staminaSpeed = 5;
-        public float playerSpeed;
-        public float dashSpeed = 10;
-        public float dashTime = .1f;
-        public float sprintSpeedMultiplier;
-        public float jumpForce = 10;
+        public float playerSpeed = 15;
+        public float dashSpeed = 30;
+        public float dashTime = .2f;
+        public float sprintSpeedMultiplier = 4;
+        public float jumpForce = 15;
         public float gravityMultiplier = 3.0f;
 
         public bool isCooldown;
+        public bool isStaminaCoolDown=false;
+        public bool isUsableStaminaRestored = false;
         public bool isDead;
 
+        public PlayerStats stats;
 
         public ParticleSystem dashParticle;
         public ParticleSystem jumpParticle;
@@ -60,7 +63,7 @@ namespace Game.Player
             HEAVYATTACK = new P_HeavyAttack(this);
             _currentState = IDLE;
             _currentState.EnterState();
-            //currentStamina = stats.MaxStamina;
+            currentStamina = stats.stats.MaxStamina;
         }
 
         private void Update()
@@ -101,6 +104,19 @@ namespace Game.Player
             
         }
 
+        public void StartRefilStamina()
+        {
+            StartCoroutine(stats.StaminaRefil());
+        }
+        public void StopRefilStamina()
+        {
+            if (!isUsableStaminaRestored)
+            {
+                StopCoroutine(stats.StaminaRefil());
+                isUsableStaminaRestored = false; 
+            }
+            //isStaminaCoolDown = false;
+        }
         public void doDash(float dashMultiplayer = 1)
         {
             if(CurrrentState != null)
