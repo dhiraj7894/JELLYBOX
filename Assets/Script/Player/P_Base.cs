@@ -1,7 +1,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
-
+using System.Collections;
 
 namespace Game.Player
 {
@@ -17,9 +17,6 @@ namespace Game.Player
         protected InputAction _sprintAction;        
         protected InputAction _dashAction;
         protected InputAction _attack;
-        protected InputAction _leftDoubleSlash;
-        protected InputAction _rightSingleSlash;
-        protected InputAction _rightDoubleSlash;
         protected InputAction _heavyAttack;
 
         protected bool _isIdle = false;
@@ -38,6 +35,9 @@ namespace Game.Player
         private float _strafeSpeedMultiplier = 0.75f;
         private float _backSpeedMultiplier = 0.4f;
         protected Vector3 _velocity;
+
+
+        protected Rigidbody rb;
         public P_Base(MainPlayer mainPlayer)
         {
             player = mainPlayer;
@@ -58,6 +58,7 @@ namespace Game.Player
 
             _playerSpeed = player.playerSpeed;
             _gravityMulitplier = player.gravityMultiplier;
+            rb = player.rb;
         }
 
 
@@ -65,15 +66,17 @@ namespace Game.Player
 
         public virtual void LogicUpdateState()
         {            
+            _isDead = player.isDead;
             addGeavity();
             if (_dashAction.triggered)
             {
                 Jump();
             }
+            
         }
 
         public virtual void ExitState() { }
-
+        Vector3 moveDir;
         public void MovementUpdate(float speed = 1)
         {
             if (!_isDead)
@@ -81,7 +84,7 @@ namespace Game.Player
                 float targetAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg + player.cameraTransform.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, player.turnSmoothDamp);
                 player.transform.rotation = Quaternion.Euler(0, angle, 0);
-                Vector3 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
                 player.controller.Move(moveDir.normalized * _playerSpeed * speed * Time.deltaTime);
             }
 
@@ -114,7 +117,29 @@ namespace Game.Player
             if (player.controller.isGrounded)
             {
                 _velocity.y += player.jumpForce;
-                player.P_anim.Play(AnimationVeriable.JUMP);
+                player.anim.Play(AnimationVeriable.JUMP);
+                player.jumpParticle.Play();
+            }
+        }
+
+
+        /* public void Dash(float time, float dashForce)
+         {
+             Vector3 forceToApply = player.transform.forward * dashForce;
+             rb.AddForce(forceToApply, ForceMode.Impulse);
+
+             //player.transform.Translate(player.transform.forward * time * Time.deltaTime);
+         }*/
+
+        public IEnumerator Dash(float dashSpeed, float dashTime)
+        {
+            
+            float startTime = Time.time;
+
+            while (Time.time<startTime + dashTime)
+            {
+                player.controller.Move(player.transform.forward * dashSpeed * Time.deltaTime);
+                yield return null;
             }
         }
     }
