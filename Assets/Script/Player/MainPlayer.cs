@@ -31,12 +31,14 @@ namespace Game.Player
         public PlayerInput playerInput;
         public Animator anim;
         public Transform cameraTransform;
-        public Transform targetedEnemy;
         public Rigidbody rb;
 
+        [Space(5)]
         public Collider[] nearByEnemy;
+        public Transform targetedEnemy;
         public LayerMask enemyLayerMask;
 
+        [Space(10)]
         public float currentStamina = 10;
         public float staminaSpeed = 5;
         public float playerSpeed = 15;
@@ -46,11 +48,13 @@ namespace Game.Player
         public float jumpForce = 15;
         public float gravityMultiplier = 3.0f;
 
+        [Space(10)]
         public bool isCooldown;
         public bool isStaminaCoolDown=false;
         public bool isUsableStaminaRestored = false;
         public bool isDead;
-
+        
+        [Space(10)]
         public PlayerStats stats;
 
         public ParticleSystem dashParticle;
@@ -115,7 +119,6 @@ namespace Game.Player
                 StopCoroutine(stats.StaminaRefil());
                 isUsableStaminaRestored = false; 
             }
-            //isStaminaCoolDown = false;
         }
         public void doDash(float dashMultiplayer = 1)
         {

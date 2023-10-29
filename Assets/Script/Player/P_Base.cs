@@ -18,6 +18,8 @@ namespace Game.Player
         protected InputAction _dashAction;
         protected InputAction _attack;
         protected InputAction _heavyAttack;
+        protected InputAction _specialAttackA;
+        protected InputAction _specialAttackB;
 
         protected bool _isIdle = false;
         protected bool _isSprint = false;
@@ -55,6 +57,8 @@ namespace Game.Player
             _attack = player.playerInput.actions["Attack"];
 
             _heavyAttack = player.playerInput.actions["HeavyAttack"];
+            _specialAttackA = player.playerInput.actions["MiniSAttack"];
+            _specialAttackB = player.playerInput.actions["MiniSAttack"];
 
             _playerSpeed = player.playerSpeed;
             _gravityMulitplier = player.gravityMultiplier;
