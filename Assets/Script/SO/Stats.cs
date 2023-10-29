@@ -13,3 +13,11 @@ public class Stats : ScriptableObject
     public float StaminaCoolDownTime = 3;
     public float StaminaRefilSpeed = 5;
 }
+
+[CreateAssetMenu(menuName = "Jelly/EnemyStats")]
+public class EnemyStats : ScriptableObject
+{
+    public float MaxHealth = 100;
+    public float ChaseRadius = 25;
+    public float AttackRadius = 10;
+}

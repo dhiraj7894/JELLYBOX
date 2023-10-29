@@ -13,7 +13,26 @@ namespace Game.Enemy
             enemy = M_enemy;
         }
 
-        //
+        public virtual void EnterState()
+        {
 
+        }
+
+        public virtual void LogicUpdateState()
+        {
+
+        }
+
+        public virtual void ExitState() 
+        {
+
+        }
+
+        public float CheckTargetDistance(Transform target)
+        {
+            float distance = Vector3.Distance(enemy.transform.position, target.position);
+
+            return distance;
+        }
     }
 }
