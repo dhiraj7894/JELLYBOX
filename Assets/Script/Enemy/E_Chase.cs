@@ -4,18 +4,26 @@ using UnityEngine;
 
 namespace Game.Enemy
 {
-    public class E_Chase : MonoBehaviour
+    public class E_Chase : E_Base
     {
-        // Start is called before the first frame update
-        void Start()
+        public E_Chase(MainEnemy _enemy) : base(_enemy)
         {
-
+            enemy = _enemy;
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void EnterState()
         {
+            base.EnterState();
+        }
 
+        public override void LogicUpdateState()
+        {
+            base.LogicUpdateState();
+        }
+
+        public override void ExitState()
+        {
+            base.ExitState();
         }
     }
 }

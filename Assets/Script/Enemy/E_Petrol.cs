@@ -4,18 +4,32 @@ using UnityEngine;
 
 namespace Game.Enemy
 {
-    public class E_Petrol : MonoBehaviour
+    public class E_Petrol : E_Base
     {
-        // Start is called before the first frame update
-        void Start()
+        public E_Petrol(MainEnemy _enemy) : base(_enemy)
         {
-
+            enemy = _enemy;
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void EnterState()
         {
+            base.EnterState();
+            enemy.agent.SetDestination(enemy.PetrolPath[0].position);
+        }
 
+        public override void LogicUpdateState()
+        {
+            base.LogicUpdateState();
+
+            //Set new Path for enemy to follow when it reaches it's current one
+
+            //check for target
+                // change state if near target
+        }
+
+        public override void ExitState()
+        {
+            base.ExitState();
         }
     }
 }
