@@ -21,11 +21,6 @@ namespace Game.Player
         {
             _input = _moveAction.ReadValue<Vector2>();
 
-            if (_sprintAction.triggered || _input.sqrMagnitude == 0f)
-            {
-                _isSprint = false;
-            }
-
         }
         public override void LogicUpdateState()
         {

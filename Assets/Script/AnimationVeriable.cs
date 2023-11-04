@@ -8,11 +8,7 @@ public class AnimationVeriable {
     public const string BLOCK = "block";
     public const string HIT = "hit";
     public const string HEAVYHIT = "heavyHit";
-
-    public const string LEFTSSLASH = "left";
-    public const string LEFTDSLASH = "round";
-    public const string RIGHTSSLASH = "right";
-    public const string RIGHTDSLASH = "centre";
+    public const string SHIELD = "Shield";
 
     public const string DEATH = "death";
 
@@ -25,11 +21,8 @@ public class AnimationVeriable {
         Animator.StringToHash(BLOCK);
         Animator.StringToHash(HIT);
         Animator.StringToHash(HEAVYHIT);
+        Animator.StringToHash(SHIELD);
         Animator.StringToHash(DEATH);
-        Animator.StringToHash(LEFTSSLASH);
-        Animator.StringToHash(LEFTDSLASH);
-        Animator.StringToHash(RIGHTSSLASH);
-        Animator.StringToHash(RIGHTDSLASH);
     }
 
 }

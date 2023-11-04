@@ -16,4 +16,9 @@ public class UIManager : MonoBehaviour
 
     public Slider Health;
     public Slider Stamina;
+    public Slider Shield;
+
+    [Space(5)]
+    public Slider SP_A;
+    public Slider SP_B;
 }

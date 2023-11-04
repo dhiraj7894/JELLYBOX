@@ -35,11 +35,7 @@ namespace Game.Player
         {
             base.ManageInput();
             velocity = _velocity;
-            _input = _moveAction.ReadValue<Vector2>();
-            if (_sprintAction.triggered)
-            {
-                _isSprint = true;
-            }    
+            _input = _moveAction.ReadValue<Vector2>();  
             if(_attack.triggered && player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 attack = true;
@@ -51,6 +47,17 @@ namespace Game.Player
             {
                 player.StartRefilStamina();
                 player.isStaminaCoolDown = true;
+            }
+
+            if (_specialAttackA.triggered && !player.isSpecialAttackCooldown)
+            {
+                player.isSpecialAttackCooldown = true;
+                SpecialAttackA();
+            }
+            if (_specialAttackB.triggered && !player.isSpecialAttackCooldown)
+            {
+                player.isSpecialAttackCooldown = true;
+                SpecialAttackB();
             }
         }
 
@@ -64,16 +71,17 @@ namespace Game.Player
                 player.anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
                 if (_input.magnitude >= 0.1f) MovementUpdate();
 
-                if (_isSprint && !attack)
+                if (!player.isSpecialAttackCooldown)
                 {
-                    player.ChangeCurrentState(player.SPRINT);
-                }
-                if (attack && !_isSprint)
-                {
-                    /*                player.anim.SetTrigger(AnimationVeriable.ATTACK);
-                                    player.anim.SetFloat(AnimationVeriable.SPEED, 0);*/
-                    player.ChangeCurrentState(player.ATTACKING);
-                }
+                    if (_isSprint && !attack)
+                    {
+                        player.ChangeCurrentState(player.SPRINT);
+                    }
+                    if (attack && !_isSprint)
+                    {
+                        player.ChangeCurrentState(player.ATTACKING);
+                    }
+                }               
             }
             else
             {
@@ -87,9 +95,17 @@ namespace Game.Player
         }
         public void OnHeavyAttack(InputAction.CallbackContext context)
         {
-            /*            player.anim.SetTrigger(AnimationVeriable.HEAVYATTACK);*/
             player.ChangeCurrentState(player.HEAVYATTACK);
             player.currentStamina -= (player.stats.stats.StaminaNeedToAttack * player.stats.stats.StaminaMultiplier);
+        }
+
+        public void SpecialAttackA()
+        {
+
+        }
+        public void SpecialAttackB()
+        {
+
         }
 
     }

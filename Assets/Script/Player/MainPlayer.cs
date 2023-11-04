@@ -5,6 +5,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
+using UnityEngine.VFX;
 
 namespace Game.Player
 {
@@ -52,6 +53,8 @@ namespace Game.Player
         public bool isCooldown;
         public bool isStaminaCoolDown=false;
         public bool isUsableStaminaRestored = false;
+        public bool isShieldActivated = false;
+        public bool isSpecialAttackCooldown = false;
         public bool isDead;
         
         [Space(10)]
@@ -59,6 +62,7 @@ namespace Game.Player
 
         public ParticleSystem dashParticle;
         public ParticleSystem jumpParticle;
+        public VisualEffect shieldParticle;
         private void Start()
         {
             IDLE = new P_Idle(this);
@@ -127,6 +131,11 @@ namespace Game.Player
                 dashParticle.Play();
                 StartCoroutine(_currentState.Dash(dashSpeed * dashMultiplayer, dashTime));
             }
+        }
+        public void SheildCountDown()
+        {
+            stats.GetShieldVFXLifetime();
+            StartCoroutine(stats.ShieldReset());
         }
 
     }

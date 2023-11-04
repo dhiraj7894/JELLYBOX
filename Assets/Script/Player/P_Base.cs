@@ -13,13 +13,17 @@ namespace Game.Player
 
         protected Vector2 _input;
 
-        protected InputAction _moveAction;
-        protected InputAction _sprintAction;        
-        protected InputAction _dashAction;
+        protected InputAction _moveAction;     
+        protected InputAction _jumpAction;
+        
+        
         protected InputAction _attack;
         protected InputAction _heavyAttack;
+
         protected InputAction _specialAttackA;
         protected InputAction _specialAttackB;
+
+        protected InputAction _shieldAction;
 
         protected bool _isIdle = false;
         protected bool _isSprint = false;
@@ -50,15 +54,16 @@ namespace Game.Player
         public virtual void EnterState()
         {
             //Debug.Log("Current State is : " + this.ToString());
-            _moveAction = player.playerInput.actions["Move"];
-            _sprintAction = player.playerInput.actions["Sprint"];            
-            _dashAction = player.playerInput.actions["Dash"];
+            _moveAction = player.playerInput.actions["Move"];            
+            _jumpAction = player.playerInput.actions["Jump"];
 
             _attack = player.playerInput.actions["Attack"];
-
             _heavyAttack = player.playerInput.actions["HeavyAttack"];
+
             _specialAttackA = player.playerInput.actions["MiniSAttack"];
-            _specialAttackB = player.playerInput.actions["MiniSAttack"];
+            _specialAttackB = player.playerInput.actions["UltimateAttack"];
+
+            _shieldAction = player.playerInput.actions["Shield"];
 
             _playerSpeed = player.playerSpeed;
             _gravityMulitplier = player.gravityMultiplier;
@@ -66,17 +71,21 @@ namespace Game.Player
         }
 
 
-        public virtual void ManageInput() { }
+        public virtual void ManageInput() {
+        }
 
         public virtual void LogicUpdateState()
         {            
             _isDead = player.isDead;
             addGeavity();
-            if (_dashAction.triggered)
+            if (_jumpAction.triggered)
             {
                 Jump();
             }
-            
+            if (_shieldAction.triggered && !player.isShieldActivated)
+            {
+                ShieldActivate();
+            }
         }
 
         public virtual void ExitState() { }
@@ -124,6 +133,17 @@ namespace Game.Player
                 player.anim.Play(AnimationVeriable.JUMP);
                 player.jumpParticle.Play();
             }
+        }
+
+        public void ShieldActivate()
+        {
+            if (!player.isShieldActivated)
+            {
+                player.anim.Play(AnimationVeriable.SHIELD);
+                player.shieldParticle.Play();
+                player.isShieldActivated = true;                
+            }
+            player.SheildCountDown();
         }
 
 

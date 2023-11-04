@@ -33,8 +33,13 @@ namespace Game.Player
                 
         public Stats stats;
         public MainPlayer player;
-    
 
+        private void Awake()
+        {
+            
+        }
+        public float vfx_Shield_Lifetime = 0;
+        public float vfx_Shield_TimeVariation = 0.1f;
         private void Start()
         {
             health.currentHealth = stats.MaxHealth;
@@ -45,7 +50,7 @@ namespace Game.Player
 
             UIManager.Instance.Stamina.maxValue = stats.MaxStamina;
             UIManager.Instance.Stamina.value = player.currentStamina;
-
+            vfx_Shield_Lifetime = player.shieldParticle.GetFloat("Lifetime");
 
         }
 
@@ -69,6 +74,24 @@ namespace Game.Player
                     Debug.Log("Refil Complete");
                 }
                 yield return null;
+            }
+        }
+        public IEnumerator ShieldReset()
+        {
+            UIManager.Instance.Shield.value = 0;
+            if (player.isShieldActivated)
+            {
+                Debug.Log("ShieldActivated");
+                yield return new WaitForSeconds(vfx_Shield_Lifetime);
+                while (UIManager.Instance.Shield.value < vfx_Shield_Lifetime)
+                {
+                    Debug.Log("ShieldActivated Refieling");
+                    UIManager.Instance.Shield.value += vfx_Shield_TimeVariation * Time.deltaTime;
+                    yield return null;
+                }
+                // Start UI refiel time for new shield
+                /*yield return new WaitForSeconds(vfx_Shield_TimeVariation);*/
+                player.isShieldActivated = false;
             }
         }
 
@@ -95,7 +118,9 @@ namespace Game.Player
                 health.reducedHealth -= 10;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void HealthSlider()
         {
             if(health.reducedHealth > health.currentHealth)
@@ -145,6 +170,12 @@ namespace Game.Player
                 }
             }
             UIManager.Instance.Stamina.value = stamina.reducedStamina;
+        }
+        public void GetShieldVFXLifetime()
+        {
+            vfx_Shield_Lifetime = player.shieldParticle.GetFloat("Lifetime");
+            UIManager.Instance.Shield.maxValue = vfx_Shield_Lifetime;
+            UIManager.Instance.Shield.value = vfx_Shield_Lifetime;
         }
     }
 }
