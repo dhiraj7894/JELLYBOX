@@ -53,6 +53,9 @@ VisualEffect:
       - m_Value: 10
         m_Name: Lifetime
         m_Overridden: 1
+      - m_Value: 3
+        m_Name: Size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -289,7 +292,10 @@ MonoBehaviour:
   isStaminaCoolDown: 0
   isUsableStaminaRestored: 0
   isShieldActivated: 0
+  isSpecialAttackCooldown: 0
   isDead: 0
+  isSpecialAttack_A_CanBePerforme: 0
+  isSpecialAttack_B_CanBePerforme: 0
   stats: {fileID: 8122886620225834381}
   dashParticle: {fileID: 8871187446278206916}
   jumpParticle: {fileID: 1681983355138057918}
@@ -315,10 +321,17 @@ MonoBehaviour:
   stamina:
     reducedStamina: 0
     StaminaDiductionSpeed: 20
+  charge:
+    currentCharge: 0
+    reduceCharge: 0
+    chargeDiductionSpeed: 20
+    chargeIncrementSpeed: 10
+    speedMultiplier: 5
   stats: {fileID: 11400000, guid: f9c9d36b2955a21468dbf09aa16a4b06, type: 2}
   player: {fileID: 3877441801791478539}
+  SpecialACharge: 10
   vfx_Shield_Lifetime: 0
-  vfx_Shield_TimeVariation: 5
+  vfx_Shield_TimeVariation: 2
 --- !u!1 &1373201421433425255
 GameObject:
   m_ObjectHideFlags: 0
@@ -15143,6 +15156,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5352999261073073000, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5254247281695411094, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5234448375175369897, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4167416525326943395, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2639638324218457063, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2639638324218457063, guid: 0c7a402ae436ab54697f5305991c2a3f,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -15151,12 +15189,27 @@ PrefabInstance:
     - target: {fileID: -2639638324218457063, guid: 0c7a402ae436ab54697f5305991c2a3f,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2084112793706145679, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -212581213004161906, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c7a402ae436ab54697f5305991c2a3f,
         type: 3}
       propertyPath: m_Name
       value: ZellyBe
+      objectReference: {fileID: 0}
+    - target: {fileID: 928630626186778045, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2854563699051640978, guid: 0c7a402ae436ab54697f5305991c2a3f,
         type: 3}
@@ -15226,7 +15279,12 @@ PrefabInstance:
     - target: {fileID: 2854563699051640978, guid: 0c7a402ae436ab54697f5305991c2a3f,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397557432789257905, guid: 0c7a402ae436ab54697f5305991c2a3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c7a402ae436ab54697f5305991c2a3f, type: 3}
@@ -15255,7 +15313,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895994551188917343}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 

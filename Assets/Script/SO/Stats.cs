@@ -12,6 +12,12 @@ public class Stats : ScriptableObject
     [Space(5)]
     public float StaminaCoolDownTime = 3;
     public float StaminaRefilSpeed = 5;
+
+    [Space(5)]
+    public float SpecialAttackACooldownTime = 4;
+    public float SpecialAttackARechargeSpeed = 5;
+    public float SpecialAttack_A_EnergyLevel = 10;
+    public float SpecialAttack_B_EnergyLevel = 10;
 }
 
 [CreateAssetMenu(menuName = "Jelly/EnemyStats")]

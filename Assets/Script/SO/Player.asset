@@ -19,3 +19,7 @@ MonoBehaviour:
   StaminaMultiplier: 2
   StaminaCoolDownTime: 3
   StaminaRefilSpeed: 15
+  SpecialAttackACooldownTime: 4
+  SpecialAttackARechargeSpeed: 5
+  SpecialAttack_A_EnergyLevel: 30
+  SpecialAttack_B_EnergyLevel: 10

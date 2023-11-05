@@ -20,6 +20,7 @@ namespace Game.Player
         public P_Sprint SPRINT;
         public P_Attack ATTACKING;
         public P_HeavyAttack HEAVYATTACK;
+        public P_SpecialAttackCutScene SPECIALATTACK;
         #endregion
 
         
@@ -56,6 +57,10 @@ namespace Game.Player
         public bool isShieldActivated = false;
         public bool isSpecialAttackCooldown = false;
         public bool isDead;
+
+        [Space(5)]
+        public bool isSpecialAttack_A_CanBePerforme = false;
+        public bool isSpecialAttack_B_CanBePerforme = false;
         
         [Space(10)]
         public PlayerStats stats;
@@ -69,6 +74,7 @@ namespace Game.Player
             SPRINT = new P_Sprint(this);
             ATTACKING = new P_Attack(this);
             HEAVYATTACK = new P_HeavyAttack(this);
+            SPECIALATTACK = new P_SpecialAttackCutScene(this);
             _currentState = IDLE;
             _currentState.EnterState();
             currentStamina = stats.stats.MaxStamina;
@@ -138,5 +144,25 @@ namespace Game.Player
             StartCoroutine(stats.ShieldReset());
         }
 
+        IEnumerator SPAPerforme()
+        {
+            yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
+        }
+
+
+
+        public void SPA()
+        {
+            StartCoroutine(stats.RefielSpecialA());
+        }
+        public void SPB()
+        {
+            stats.RefielSpecialB();
+        }
+        public static float GetPercentageOfValue(float num, float percentage)
+        {
+            float _percentage = (num*percentage)/100;
+            return _percentage;
+        }
     }
 }

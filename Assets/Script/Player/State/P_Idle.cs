@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,14 +50,16 @@ namespace Game.Player
                 player.isStaminaCoolDown = true;
             }
 
-            if (_specialAttackA.triggered && !player.isSpecialAttackCooldown)
+            if (_specialAttackA.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_A_CanBePerforme)
             {
                 player.isSpecialAttackCooldown = true;
+                player.isSpecialAttack_A_CanBePerforme = false;
                 SpecialAttackA();
             }
-            if (_specialAttackB.triggered && !player.isSpecialAttackCooldown)
+            if (_specialAttackB.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_B_CanBePerforme)
             {
                 player.isSpecialAttackCooldown = true;
+                player.isSpecialAttack_B_CanBePerforme = false;
                 SpecialAttackB();
             }
         }
@@ -101,11 +104,13 @@ namespace Game.Player
 
         public void SpecialAttackA()
         {
-
+            player.SPA();
+            player.ChangeCurrentState(player.SPECIALATTACK);
         }
         public void SpecialAttackB()
         {
-
+            player.SPB();
+            player.ChangeCurrentState(player.SPECIALATTACK);            
         }
 
     }

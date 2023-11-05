@@ -9,6 +9,8 @@ public class AnimationVeriable {
     public const string HIT = "hit";
     public const string HEAVYHIT = "heavyHit";
     public const string SHIELD = "Shield";
+    public const string SPECIAL_A = "SP_A";
+    public const string ENDSPA = "EndSpecialAttack";
 
     public const string DEATH = "death";
 
@@ -23,6 +25,7 @@ public class AnimationVeriable {
         Animator.StringToHash(HEAVYHIT);
         Animator.StringToHash(SHIELD);
         Animator.StringToHash(DEATH);
+        Animator.StringToHash(SPECIAL_A);
     }
 
 }
