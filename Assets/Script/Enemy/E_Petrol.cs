@@ -14,7 +14,8 @@ namespace Game.Enemy
         public override void EnterState()
         {
             base.EnterState();
-            enemy.agent.SetDestination(enemy.PetrolPath[0].position);
+            enemy.SwitchPhysics(false);
+            enemy.agent.SetDestination(enemy.PetrolWaypoints[enemy.CurrentWaypointIndex].position);
         }
 
         public override void LogicUpdateState()
@@ -22,14 +23,36 @@ namespace Game.Enemy
             base.LogicUpdateState();
 
             //Set new Path for enemy to follow when it reaches it's current one
+            if(enemy.PetrolWaypoints.Count > 0)
+            {
+                if (Vector3.Distance(enemy.transform.position, enemy.PetrolWaypoints[enemy.CurrentWaypointIndex].position) < enemy.DeltaTouchDistance)
+                    enemy.CurrentWaypointIndex++;
+
+                if (enemy.CurrentWaypointIndex >= enemy.PetrolWaypoints.Count)
+                    enemy.CurrentWaypointIndex = 0;
+
+                enemy.agent.SetDestination(enemy.PetrolWaypoints[enemy.CurrentWaypointIndex].position);
+            }
 
             //check for target
                 // change state if near target
+            if (enemy.target)
+            {
+                if (CheckTargetDistance(enemy.target) < enemy.stats.AttackRadius)
+                {
+                    enemy.ChangeCurrentState(enemy.COMBAT);
+                }
+                else if (CheckTargetDistance(enemy.target) < enemy.stats.ChaseRadius)
+                {
+                    enemy.ChangeCurrentState(enemy.CHASE);
+                }
+            }
         }
 
         public override void ExitState()
         {
             base.ExitState();
+            enemy.agent.isStopped = true;
         }
     }
 }

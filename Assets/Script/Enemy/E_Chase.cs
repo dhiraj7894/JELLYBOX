@@ -14,11 +14,22 @@ namespace Game.Enemy
         public override void EnterState()
         {
             base.EnterState();
+            enemy.SwitchPhysics(false);
+            enemy.agent.SetDestination(enemy.target.position);
         }
 
         public override void LogicUpdateState()
         {
             base.LogicUpdateState();
+
+            if (CheckTargetDistance(enemy.target) < enemy.stats.ChaseRadius)
+            {
+                enemy.agent.SetDestination(enemy.target.position);
+            }
+            else if (CheckTargetDistance(enemy.target) < enemy.stats.AttackRadius)
+            {
+                enemy.ChangeCurrentState(enemy.COMBAT);
+            }
         }
 
         public override void ExitState()

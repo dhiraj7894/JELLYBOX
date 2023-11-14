@@ -15,7 +15,7 @@ namespace Game.Enemy
         {
             base.EnterState();
 
-            enemy.agent.isStopped = true;
+            enemy.SwitchPhysics(false);
         }
 
         public override void LogicUpdateState()
@@ -32,10 +32,10 @@ namespace Game.Enemy
                 {
                     enemy.ChangeCurrentState(enemy.CHASE);
                 }
-                else
-                {
-                    enemy.ChangeCurrentState(enemy.PETROL);
-                }
+            }
+            else
+            {
+                enemy.ChangeCurrentState(enemy.PETROL);
             }
         }
 

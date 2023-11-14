@@ -19,8 +19,17 @@ namespace Game.Enemy
         public float speed;
         public Transform target;
         public EnemyStats stats;
-        [Space]
-        public List<Transform> PetrolPath = new List<Transform>();
+
+        [Header("Petrol")]
+        public int CurrentWaypointIndex = 0;
+        public List<Transform> PetrolWaypoints = new List<Transform>();
+        public float DeltaTouchDistance = 2;
+
+        [Header("Attack")]
+        public bool isFromAbove;
+        public float ProjectileSpeed;
+        public Transform shootPos;
+
 
         [HideInInspector] public FieldOfView fieldOfView;
 
@@ -56,5 +65,11 @@ namespace Game.Enemy
             _currentState.EnterState();
         }
 
+
+        public void SwitchPhysics(bool status)
+        {
+            rb.isKinematic = status;
+            agent.enabled = !status;
+        }
     }
 }
