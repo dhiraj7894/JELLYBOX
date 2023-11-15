@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,9 @@ namespace Game.Player
             LeanTween.value(player.gameObject, currentShieldSize, shieldSizeIncrese, 0.2f).setOnUpdate((float val) => {player.shieldParticle.SetFloat("Size", val); });
             TimeForCutScene = player.stats.stats.SpecialAttack_A_EnergyLevel;
             CurrentTime = 0;
-            player.anim.Play(AnimationVeriable.SPECIAL_A);
+            player.anim.Play(AnimHash.SPECIAL_A);
+
+            GameManager.Instance.CinemachineAnimator.Play(AnimHash.PSA);
         }
 
         public override void ExitState()
@@ -33,7 +36,7 @@ namespace Game.Player
             base.ExitState();
             //player.shieldParticle.SetFloat("Size", currentShieldSize);
             LeanTween.value(player.gameObject, shieldSizeIncrese, currentShieldSize, 0.2f).setOnUpdate((float val) => { player.shieldParticle.SetFloat("Size", val); });
-            player.anim.SetTrigger(AnimationVeriable.ENDSPA);
+            player.anim.SetTrigger(AnimHash.ENDSPA);
         }
 
         public override void LogicUpdateState()

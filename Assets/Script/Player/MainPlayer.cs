@@ -30,7 +30,6 @@ namespace Game.Player
 
 
         public CharacterController controller;
-        public PlayerInput playerInput;
         public Animator anim;
         public Transform cameraTransform;
         public Rigidbody rb;
@@ -56,6 +55,7 @@ namespace Game.Player
         public bool isUsableStaminaRestored = false;
         public bool isShieldActivated = false;
         public bool isSpecialAttackCooldown = false;
+        public bool isInCutScene = false;
         public bool isDead;
 
         [Space(5)]
@@ -83,7 +83,7 @@ namespace Game.Player
         private void Update()
         {
             _currentState.LogicUpdateState();
-            _currentState.ManageInput();
+            if (!isInCutScene) _currentState.ManageInput();
             CurrrentState = _currentState.ToString();
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -98,7 +98,6 @@ namespace Game.Player
             _currentState = newState;
             _currentState.EnterState();
         }
-
         public void EnemyChecker()
         {
             if(!isDead) nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
@@ -117,7 +116,6 @@ namespace Game.Player
             isCooldown = true;
             
         }
-
         public void StartRefilStamina()
         {
             StartCoroutine(stats.StaminaRefil());
@@ -132,25 +130,15 @@ namespace Game.Player
         }
         public void doDash(float dashMultiplayer = 1)
         {
-            if(CurrrentState != null)
-            {
-                dashParticle.Play();
-                StartCoroutine(_currentState.Dash(dashSpeed * dashMultiplayer, dashTime));
-            }
+            dashParticle.Play();
+            StartCoroutine(Dash(transform.forward,dashSpeed * dashMultiplayer, dashTime));
+
         }
         public void SheildCountDown()
         {
             stats.GetShieldVFXLifetime();
             StartCoroutine(stats.ShieldReset());
         }
-
-        IEnumerator SPAPerforme()
-        {
-            yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
-        }
-
-
-
         public void SPA()
         {
             StartCoroutine(stats.RefielSpecialA());
@@ -163,6 +151,21 @@ namespace Game.Player
         {
             float _percentage = (num*percentage)/100;
             return _percentage;
+        }
+        public IEnumerator Dash(Vector3 input, float dashSpeed, float dashTime)
+        {
+
+            float startTime = Time.time;
+
+            while (Time.time < startTime + dashTime)
+            {
+                controller.Move(input * dashSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+        IEnumerator SPAPerforme()
+        {
+            yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
     }
 }

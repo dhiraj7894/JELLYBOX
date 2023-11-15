@@ -1,5 +1,6 @@
+using TMPro;
 using UnityEngine;
-public class AnimationVeriable {
+public class AnimHash {
     public const string SPEED = "speed";
     public const string ATTACK = "attack";
     public const string HEAVYATTACK = "heavyAtk";
@@ -11,10 +12,11 @@ public class AnimationVeriable {
     public const string SHIELD = "Shield";
     public const string SPECIAL_A = "SP_A";
     public const string ENDSPA = "EndSpecialAttack";
+    public const string PSA = "Player Special Attack";
 
     public const string DEATH = "death";
 
-    public AnimationVeriable(){
+    public AnimHash(){
         Animator.StringToHash(SPEED);
         Animator.StringToHash(ATTACK);
         Animator.StringToHash(HEAVYATTACK);
@@ -27,6 +29,12 @@ public class AnimationVeriable {
         Animator.StringToHash(DEATH);
         Animator.StringToHash(SPECIAL_A);
     }
+
+}
+
+public class TagHash
+{
+    public const string PLAYER = "Player";
 
 }
 

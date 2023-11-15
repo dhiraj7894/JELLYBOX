@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.UI;
+using Game.Core;
 
 namespace Game.Player
 {
@@ -162,17 +162,17 @@ namespace Game.Player
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                //health.reducedHealth += 10;
-                charge.reduceCharge += 1;
+                health.reducedHealth += 10;
+               /* charge.reduceCharge += 1;
                 if(charge.currentCharge >= stats.SpecialAttack_B_EnergyLevel - 1)
                 {
                     player.isSpecialAttack_B_CanBePerforme = true;
-                }
+                }*/
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                //health.reducedHealth -= 10;
-                if(charge.reduceCharge>0) charge.reduceCharge -= 10;
+                health.reducedHealth -= 10;
+                //if(charge.reduceCharge>0) charge.reduceCharge -= 10;
             }
         }
         /// <summary>

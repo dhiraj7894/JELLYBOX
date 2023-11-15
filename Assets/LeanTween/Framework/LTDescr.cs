@@ -906,7 +906,7 @@ public class LTDescr
 	private void init(){
 		this.hasInitiliazed = true;
 
-		usesNormalDt = !(useEstimatedTime || useManualTime || useFrames); // only set this to true if it uses non of the other timing modes
+		usesNormalDt = !(useEstimatedTime || useManualTime || useFrames); // only set this to true if it uses non of the otherCollider timing modes
 
 		if (useFrames)
 			this.optional.initFrameCount = Time.frameCount;
@@ -1847,7 +1847,7 @@ public class LTDescr
 	}
 
 	/**
-	* Set ignore time scale when tweening an object when you want the animation to be time-scale independent (ignores the Time.timeScale value). Great for pause screens, when you want all other action to be stopped (or slowed down)
+	* Set ignore time scale when tweening an object when you want the animation to be time-scale independent (ignores the Time.timeScale value). Great for pause screens, when you want all otherCollider action to be stopped (or slowed down)
 	* @method setIgnoreTimeScale
 	* @param {bool} useUnScaledTime:bool whether to use the unscaled time or not
 	* @return {LTDescr} LTDescr an object that distinguishes the tween

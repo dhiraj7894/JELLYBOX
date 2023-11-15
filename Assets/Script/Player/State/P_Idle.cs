@@ -26,7 +26,7 @@ namespace Game.Player
             attack = false;
             if(player.currentStamina >= (player.stats.stats.StaminaNeedToAttack* player.stats.stats.StaminaMultiplier) )
             {
-                _heavyAttack.performed += OnHeavyAttack;
+                InputActions._heavyAttack.performed += OnHeavyAttack;
             }         
             
         }
@@ -36,8 +36,8 @@ namespace Game.Player
         {
             base.ManageInput();
             velocity = _velocity;
-            _input = _moveAction.ReadValue<Vector2>();  
-            if(_attack.triggered && player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
+            _input = InputActions._moveAction.ReadValue<Vector2>();  
+            if(InputActions._attack.triggered && player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 attack = true;
                 attackCoolDown = 2;
@@ -50,13 +50,13 @@ namespace Game.Player
                 player.isStaminaCoolDown = true;
             }
 
-            if (_specialAttackA.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_A_CanBePerforme)
+            if (InputActions._specialAttackA.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_A_CanBePerforme)
             {
                 player.isSpecialAttackCooldown = true;
                 player.isSpecialAttack_A_CanBePerforme = false;
                 SpecialAttackA();
             }
-            if (_specialAttackB.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_B_CanBePerforme)
+            if (InputActions._specialAttackB.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_B_CanBePerforme)
             {
                 player.isSpecialAttackCooldown = true;
                 player.isSpecialAttack_B_CanBePerforme = false;
@@ -71,7 +71,7 @@ namespace Game.Player
             
             if (!_isDead)
             {
-                player.anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
+                player.anim.SetFloat(AnimHash.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
                 if (_input.magnitude >= 0.1f) MovementUpdate();
 
                 if (!player.isSpecialAttackCooldown)
@@ -88,13 +88,13 @@ namespace Game.Player
             }
             else
             {
-                player.anim.SetFloat(AnimationVeriable.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
+                player.anim.SetFloat(AnimHash.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
             }
             
         }
         public override void ExitState()
         {
-            _heavyAttack.performed -= OnHeavyAttack;
+            InputActions._heavyAttack.performed -= OnHeavyAttack;
         }
         public void OnHeavyAttack(InputAction.CallbackContext context)
         {

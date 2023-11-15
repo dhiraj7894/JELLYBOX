@@ -13,18 +13,6 @@ namespace Game.Player
 
         protected Vector2 _input;
 
-        protected InputAction _moveAction;     
-        protected InputAction _jumpAction;
-        
-        
-        protected InputAction _attack;
-        protected InputAction _heavyAttack;
-
-        protected InputAction _specialAttackA;
-        protected InputAction _specialAttackB;
-
-        protected InputAction _shieldAction;
-
         protected bool _isIdle = false;
         protected bool _isSprint = false;
         protected bool _isDash = false;
@@ -53,17 +41,7 @@ namespace Game.Player
 
         public virtual void EnterState()
         {
-            //Debug.Log("Current State is : " + this.ToString());
-            _moveAction = player.playerInput.actions["Move"];            
-            _jumpAction = player.playerInput.actions["Jump"];
-
-            _attack = player.playerInput.actions["Attack"];
-            _heavyAttack = player.playerInput.actions["HeavyAttack"];
-
-            _specialAttackA = player.playerInput.actions["MiniSAttack"];
-            _specialAttackB = player.playerInput.actions["UltimateAttack"];
-
-            _shieldAction = player.playerInput.actions["Shield"];
+            //Debug.Log("Current State is : " + this.ToString());           
 
             _playerSpeed = player.playerSpeed;
             _gravityMulitplier = player.gravityMultiplier;
@@ -72,20 +50,29 @@ namespace Game.Player
 
 
         public virtual void ManageInput() {
+            addGeavity();
+            if (InputActions._jumpAction.triggered)
+            {
+                Jump();
+            }
+            if (InputActions._shieldAction.triggered && !player.isShieldActivated)
+            {
+                ShieldActivate();
+            }
+            if (InputActions._dashAction.triggered)
+            {
+                if (player.currentStamina >= player.stats.stats.StaminaNeedToDash)
+                {
+                    if (!player.isCooldown) player.doDash();
+                    player.currentStamina -= player.stats.stats.StaminaNeedToDash;
+                }
+            }
         }
 
         public virtual void LogicUpdateState()
         {            
             _isDead = player.isDead;
-            addGeavity();
-            if (_jumpAction.triggered)
-            {
-                Jump();
-            }
-            if (_shieldAction.triggered && !player.isShieldActivated)
-            {
-                ShieldActivate();
-            }
+            
         }
 
         public virtual void ExitState() { }
@@ -130,7 +117,7 @@ namespace Game.Player
             if (player.controller.isGrounded)
             {
                 _velocity.y += player.jumpForce;
-                player.anim.Play(AnimationVeriable.JUMP);
+                player.anim.Play(AnimHash.JUMP);
                 player.jumpParticle.Play();
             }
         }
@@ -139,33 +126,12 @@ namespace Game.Player
         {
             if (!player.isShieldActivated)
             {
-                player.anim.Play(AnimationVeriable.SHIELD);
+                player.anim.Play(AnimHash.SHIELD);
                 player.shieldParticle.Play();
                 player.isShieldActivated = true;                
             }
             player.SheildCountDown();
-        }
-
-
-        /* public void Dash(float time, float dashForce)
-         {
-             Vector3 forceToApply = player.transform.forward * dashForce;
-             rb.AddForce(forceToApply, ForceMode.Impulse);
-
-             //player.transform.Translate(player.transform.forward * time * Time.deltaTime);
-         }*/
-
-        public IEnumerator Dash(float dashSpeed, float dashTime)
-        {
-            
-            float startTime = Time.time;
-
-            while (Time.time<startTime + dashTime)
-            {
-                player.controller.Move(player.transform.forward * dashSpeed * Time.deltaTime);
-                yield return null;
-            }
-        }
+        }       
     }
 }
 

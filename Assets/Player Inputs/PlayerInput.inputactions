@@ -15,24 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "906812a7-fbe1-4101-962a-0085ff19ee3e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=2)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DrawWeapon",
-                    "type": "Button",
-                    "id": "adf04bfc-58de-405d-93dc-a5568539ee25",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "5e4b4e02-ab6c-4e93-8f34-aa710d606ab7",
@@ -94,31 +76,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "e0c02fb0-ed68-45d8-b23f-2c3edcde72c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4a38dc83-a167-4b9f-80ca-66134de483c4",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "355a2cfb-8996-44c0-9d2b-9e098d691f5a",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "46b8c46c-5a77-4767-bb50-21e6e51b8036",
@@ -187,28 +156,6 @@
                 },
                 {
                     "name": "",
-                    "id": "25f31d5c-77f6-4d7b-a2a3-bed673f957de",
-                    "path": "<Keyboard>/r",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "DrawWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d81b8019-9cf0-47aa-9889-347a96826ad8",
-                    "path": "<Gamepad>/dpad/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "DrawWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "13bff46d-f948-48b8-a876-2a2336df73c9",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Tap",
@@ -254,7 +201,7 @@
                 {
                     "name": "",
                     "id": "8d278803-8f7b-4676-b454-6076e2ca8882",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
@@ -325,6 +272,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UltimateAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09fd7b52-36f6-4fb2-90a2-1f31eb619eb9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

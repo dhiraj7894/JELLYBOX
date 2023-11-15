@@ -16,8 +16,9 @@ MonoBehaviour:
   MaxStamina: 50
   StaminaNeedToAttack: 5
   StaminaNeedToJump: 1
-  StaminaMultiplier: 2
-  StaminaCoolDownTime: 3
+  StaminaNeedToDash: 10
+  StaminaMultiplier: 3
+  StaminaCoolDownTime: 5
   StaminaRefilSpeed: 15
   SpecialAttackACooldownTime: 4
   SpecialAttackARechargeSpeed: 5
