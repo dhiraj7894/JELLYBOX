@@ -9,13 +9,13 @@ public class LookAtCamera : MonoBehaviour
     {
         Camera = Camera.main;
     }
-    void Update()
+ /*   void Update()
     {
         LookAtCam();
-    }
+    }*/
 
 
-    void LookAtCam()
+    public void LookAtCam()
     {
         //transform.LookAt(Camera.main.transform.position);
         transform.LookAt(new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z));

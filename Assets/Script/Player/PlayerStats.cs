@@ -34,7 +34,7 @@ namespace Game.Player
         public float speedMultiplier;
     }
 
-    public class PlayerStats : MonoBehaviour, IDamagable
+    public class PlayerStats : MonoBehaviour, IHealthSystem
     {
         
         public PlayerHealth health; 

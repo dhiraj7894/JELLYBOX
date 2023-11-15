@@ -1,64 +1,40 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling;
 using Unity.VisualScripting;
 using UnityEngine;
 
 
 namespace Game.Player
 {
-    public class HealingFontain : MonoBehaviour, IDamagable
+    public class HealingFontain : MonoBehaviour
     {
         public float MaxHealing = 100;
         public float CooldownTime = 5;
         public bool isCooldown = false;
-        public PlayerStats playerStats;
         public ParticleSystem HealingParticleForPlayer;
 
-        public GameObject InteractUI;
+        public PressF_UI PressFUI;
 
-        Collider otherCollider;
-
-
-        public void TakeDamage(float damage) { }
-        public void HealDamage(float damage) {
+        public void HealDamage() {
             if (!isCooldown)
             {
-                if (playerStats.health.reducedHealth < playerStats.stats.MaxHealth)
+                if (PressFUI.stats.health.reducedHealth < PressFUI.stats.stats.MaxHealth)
                 {
-                    playerStats.health.reducedHealth = MaxHealing;
-                    if (HealingParticleForPlayer) Destroy(Instantiate(HealingParticleForPlayer.gameObject, playerStats.transform), 1);
+                 
+                    //PressFUI.stats.health.reducedHealth = MaxHealing;
+                    LeanTween.value(this.gameObject, PressFUI.stats.health.reducedHealth, MaxHealing, 1f).setOnUpdate((float val) => { PressFUI.stats.health.reducedHealth = val; });
+                    if (HealingParticleForPlayer) Destroy(Instantiate(HealingParticleForPlayer.gameObject, PressFUI.stats.transform), 1);
                     isCooldown = true;
+                    MainPlayer.Instance.isInCutScene = true;
+                    UIManager.Instance.CutSceneFadeOutIn(CooldownTime);
                     StartCoroutine(healingCooldown());
 
                 }
             }
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(other.tag);
-            if (!isCooldown && other.CompareTag(TagHash.PLAYER))
-            {
-                if (other.GetComponent<PlayerStats>().health.reducedHealth < other.GetComponent<PlayerStats>().stats.MaxHealth)
-                {
-                    other.GetComponent<PlayerStats>().health.reducedHealth = MaxHealing;
-                    if (HealingParticleForPlayer) Destroy(Instantiate(HealingParticleForPlayer.gameObject, other.transform), 1);
-                    isCooldown = true;
-                    StartCoroutine(healingCooldown());
-
-                }
-            }
-        }
-
-        public void showInteractUI()
-        {
-            InteractUI.GetComponent<CanvasGroup>().alpha = 1;
-            //LeanTween.value(InteractUI.GetComponent<CanvasGroup>().alpha, 1, 0.1f);
-        }
-        public void hideInteractUI()
-        {
-            InteractUI.GetComponent<CanvasGroup>().alpha = 0;
-            //LeanTween.value(InteractUI.GetComponent<CanvasGroup>().alpha, 0, 0.1f);
-        }
+              
 
         IEnumerator healingCooldown()
         {
@@ -66,6 +42,7 @@ namespace Game.Player
             {
                 yield return new WaitForSeconds(CooldownTime);
                 isCooldown = false;
+                MainPlayer.Instance.isInCutScene = false;
             }
             StopCoroutine(healingCooldown());
             

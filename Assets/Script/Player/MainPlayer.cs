@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
@@ -9,7 +10,7 @@ using UnityEngine.VFX;
 
 namespace Game.Player
 {
-    public class MainPlayer : MonoBehaviour
+    public class MainPlayer : Singleton<MainPlayer>
     {
 
         public string CurrrentState;
@@ -22,12 +23,10 @@ namespace Game.Player
         public P_HeavyAttack HEAVYATTACK;
         public P_SpecialAttackCutScene SPECIALATTACK;
         #endregion
-
         
         [Range(0, 1)] public float playerSpeedDamp = 0.1f;
         [Range(0, 1)] public float turnSmoothDamp = 0.1f;
         [Range(0, 10)] public int enemyCheckingRange = 1;
-
 
         public CharacterController controller;
         public Animator anim;
@@ -83,7 +82,16 @@ namespace Game.Player
         private void Update()
         {
             _currentState.LogicUpdateState();
-            if (!isInCutScene) _currentState.ManageInput();
+            if (!isInCutScene)
+            {
+                _currentState.ManageInput();
+                GameManager.Instance.CSDC.enabled = true;
+            }
+            else
+            {
+                GameManager.Instance.CSDC.enabled = false;
+            }
+            
             CurrrentState = _currentState.ToString();
 
             if (Input.GetKeyDown(KeyCode.X))

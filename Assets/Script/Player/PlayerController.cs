@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Game.Core;
 using UnityEngine;
 
 
@@ -27,8 +25,10 @@ namespace Game.Player
                 {
                     if (!TargetedObject)
                     {
-                        hit.transform.GetComponent<HealingFontain>().showInteractUI();
-                        hit.transform.GetComponent<HealingFontain>().playerStats = transform.GetComponent<PlayerStats>();
+                        EventManager.Instance.PressFButton += hit.transform.GetComponent<HealingFontain>().HealDamage;
+                        
+                        hit.transform.GetComponent<PressF_UI>().showInteractUI();
+                        hit.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
                         TargetedObject = hit.transform;
                     }
                     
@@ -37,8 +37,9 @@ namespace Game.Player
                 {
                     if (TargetedObject)
                     {
-                        TargetedObject.GetComponent<HealingFontain>().hideInteractUI();
-                        TargetedObject.transform.GetComponent<HealingFontain>().playerStats = null;
+                        EventManager.Instance.PressFButton -= TargetedObject.GetComponent<HealingFontain>().HealDamage;
+                        TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
+                        TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                         TargetedObject = null;
                     }
                 }
@@ -48,8 +49,9 @@ namespace Game.Player
             {
                 if (TargetedObject)
                 {
-                    TargetedObject.GetComponent<HealingFontain>().hideInteractUI();
-                    TargetedObject.transform.GetComponent<HealingFontain>().playerStats = null;
+                    EventManager.Instance.PressFButton -= TargetedObject.GetComponent<HealingFontain>().HealDamage;
+                    TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
+                    TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                     TargetedObject = null;
                 }
             }

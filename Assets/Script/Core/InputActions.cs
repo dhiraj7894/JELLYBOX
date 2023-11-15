@@ -1,3 +1,4 @@
+using Game.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,5 +35,14 @@ public class InputActions : MonoBehaviour
         _specialAttackB = playerInput.actions["UltimateAttack"];
 
         _shieldAction = playerInput.actions["Shield"];
+        _pressF = playerInput.actions["PressF"];
+    }
+
+    private void Update()
+    {
+        if (_pressF.triggered)
+        {
+            EventManager.Instance.PressedFButton();
+        }
     }
 }

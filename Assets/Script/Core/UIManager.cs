@@ -17,5 +17,17 @@ namespace Game.Core
         [Space(5)]
         public Slider SP_A;
         public Slider SP_B;
+
+        [Space(10)]
+        public CanvasGroup BackScreenCutOut;
+
+
+
+        public void CutSceneFadeOutIn(float cooldown)
+        {
+            LeanTween.value(this.gameObject, 0, 1, 0.4f).setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }).
+                setOnComplete(()=> { LeanTween.delayedCall(cooldown, () => { LeanTween.value(this.gameObject, 1, 0, 0.4f).setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }); }); });
+        }
+
     }
 }

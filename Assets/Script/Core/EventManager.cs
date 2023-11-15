@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 using System;
 
 namespace Game.Core
@@ -9,5 +5,10 @@ namespace Game.Core
     public class EventManager : Singleton<EventManager>
     {
         public event Action PressFButton;
+
+        public void PressedFButton()
+        {
+            if(PressFButton !=null)PressFButton();
+        }
     }
 }
