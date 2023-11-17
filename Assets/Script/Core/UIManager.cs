@@ -25,8 +25,15 @@ namespace Game.Core
 
         public void CutSceneFadeOutIn(float cooldown)
         {
-            LeanTween.value(this.gameObject, 0, 1, 0.4f).setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }).
-                setOnComplete(()=> { LeanTween.delayedCall(cooldown, () => { LeanTween.value(this.gameObject, 1, 0, 0.4f).setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }); }); });
+            LeanTween.value(this.gameObject, 0, 1, 0.4f).
+                setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }).
+                setOnComplete(()=> { 
+                    LeanTween.delayedCall(cooldown, () => { 
+                        LeanTween.value(this.gameObject, 1, 0, 0.4f).setOnUpdate((float val) => { 
+                            BackScreenCutOut.alpha = val; 
+                        }); 
+                    }); 
+                });
         }
 
     }

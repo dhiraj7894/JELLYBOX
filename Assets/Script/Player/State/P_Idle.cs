@@ -8,7 +8,6 @@ using UnityEngine.TextCore.Text;
 
 namespace Game.Player
 {
-    [System.Serializable]
     public class P_Idle : P_Base
     {
         public Vector3 velocity;

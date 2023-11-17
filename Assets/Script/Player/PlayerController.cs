@@ -25,8 +25,7 @@ namespace Game.Player
                 {
                     if (!TargetedObject)
                     {
-                        EventManager.Instance.PressFButton += hit.transform.GetComponent<HealingFontain>().HealDamage;
-                        
+                        EventManager.Instance.PressFButton += hit.transform.GetComponent<HealingFontain>().HealDamage;                        
                         hit.transform.GetComponent<PressF_UI>().showInteractUI();
                         hit.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
                         TargetedObject = hit.transform;

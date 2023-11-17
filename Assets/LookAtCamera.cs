@@ -9,11 +9,6 @@ public class LookAtCamera : MonoBehaviour
     {
         Camera = Camera.main;
     }
- /*   void Update()
-    {
-        LookAtCam();
-    }*/
-
 
     public void LookAtCam()
     {

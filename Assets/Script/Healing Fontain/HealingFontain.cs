@@ -24,7 +24,8 @@ namespace Game.Player
                 {
                  
                     //PressFUI.stats.health.reducedHealth = MaxHealing;
-                    LeanTween.value(this.gameObject, PressFUI.stats.health.reducedHealth, MaxHealing, 1f).setOnUpdate((float val) => { PressFUI.stats.health.reducedHealth = val; });
+                    LeanTween.value(this.gameObject, PressFUI.stats.health.reducedHealth, MaxHealing, 1f).
+                        setOnUpdate((float val) => { PressFUI.stats.health.reducedHealth = val; });
                     if (HealingParticleForPlayer) Destroy(Instantiate(HealingParticleForPlayer.gameObject, PressFUI.stats.transform), 1);
                     isCooldown = true;
                     MainPlayer.Instance.isInCutScene = true;
