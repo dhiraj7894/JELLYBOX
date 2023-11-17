@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,21 +12,53 @@ namespace Game.Enemy
             enemy = _enemy;
         }
 
+        float delay;
+
         public override void EnterState()
         {
             base.EnterState();
 
+            delay = enemy.fireRate;
             enemy.SwitchPhysics(true);
         }
+
+
 
         public override void LogicUpdateState()
         {
             base.LogicUpdateState();
+
+
+            delay -= Time.deltaTime;
+            Vector3 direction = (enemy.target.transform.position - enemy.transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * enemy.rotSpeed);
+            float? angle = Rotate();
+
+            if (angle != null && delay <= 0.0f)
+            {
+                Shoot();
+                delay = enemy.fireRate;
+
+                if (CheckTargetDistance(enemy.target) < enemy.stats.AttackRadius)
+                {
+
+                }
+                else
+                {
+                    enemy.ChangeCurrentState(enemy.COMBAT);
+                }
+            }
         }
 
         public override void ExitState()
         {
             base.ExitState();
+        }
+
+        void Shoot()
+        {
+
         }
 
         float? Rotate()
@@ -35,7 +68,6 @@ namespace Game.Enemy
 
             if (angle != null)
             {
-
                 enemy.transform.localEulerAngles = new Vector3(360.0f - (float)angle, 0.0f, 0.0f);
             }
             return angle;

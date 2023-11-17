@@ -28,7 +28,7 @@ namespace Game.Enemy
             }
             
             
-            if (CheckTargetDistance(enemy.target) < enemy.stats.AttackRadius )
+            if (CheckTargetDistance(enemy.target) < enemy.stats.AttackRadius)
             {
                 enemy.ChangeCurrentState(enemy.ATTACK);
             }

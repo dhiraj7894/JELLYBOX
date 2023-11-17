@@ -27,7 +27,7 @@ namespace Game.Enemy
 
         [Header("Attack")]
         public bool isFromAbove;
-        public float ProjectileSpeed;
+        public float ProjectileSpeed, rotSpeed, fireRate;
         public Transform shootPos;
 
 

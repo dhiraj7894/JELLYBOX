@@ -2567,7 +2567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1983301085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,6 +2607,9 @@ MonoBehaviour:
   CurrentWaypointIndex: 0
   PetrolWaypoints: []
   DeltaTouchDistance: 0
+  isFromAbove: 0
+  ProjectileSpeed: 0
+  shootPos: {fileID: 0}
   fieldOfView: {fileID: 0}
   rb: {fileID: 0}
   agent: {fileID: 0}
