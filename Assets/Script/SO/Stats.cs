@@ -7,6 +7,7 @@ public class Stats : ScriptableObject
     public float MaxStamina = 100;
     public float StaminaNeedToAttack = 5;
     public float StaminaNeedToJump = 1;
+    public float StaminaNeedToDash = 3;
     public float StaminaMultiplier = 2;
 
     [Space(5)]

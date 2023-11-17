@@ -19,7 +19,7 @@ namespace Game.Player
         }
         public override void ManageInput()
         {
-            _input = _moveAction.ReadValue<Vector2>();
+            _input = InputActions._moveAction.ReadValue<Vector2>();
 
         }
         public override void LogicUpdateState()
@@ -28,7 +28,7 @@ namespace Game.Player
             if (_input.magnitude >= 0.1f) MovementUpdate(player.sprintSpeedMultiplier);
             if (_isSprint)
             {
-                player.anim.SetFloat(AnimationVeriable.SPEED, _input.magnitude + 0.5f, player.playerSpeedDamp, Time.deltaTime);                               
+                player.anim.SetFloat(AnimHash.SPEED, _input.magnitude + 0.5f, player.playerSpeedDamp, Time.deltaTime);                               
 
             }
             else

@@ -63,12 +63,12 @@ public class LeanAudio : object {
 	}
 
 	/**
-	* Create dynamic audio from a set of Animation Curves and other options.
+	* Create dynamic audio from a set of Animation Curves and otherCollider options.
 	* 
 	* @method createAudio
 	* @param {AnimationCurve} volumeCurve:AnimationCurve describing the shape of the audios volume (from 0-1). The length of the audio is dicated by the end value here.
 	* @param {AnimationCurve} frequencyCurve:AnimationCurve describing the width of the oscillations between the sound waves in seconds. Large numbers mean a lower note, while higher numbers mean a tighter frequency and therefor a higher note. Values are usually between 0.01 and 0.000001 (or smaller)
-	* @param {LeanAudioOptions} options:LeanAudioOptions You can pass any other values in here like vibrato or the frequency you would like the sound to be encoded at. See <a href="LeanAudioOptions.html">LeanAudioOptions</a> for more details.
+	* @param {LeanAudioOptions} options:LeanAudioOptions You can pass any otherCollider values in here like vibrato or the frequency you would like the sound to be encoded at. See <a href="LeanAudioOptions.html">LeanAudioOptions</a> for more details.
 	* @return {AudioClip} AudioClip of the procedurally generated audio
 	* @example
 	* AnimationCurve volumeCurve = new AnimationCurve( new Keyframe(0f, 1f, 0f, -1f), new Keyframe(1f, 0f, -1f, 0f));<br>

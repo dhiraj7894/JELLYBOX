@@ -23,8 +23,8 @@ namespace Game.Player
             base.EnterState();
             dashMultiplier = 2;
             timePassed = 0;
-            player.anim.SetTrigger(AnimationVeriable.HEAVYATTACK);
-            player.anim.SetFloat(AnimationVeriable.SPEED, 0);
+            player.anim.SetTrigger(AnimHash.HEAVYATTACK);
+            player.anim.SetFloat(AnimHash.SPEED, 0);
             player.doDash(dashMultiplier);
         }
         public override void ManageInput()
@@ -41,7 +41,7 @@ namespace Game.Player
         public override void ExitState()
         {
             base.ExitState();
-            player.anim.ResetTrigger(AnimationVeriable.HEAVYATTACK);
+            player.anim.ResetTrigger(AnimHash.HEAVYATTACK);
             if(player.isCooldown) player.isCooldown = false;
         }
         public void HeavyAttackLogic()
@@ -52,7 +52,7 @@ namespace Game.Player
             if (timePassed >= clipLength / clipSpeed)
             {
                 player.ChangeCurrentState(player.IDLE);
-                player.anim.SetTrigger(AnimationVeriable.MOVE);
+                player.anim.SetTrigger(AnimHash.MOVE);
             }
         }
     }

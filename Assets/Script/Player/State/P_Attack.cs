@@ -27,15 +27,15 @@ namespace Game.Player
 
             if(player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
-                player.anim.SetTrigger(AnimationVeriable.ATTACK);
-                player.anim.SetFloat(AnimationVeriable.SPEED, 0);
+                player.anim.SetTrigger(AnimHash.ATTACK);
+                player.anim.SetFloat(AnimHash.SPEED, 0);
                 if (!player.isCooldown) player.doDash();
                 player.currentStamina -= player.stats.stats.StaminaNeedToAttack;
             }
             else
             {
                 player.ChangeCurrentState(player.IDLE);
-                player.anim.SetTrigger(AnimationVeriable.MOVE);
+                player.anim.SetTrigger(AnimHash.MOVE);
             }
 
             
@@ -44,7 +44,7 @@ namespace Game.Player
         public override void ManageInput()
         {
             base.ManageInput();
-            if (_attack.triggered)
+            if (InputActions._attack.triggered)
             {
                 attack = true;
             }            
@@ -54,13 +54,13 @@ namespace Game.Player
         {
             base.LogicUpdateState();
             LightAttackLogic();
-            //character.animator.SetBool(AnimationVeriable.BLOCK, _isBlocked);
+            //character.animator.SetBool(AnimHash.BLOCK, _isBlocked);
         }
 
         public override void ExitState()
         {
             base.ExitState();
-            player.anim.ResetTrigger(AnimationVeriable.ATTACK);
+            player.anim.ResetTrigger(AnimHash.ATTACK);
             player.isCooldown = false;
             // character.animator.applyRootMotion = false;            
         }
@@ -78,7 +78,7 @@ namespace Game.Player
             if (timePassed >= clipLength / clipSpeed)
             {
                 player.ChangeCurrentState(player.IDLE);
-                player.anim.SetTrigger(AnimationVeriable.MOVE);
+                player.anim.SetTrigger(AnimHash.MOVE);
             }
         }
     }

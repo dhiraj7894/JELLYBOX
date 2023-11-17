@@ -1,3 +1,4 @@
+using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
@@ -9,7 +10,7 @@ using UnityEngine.VFX;
 
 namespace Game.Player
 {
-    public class MainPlayer : MonoBehaviour
+    public class MainPlayer : Singleton<MainPlayer>
     {
 
         public string CurrrentState;
@@ -22,15 +23,12 @@ namespace Game.Player
         public P_HeavyAttack HEAVYATTACK;
         public P_SpecialAttackCutScene SPECIALATTACK;
         #endregion
-
         
         [Range(0, 1)] public float playerSpeedDamp = 0.1f;
         [Range(0, 1)] public float turnSmoothDamp = 0.1f;
         [Range(0, 10)] public int enemyCheckingRange = 1;
 
-
         public CharacterController controller;
-        public PlayerInput playerInput;
         public Animator anim;
         public Transform cameraTransform;
         public Rigidbody rb;
@@ -56,6 +54,7 @@ namespace Game.Player
         public bool isUsableStaminaRestored = false;
         public bool isShieldActivated = false;
         public bool isSpecialAttackCooldown = false;
+        public bool isInCutScene = false;
         public bool isDead;
 
         [Space(5)]
@@ -83,7 +82,16 @@ namespace Game.Player
         private void Update()
         {
             _currentState.LogicUpdateState();
-            _currentState.ManageInput();
+            if (!isInCutScene)
+            {
+                _currentState.ManageInput();
+                GameManager.Instance.CSDC.enabled = true;
+            }
+            else
+            {
+                GameManager.Instance.CSDC.enabled = false;
+            }
+            
             CurrrentState = _currentState.ToString();
 
             if (Input.GetKeyDown(KeyCode.X))
@@ -98,7 +106,6 @@ namespace Game.Player
             _currentState = newState;
             _currentState.EnterState();
         }
-
         public void EnemyChecker()
         {
             if(!isDead) nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
@@ -117,7 +124,6 @@ namespace Game.Player
             isCooldown = true;
             
         }
-
         public void StartRefilStamina()
         {
             StartCoroutine(stats.StaminaRefil());
@@ -132,25 +138,15 @@ namespace Game.Player
         }
         public void doDash(float dashMultiplayer = 1)
         {
-            if(CurrrentState != null)
-            {
-                dashParticle.Play();
-                StartCoroutine(_currentState.Dash(dashSpeed * dashMultiplayer, dashTime));
-            }
+            dashParticle.Play();
+            StartCoroutine(Dash(transform.forward,dashSpeed * dashMultiplayer, dashTime));
+
         }
         public void SheildCountDown()
         {
             stats.GetShieldVFXLifetime();
             StartCoroutine(stats.ShieldReset());
         }
-
-        IEnumerator SPAPerforme()
-        {
-            yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
-        }
-
-
-
         public void SPA()
         {
             StartCoroutine(stats.RefielSpecialA());
@@ -163,6 +159,21 @@ namespace Game.Player
         {
             float _percentage = (num*percentage)/100;
             return _percentage;
+        }
+        public IEnumerator Dash(Vector3 input, float dashSpeed, float dashTime)
+        {
+
+            float startTime = Time.time;
+
+            while (Time.time < startTime + dashTime)
+            {
+                controller.Move(input * dashSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+        IEnumerator SPAPerforme()
+        {
+            yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
     }
 }
