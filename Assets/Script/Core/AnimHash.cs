@@ -16,6 +16,7 @@ public class AnimHash {
 
     public const string DEATH = "death";
 
+    public const string ATTACKTYP = "atkType";
     public AnimHash(){
         Animator.StringToHash(SPEED);
         Animator.StringToHash(ATTACK);
@@ -27,7 +28,8 @@ public class AnimHash {
         Animator.StringToHash(HEAVYHIT);
         Animator.StringToHash(SHIELD);
         Animator.StringToHash(DEATH);
-        Animator.StringToHash(SPECIAL_A);
+        Animator.StringToHash(SPECIAL_A);        
+        Animator.StringToHash(ATTACKTYP);        
     }
 
 }
