@@ -98,6 +98,7 @@ namespace Game.Player
             {
                 isDead = true;
             }
+            EnemyChecker();
         }
 
         public void ChangeCurrentState(P_Base newState)

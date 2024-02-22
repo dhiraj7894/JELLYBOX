@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Jelly/stats")]
-public class Stats : ScriptableObject
+public class PlayerStatsSO : ScriptableObject
 {
     public float MaxHealth = 100;
     public float MaxStamina = 100;

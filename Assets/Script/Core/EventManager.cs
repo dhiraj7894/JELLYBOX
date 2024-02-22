@@ -8,7 +8,7 @@ namespace Game.Core
 
         public void PressedFButton()
         {
-            if(PressFButton !=null)PressFButton();
+            PressFButton?.Invoke();
         }
     }
 }

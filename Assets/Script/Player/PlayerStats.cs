@@ -41,7 +41,7 @@ namespace Game.Player
         public PlayerStamina stamina; 
         public UltCharge charge;
                 
-        public Stats stats;
+        public PlayerStatsSO stats;
         public MainPlayer player;
         public float SpecialACharge = 10;
         private void Awake()

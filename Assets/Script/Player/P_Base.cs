@@ -96,7 +96,7 @@ namespace Game.Player
             Vector3 viwDir = (player.targetedEnemy.position - player.transform.position).normalized;
             viwDir.y = 0;
             Quaternion rotation = Quaternion.LookRotation(viwDir);
-            LeanTween.rotate(player.gameObject, rotation.eulerAngles, 0.1f);
+            LeanTween.rotate(player.gameObject, rotation.eulerAngles, 0.01f);
         }
         public void addGeavity()
         {

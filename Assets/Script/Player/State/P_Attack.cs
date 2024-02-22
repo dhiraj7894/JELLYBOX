@@ -24,8 +24,8 @@ namespace Game.Player
             //if (player.targetedEnemy) RotateTowardCamera();
             attack = false;
             timePassed = 0;
-
-            if(player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
+            
+            if (player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 player.anim.SetTrigger(AnimHash.ATTACK);
                 player.anim.SetFloat(AnimHash.SPEED, 0);
@@ -37,8 +37,8 @@ namespace Game.Player
                 player.ChangeCurrentState(player.IDLE);
                 player.anim.SetTrigger(AnimHash.MOVE);
             }
+            RotateTowardCamera();
 
-            
         }
 
         public override void ManageInput()
