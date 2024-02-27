@@ -43,7 +43,8 @@ namespace Game.Core.Quest
             GameObject questStepPrefab = GetCurrentQuestStepPrefab();
             if (questStepPrefab != null)
             {
-                Object.Instantiate<GameObject>(questStepPrefab, parentTransform);
+                QuestStep questStep =  Object.Instantiate<GameObject>(questStepPrefab, parentTransform).GetComponent<QuestStep>();
+                questStep.InitQuestStep(info.id);
             }
         }
 

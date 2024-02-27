@@ -90,7 +90,7 @@ namespace Game.Player
         public IEnumerator StaminaRefil()
         {
             
-            Debug.Log("Refil Activated");
+            //Debug.Log("Refil Activated");
             yield return new WaitForSeconds(stats.StaminaCoolDownTime);
             player.isUsableStaminaRestored = false;
             while (player.isStaminaCoolDown && player.currentStamina < stats.MaxStamina)
@@ -100,7 +100,7 @@ namespace Game.Player
                 {
                     player.currentStamina = stats.MaxStamina;
                     player.isStaminaCoolDown = false;
-                    Debug.Log("Refil Complete");
+                    //Debug.Log("Refil Complete");
                 }
                 yield return null;
             }

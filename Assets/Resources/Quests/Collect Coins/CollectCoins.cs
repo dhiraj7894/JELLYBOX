@@ -7,6 +7,7 @@ public class CollectCoins : QuestStep
 {
     private int CoinCollect = 0;
     private int totalCoinsCollect = 5;
+    public string ObjectName;
 
     private void OnEnable()
     {
@@ -20,5 +21,6 @@ public class CollectCoins : QuestStep
     public void CoinCollected()
     {
         CoinCollect++;
+        FinishedQuestStep();
     }
 }

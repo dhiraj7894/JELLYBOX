@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collect Coins
   m_EditorClassIdentifier: 
   displayQuestName: Colect The Coins
-  level: 1
-  quest: []
+  levelRequirement: 1
+  questRequirement: []
   questSteps:
   - {fileID: 1670015429102802045, guid: 90ef89be1edbe534abb60c475adf1b62, type: 3}
   XPPointsReward: 200

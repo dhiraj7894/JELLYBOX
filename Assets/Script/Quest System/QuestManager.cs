@@ -47,7 +47,13 @@ namespace Game.Core.Quest
             }
             return quest;
         }
-
+        
+        void ChangeQuestState(string id, QuestState state)
+        {
+            Quest quest = GetQuestByID(id);
+            quest.state = state;
+            QuestEvent.QuestStateChange(quest);
+        }
 
         private void OnEnable()
         {
@@ -63,19 +69,69 @@ namespace Game.Core.Quest
             QuestEvent.onFinishQuest -= FinishQuest;
         }
 
+        bool CheckRequirementMet(Quest quest)
+        {
+            bool meetRequirement = true;
+            if(GameManager.Instance.playerLevel < quest.info.levelRequirement)
+            {
+                meetRequirement = false;
+            }
+            foreach (QuestSystemSO preRequirementInfo in quest.info.questRequirement)
+            {
+                if(GetQuestByID(preRequirementInfo.id).state != QuestState.FINISHED)
+                {
+                    meetRequirement = false;
+                }
+            }
+            return meetRequirement;     
+        }
+
+        private void Update()
+        {
+
+            foreach (Quest quest in questMap.Values)
+            {
+                if(quest.state == QuestState.REQUIREMENT_NOT_MET && CheckRequirementMet(quest))
+                {
+                    ChangeQuestState(quest.info.id, QuestState.CAN_START);
+                }
+            }
+        }
 
 
         private void StartQuest(string id)
         {
-
+            Quest quest = GetQuestByID(id);
+            quest.SpwanCurrentQuestStep(this.transform);
+            ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
         }
         private void AdvacneQuest(string id)
         {
+            Quest quest = GetQuestByID(id);
+            quest.MoveToNextStep();
+            if(quest.CurrentStepExists())
+            {
+                quest.SpwanCurrentQuestStep(this.transform);
+            }
+            else
+            {
+                ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
+            }
 
         }
         private void FinishQuest(string id)
         {
+            Quest quest = GetQuestByID(id);
+            ClaimReward(quest);
+        }
 
+
+        void ClaimReward(Quest queest)
+        {
+            //Add XP to player level
+            //Add Object reward to player invetory 
+            //Add In Game Currency as reward
+            Debug.Log($"<color=green>Game Reward Added to you inventory</color>");
         }
     }
 }

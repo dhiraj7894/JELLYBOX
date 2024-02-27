@@ -13,8 +13,8 @@ namespace Game.Core.Quest
         [Header("General")]
         public string displayQuestName;
         [Header("Requirements")]
-        public int level;
-        public QuestSystemSO[] quest;
+        public int levelRequirement;
+        public QuestSystemSO[] questRequirement;
 
         [Header("Steps")]
         public GameObject[] questSteps;

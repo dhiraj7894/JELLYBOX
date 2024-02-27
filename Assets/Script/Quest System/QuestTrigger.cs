@@ -10,6 +10,7 @@ namespace Game.Core.Quest
         public QuestPoint QuestPoint;
         public override void Trigger()
         {
+            Debug.Log($"Quest event trigger");
             QuestPoint.ActivateQuest();
         }
     }
