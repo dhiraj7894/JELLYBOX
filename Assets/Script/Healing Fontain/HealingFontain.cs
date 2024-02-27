@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Game.Player
 {
-    public class HealingFontain : MonoBehaviour
+    public class HealingFontain : IActionTrigger
     {
         public float MaxHealing = 100;
         public float CooldownTime = 5;
@@ -35,7 +35,11 @@ namespace Game.Player
                 }
             }
         }
-              
+
+        public override void Trigger()
+        {
+            HealDamage();
+        }
 
         IEnumerator healingCooldown()
         {

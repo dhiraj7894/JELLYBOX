@@ -34,6 +34,7 @@ namespace Game.Player
         public override void ExitState()
         {
             base.ExitState();
+            EventManager.OnSpecialAttackEnd();
             //player.shieldParticle.SetFloat("Size", currentShieldSize);
             LeanTween.value(player.gameObject, shieldSizeIncrese, currentShieldSize, 0.2f).setOnUpdate((float val) => { player.shieldParticle.SetFloat("Size", val); });
             player.anim.SetTrigger(AnimHash.ENDSPA);

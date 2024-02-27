@@ -1,6 +1,7 @@
 using Game.Core;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ namespace Game.Core
         [Space(10)]
         public CanvasGroup BackScreenCutOut;
 
+        [Space(5)]
+        public TextMeshProUGUI CoinCount;
 
 
         public void CutSceneFadeOutIn(float cooldown)

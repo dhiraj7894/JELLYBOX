@@ -10,7 +10,7 @@ namespace Game.Core
     public class GameManager : Singleton<GameManager>
     {
         public Animator CinemachineAnimator;
-        public CinemachineStateDrivenCamera CSDC;
+        public CinemachineStateDrivenCamera CSDC; // Cinemachine State Driven Camera for player special attack animation angle
 
         private void Start()
         {

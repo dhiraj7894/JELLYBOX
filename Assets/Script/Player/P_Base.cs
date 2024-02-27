@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Game.Player
 {
-    
     public abstract class P_Base
     {
         public MainPlayer player;
@@ -50,11 +49,7 @@ namespace Game.Player
 
 
         public virtual void ManageInput() {
-            addGeavity();
-            if (InputActions._jumpAction.triggered)
-            {
-                Jump();
-            }
+            addGeavity();            
             if (InputActions._shieldAction.triggered && !player.isShieldActivated)
             {
                 ShieldActivate();

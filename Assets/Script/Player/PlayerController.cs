@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game.Player
 {
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : IActionTrigger
     {        
         RaycastHit hit;
         public Camera cam;
@@ -25,7 +25,7 @@ namespace Game.Player
                 {
                     if (!TargetedObject)
                     {
-                        EventManager.Instance.PressFButton += hit.transform.GetComponent<HealingFontain>().HealDamage;                        
+                        EventManager.Instance.PressFButton += hit.transform.GetComponent<IActionTrigger>().Trigger;                        
                         hit.transform.GetComponent<PressF_UI>().showInteractUI();
                         hit.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
                         TargetedObject = hit.transform;
@@ -36,7 +36,7 @@ namespace Game.Player
                 {
                     if (TargetedObject)
                     {
-                        EventManager.Instance.PressFButton -= TargetedObject.GetComponent<HealingFontain>().HealDamage;
+                        EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
                         TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                         TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                         TargetedObject = null;
@@ -48,7 +48,7 @@ namespace Game.Player
             {
                 if (TargetedObject)
                 {
-                    EventManager.Instance.PressFButton -= TargetedObject.GetComponent<HealingFontain>().HealDamage;
+                    EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
                     TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                     TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                     TargetedObject = null;
