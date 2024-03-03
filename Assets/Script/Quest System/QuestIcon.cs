@@ -10,6 +10,8 @@ namespace Game.Core.Quest
         [SerializeField] private GameObject canStartGameObject;
         [SerializeField] private GameObject inProgressGameObject;
         [SerializeField] private GameObject canFinishGameObject;
+        [Header("Raycast Detection")]
+        public GameObject RaycastTarget;
 
 
 
@@ -32,10 +34,12 @@ namespace Game.Core.Quest
                     if (finishPoint) inProgressGameObject.SetActive(true);
                     break;
                 case QuestState.CAN_FINISH:
-                    if (finishPoint) canFinishGameObject.SetActive(true);
+                    if (finishPoint) { 
+                        canFinishGameObject.SetActive(true);                        
+                    }
                     break;
                 case QuestState.FINISHED:
-
+                    Destroy(RaycastTarget.GetComponent<RaycastTarget>());
                     break;
                 default:
                     Debug.Log($"{state}");

@@ -21,7 +21,7 @@ namespace Game.Player
         {
             if(Physics.Raycast(cam.transform.position,cam.transform.forward, out hit, Distance))
             {
-                if (hit.transform.GetComponent<ReycastTarget>())
+                if (hit.transform.GetComponent<RaycastTarget>())
                 {
                     if (!TargetedObject)
                     {

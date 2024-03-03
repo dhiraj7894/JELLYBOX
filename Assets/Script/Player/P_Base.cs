@@ -87,6 +87,8 @@ namespace Game.Player
 
         public void RotateTowardCamera()
         {
+            if (player.targetedEnemy == null)
+                return;
 
             Vector3 viwDir = (player.targetedEnemy.position - player.transform.position).normalized;
             viwDir.y = 0;

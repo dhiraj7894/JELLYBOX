@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class ReycastTarget : MonoBehaviour
+public class RaycastTarget : MonoBehaviour
 {
     ///
     /// 

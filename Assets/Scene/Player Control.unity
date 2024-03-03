@@ -488,6 +488,7 @@ MonoBehaviour:
   stats: {fileID: 0}
   CanvasGroup: {fileID: 1752876528}
   LAC: {fileID: 1819189715}
+  RaycastTarget: {fileID: 0}
 --- !u!1 &176202671
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +640,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238541625}
-  m_LocalRotation: {x: 0.02366653, y: 0.95991975, z: 0.08544369, w: -0.2658824}
+  m_LocalRotation: {x: 0.023666538, y: 0.95991975, z: 0.08544371, w: -0.26588237}
   m_LocalPosition: {x: -8.73, y: 0, z: -1.6899996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1769,7 +1770,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469047482}
-  m_LocalRotation: {x: 0.082480535, y: -0, z: -0, w: 0.9965927}
+  m_LocalRotation: {x: 0.082480535, y: 1e-45, z: -0, w: 0.9965927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3150,6 +3151,7 @@ MonoBehaviour:
   stats: {fileID: 0}
   CanvasGroup: {fileID: 1560075440}
   LAC: {fileID: 1310249914}
+  RaycastTarget: {fileID: 0}
 --- !u!114 &1000680065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4159,6 +4161,7 @@ MonoBehaviour:
   canStartGameObject: {fileID: 2136299716}
   inProgressGameObject: {fileID: 975806094}
   canFinishGameObject: {fileID: 549079935}
+  RaycastTarget: {fileID: 1000680059}
 --- !u!1 &1370885297
 GameObject:
   m_ObjectHideFlags: 0
@@ -4222,7 +4225,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458983040}
-  m_LocalRotation: {x: 0.06433938, y: -0.0000000042926827, z: 2.7676197e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433938, y: -0.000000004292682, z: 2.7676195e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
