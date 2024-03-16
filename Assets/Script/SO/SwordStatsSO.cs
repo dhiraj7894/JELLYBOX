@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Jelly/stats")]
+[CreateAssetMenu(menuName = "Jelly/WeaponStatsSO")]
 public class SwordStatsSO : ScriptableObject
 {
-    public GameObject Sword;
+    public GameObject Weapon;
     public string Name;
     public string Description;
     public Sprite UI;

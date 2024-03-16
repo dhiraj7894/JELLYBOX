@@ -20,8 +20,8 @@ namespace Game.Core
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
     }

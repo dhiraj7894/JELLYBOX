@@ -18,6 +18,7 @@ public class InputActions : MonoBehaviour
     public static InputAction _shieldAction;
 
     public static InputAction _pressF;
+    public static InputAction _submit;
 
 
     public PlayerInput playerInput;
@@ -36,6 +37,7 @@ public class InputActions : MonoBehaviour
 
         _shieldAction = playerInput.actions["Shield"];
         _pressF = playerInput.actions["PressF"];
+        _submit = playerInput.actions["Submit"];
     }
 
     private void Update()

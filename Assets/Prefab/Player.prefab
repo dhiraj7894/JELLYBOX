@@ -215,7 +215,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3877441801791478539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,18 +228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrrentState: 
-  IDLE:
-    player: {fileID: 0}
-    _isDead: 0
-    _isRevived: 0
-    velocity: {x: 0, y: 0, z: 0}
-    attack: 0
-    attackCoolDown: 0
   playerSpeedDamp: 0.1
   turnSmoothDamp: 0.1
   enemyCheckingRange: 2
+  dialogueManager: {fileID: 0}
   controller: {fileID: 7616316198961225356}
-  playerInput: {fileID: 0}
   anim: {fileID: 4203800355424133668}
   cameraTransform: {fileID: 0}
   rb: {fileID: 936284004696580410}
@@ -316,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   TargetedObject: {fileID: 0}
-  Distance: 30
+  Distance: 15
 --- !u!1 &1373201421433425255
 GameObject:
   m_ObjectHideFlags: 0

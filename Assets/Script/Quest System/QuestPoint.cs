@@ -10,11 +10,13 @@ namespace Game.Core.Quest
         [Header("Quest")]
         [SerializeField] private QuestSystemSO questInfoForPoint;
         private string questId;
-        private QuestState currentQuestState;
+        public QuestState currentQuestState;
         public QuestIcon QuestIcon;
         public bool isStartPoint = false;
         public bool isFinishPoint = false;
 
+        [Header("Quest Releted Item")]
+        public List<GameObject> QuestItem = new List<GameObject>();
 
 
         private void Awake()
@@ -38,6 +40,7 @@ namespace Game.Core.Quest
 
         private void OnEnable()
         {
+            QuestItemData();
             QuestEvent.onQuestStateChange += QuestStateChange;
             //EventManager.Instance.PressFButton += ActivateQuest;
         }
@@ -65,13 +68,35 @@ namespace Game.Core.Quest
 
             if (currentQuestState.Equals(QuestState.CAN_START) && isStartPoint)
             {
-                QuestEvent.StartQuest(questId);
+                
+                UIManager.Instance.CutSceneFadeOutIn(0.5f);
+                LeanTween.delayedCall(.4f, () => { 
+                    QuestEvent.StartQuest(questId);
+                    QuestItemData(true);
+                });
+                
             }
             if (currentQuestState.Equals(QuestState.CAN_FINISH) && isFinishPoint)
             {
-                QuestEvent.FinishQuest(questId);
+                QuestItemData();
+                UIManager.Instance.CutSceneFadeOutIn(0.5f);
+                LeanTween.delayedCall(.4f, () => {
+                    QuestEvent.FinishQuest(questId);
+                });
+                
             }
 
+        }
+
+        public void QuestItemData(bool isTrue=false)
+        {
+            if (QuestItem.Count > 0)
+            {
+                foreach (GameObject item in QuestItem)
+                {
+                    item.SetActive(isTrue);
+                }
+            }
         }
 
     }

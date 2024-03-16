@@ -29,6 +29,11 @@ namespace Game.Player
             {
                 player.anim.SetTrigger(AnimHash.ATTACK);
                 player.anim.SetFloat(AnimHash.SPEED, 0);
+                
+                ///
+                /// Uncomment when making build
+                ///
+
                 if (!player.isCooldown) player.doDash();
                 player.currentStamina -= player.stats.stats.StaminaNeedToAttack;
             }

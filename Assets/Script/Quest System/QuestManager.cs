@@ -8,7 +8,7 @@ namespace Game.Core.Quest
 {
     public class QuestManager : MonoBehaviour
     {
-        private Dictionary<string, Quest> questMap;
+        [SerializeField]private Dictionary<string, Quest> questMap;
 
         private void Awake()
         {
@@ -34,6 +34,7 @@ namespace Game.Core.Quest
                     
                 }
                 idToQuestMap.Add(questInfo.id, new Quest(questInfo));
+                
             }
             return idToQuestMap;
         }
@@ -45,6 +46,7 @@ namespace Game.Core.Quest
             {
                 Debug.Log($"ID NOT FOINT IN QUEST MAP {id}");
             }
+            
             return quest;
         }
         
@@ -91,8 +93,10 @@ namespace Game.Core.Quest
 
             foreach (Quest quest in questMap.Values)
             {
-                if(quest.state == QuestState.REQUIREMENT_NOT_MET && CheckRequirementMet(quest))
+                //Debug.Log($"WHY ?");
+                if (quest.state == QuestState.REQUIREMENT_NOT_MET && CheckRequirementMet(quest))
                 {
+                    
                     ChangeQuestState(quest.info.id, QuestState.CAN_START);
                 }
             }
@@ -126,12 +130,13 @@ namespace Game.Core.Quest
         }
 
 
-        void ClaimReward(Quest queest)
+        void ClaimReward(Quest quest)
         {
             //Add XP to player level
             //Add Object reward to player invetory 
             //Add In Game Currency as reward
             Debug.Log($"<color=green>Game Reward Added to you inventory</color>");
+            ChangeQuestState(quest.info.id, QuestState.FINISHED);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Game.Player
         [Range(0, 1)] public float turnSmoothDamp = 0.1f;
         [Range(0, 10)] public int enemyCheckingRange = 1;
 
+        public DialogueManager dialogueManager;
         public CharacterController controller;
         public Animator anim;
         public Transform cameraTransform;
@@ -81,9 +82,16 @@ namespace Game.Player
 
         private void Update()
         {
+            if (isDead || dialogueManager.isDialoguePlaying)
+                return;
+
             _currentState.LogicUpdateState();
+
             if (!isInCutScene)
             {
+                if (UIManager.Instance.isBackScreenFadeActive) 
+                    return;
+
                 _currentState.ManageInput();
                 GameManager.Instance.CSDC.enabled = true;
             }

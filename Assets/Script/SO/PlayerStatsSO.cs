@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Jelly/Stats")]
+[CreateAssetMenu(menuName = "Jelly/PlayerStatsSO")]
 public class PlayerStatsSO : ScriptableObject
 {
     public float MaxHealth = 100;
@@ -21,10 +21,3 @@ public class PlayerStatsSO : ScriptableObject
     public float SpecialAttack_B_EnergyLevel = 10;
 }
 
-[CreateAssetMenu(menuName = "Jelly/EnemyStats")]
-public class EnemyStats : ScriptableObject
-{
-    public float MaxHealth = 100;
-    public float ChaseRadius = 25;
-    public float AttackRadius = 10;
-}

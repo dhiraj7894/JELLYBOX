@@ -1,4 +1,5 @@
 
+using Game;
 using UnityEngine;
 
 public class RaycastTarget : MonoBehaviour
@@ -9,4 +10,15 @@ public class RaycastTarget : MonoBehaviour
     /// ask before writing any code
     /// 
     ///
+    private void OnDestroy()
+    {
+        try
+        {
+            GetComponent<PressF_UI>().CanvasGroup.alpha = 0.0f;
+        }
+        catch
+        {
+
+        }
+    }
 }

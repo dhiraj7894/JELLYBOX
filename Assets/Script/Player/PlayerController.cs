@@ -1,4 +1,5 @@
 using Game.Core;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,11 +11,12 @@ namespace Game.Player
         RaycastHit hit;
         public Camera cam;
         public Transform TargetedObject;
+        public bool isPlayerNear = false;
 
         public float Distance = 3;
         private void Update()
         {
-            rycaster();
+            if(!isPlayerNear) rycaster();
         }
 
         void rycaster()
@@ -53,6 +55,43 @@ namespace Game.Player
                     TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                     TargetedObject = null;
                 }
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<RaycastTarget>())
+            {
+                isPlayerNear = true;
+                if (!TargetedObject)
+                {
+                    EventManager.Instance.PressFButton += other.transform.GetComponent<IActionTrigger>().Trigger;
+                    other.transform.GetComponent<PressF_UI>().showInteractUI();
+                    other.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
+                    TargetedObject = other.transform;
+                }
+            }
+            else
+            {
+                if (TargetedObject)
+                {
+                    EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
+                    TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
+                    TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
+                    TargetedObject = null;
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (TargetedObject)
+            {
+                isPlayerNear = false;
+                EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
+                TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
+                TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
+                TargetedObject = null;
             }
         }
     }

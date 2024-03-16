@@ -21,6 +21,7 @@ namespace Game.Core
 
         [Space(10)]
         public CanvasGroup BackScreenCutOut;
+        public bool isBackScreenFadeActive;
 
         [Space(5)]
         public TextMeshProUGUI CoinCount;
@@ -29,12 +30,17 @@ namespace Game.Core
         public void CutSceneFadeOutIn(float cooldown)
         {
             LeanTween.value(this.gameObject, 0, 1, 0.4f).
-                setOnUpdate((float val) => { BackScreenCutOut.alpha = val; }).
+                setOnUpdate((float val) => { 
+                    BackScreenCutOut.alpha = val;
+                    isBackScreenFadeActive = true;
+                }).
                 setOnComplete(()=> { 
-                    LeanTween.delayedCall(cooldown, () => { 
-                        LeanTween.value(this.gameObject, 1, 0, 0.4f).setOnUpdate((float val) => { 
-                            BackScreenCutOut.alpha = val; 
-                        }); 
+                    LeanTween.delayedCall(cooldown, () => {
+                        LeanTween.value(this.gameObject, 1, 0, 0.4f).setOnUpdate((float val) =>
+                        {
+                            BackScreenCutOut.alpha = val;
+
+                        }).setOnComplete(() => isBackScreenFadeActive = false); 
                     }); 
                 });
         }

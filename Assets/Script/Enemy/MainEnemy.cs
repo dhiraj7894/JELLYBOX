@@ -18,7 +18,7 @@ namespace Game.Enemy
 
         public float speed;
         public Transform target;
-        public EnemyStats stats;
+        public EnemyStatsSO stats;
         [Space]
         public List<Transform> PetrolPath = new List<Transform>();
 

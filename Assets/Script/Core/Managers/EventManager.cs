@@ -6,7 +6,8 @@ namespace Game.Core
     {
         public event Action PressFButton;
         public static event Action SpecialAttackEnd;
-        public static event Action CoinCollected;
+        public static event Action OrbCollected;
+        public static event Action CutSceneChange;
         public void PressedFButton()
         {
             PressFButton?.Invoke();
@@ -17,9 +18,14 @@ namespace Game.Core
             SpecialAttackEnd?.Invoke();
         }
 
-        public static void OnCoinCollected()
+        public static void OnOrbCollected()
         {
-            CoinCollected?.Invoke();
+            OrbCollected?.Invoke();
+        }
+
+        public static void OnCutSceneChange()
+        {
+            CutSceneChange?.Invoke();
         }
     }
 }

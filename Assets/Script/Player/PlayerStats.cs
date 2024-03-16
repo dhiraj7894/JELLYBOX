@@ -114,7 +114,7 @@ namespace Game.Player
                 yield return new WaitForSeconds(vfx_Shield_Lifetime);
                 while (UIManager.Instance.Shield.value < vfx_Shield_Lifetime)
                 {
-                    Debug.Log("ShieldActivated Refieling");
+                    //Debug.Log("ShieldActivated Refieling");
                     UIManager.Instance.Shield.value += vfx_Shield_TimeVariation * Time.deltaTime;
                     yield return null;
                 }

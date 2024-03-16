@@ -7,7 +7,7 @@ public abstract class QuestStep : MonoBehaviour
 {
     private bool isFinished = false;
     private string questId;
-    protected void FinishedQuestStep()
+    public void FinishedQuestStep()
     {
         if (!isFinished)
         {
