@@ -7,6 +7,10 @@ namespace Game.Core.Quest
     public class QuestPoint : MonoBehaviour
     {
         private bool isPlayerNear = false;
+
+        private PressF_UI pressF_UI;
+
+
         [Header("Quest")]
         [SerializeField] private QuestSystemSO questInfoForPoint;
         private string questId;
@@ -30,6 +34,18 @@ namespace Game.Core.Quest
                 isPlayerNear = true;
             }
         }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag(TagHash.PLAYER) && currentQuestState == QuestState.IN_PROGRESS && pressF_UI)
+            {
+                pressF_UI.CanvasGroup.gameObject.SetActive(false);
+            }
+            else
+            {
+                pressF_UI.CanvasGroup.gameObject.SetActive(true);
+            }
+        }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag(TagHash.PLAYER))
@@ -40,6 +56,7 @@ namespace Game.Core.Quest
 
         private void OnEnable()
         {
+            pressF_UI = GetComponent<PressF_UI>();
             QuestItemData();
             QuestEvent.onQuestStateChange += QuestStateChange;
             //EventManager.Instance.PressFButton += ActivateQuest;

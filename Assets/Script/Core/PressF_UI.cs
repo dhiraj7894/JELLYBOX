@@ -12,7 +12,6 @@ namespace Game
         public CanvasGroup CanvasGroup;
         public LookAtCamera LACamera;
         public RaycastTarget RaycastTarget;
-        public QuestPoint questPoint;
 
         private void Awake()
         {
@@ -23,19 +22,7 @@ namespace Game
         {
             if (RaycastTarget == null)
                 return;
-            if (questPoint)
-            {
-                if (questPoint && questPoint.currentQuestState == QuestState.IN_PROGRESS)
-                    CanvasGroup.alpha = 0;
-                else
-                    LeanTween.value(this.gameObject, 0, 1, 0.1f).setOnUpdate((float val) => { CanvasGroup.alpha = val; });
-            }
-            else
-            {
-                LeanTween.value(this.gameObject, 0, 1, 0.1f).setOnUpdate((float val) => { CanvasGroup.alpha = val; });
-            }
-
-
+            LeanTween.value(this.gameObject, 0, 1, 0.1f).setOnUpdate((float val) => { CanvasGroup.alpha = val; });
             LACamera.LookAtCam();
         }
         public void hideInteractUI()

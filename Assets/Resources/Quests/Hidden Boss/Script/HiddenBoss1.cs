@@ -14,7 +14,8 @@ namespace Game.Dialouge
 
         private void Start()
         {
-            DialogueManager.Instance.EnterDialogueMode(inkJSON, this);
+            LeanTween.delayedCall(1, () =>{ DialogueManager.Instance.EnterDialogueMode(inkJSON, this); });
+            
         }
         
 

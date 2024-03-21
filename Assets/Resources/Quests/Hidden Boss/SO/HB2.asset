@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayQuestName: HB
   levelRequirement: 0
-  questRequirement:
-  - {fileID: 11400000, guid: 2dab3e4b3b379314490858532e4947cd, type: 2}
+  questRequirement: []
   questSteps:
   - {fileID: 1596517614658570022, guid: 6ad8da22d0abceb4586caab342771af9, type: 3}
   XPPointsReward: 0

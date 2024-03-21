@@ -37,6 +37,11 @@ public class AnimHash {
 public class TagHash
 {
     public const string PLAYER = "Player";
-
 }
+
+public class INKTags {
+    public const string SPEAKER = "speaker";    
+    public const string VOICELINE = "voiceline";    
+}
+
 
