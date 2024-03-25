@@ -1,11 +1,11 @@
-using Game.Core;
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Core
+namespace Jelly.Core
 {
 
     public class UIManager : Singleton<UIManager>

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Game.Core;
+using Jelly.Core;
 using Ink.Runtime;
 
-namespace Game.Dialouge
+namespace Jelly.Dialouge
 {
 
     public class HiddenBoss1 : QuestStep

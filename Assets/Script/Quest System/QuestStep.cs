@@ -1,4 +1,4 @@
-using Game.Core.Quest;
+using Jelly.Core.Quest;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

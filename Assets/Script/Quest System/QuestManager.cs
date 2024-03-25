@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Game.Core.Quest
+namespace Jelly.Core.Quest
 {
     public class QuestManager : MonoBehaviour
     {
@@ -134,8 +134,8 @@ namespace Game.Core.Quest
         {
             //Add XP to player level
             //Add Object reward to player invetory 
-            //Add In Game Currency as reward
-            Debug.Log($"<color=green>Game Reward Added to you inventory</color>");
+            //Add In Jelly Currency as reward
+            Debug.Log($"<color=green>Jelly Reward Added to you inventory</color>");
             ChangeQuestState(quest.info.id, QuestState.FINISHED);
         }
     }

@@ -1,11 +1,11 @@
-using Game.Core;
+using Jelly.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-namespace Game.Core
+namespace Jelly.Core
 {
     public class SpwanOrbs : Singleton<SpwanOrbs>
     {

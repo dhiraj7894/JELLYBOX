@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - FxTemporaire
+  - ground
+  - explosion
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Block
   - Enemy
   - QuestItem
-  - 
+  - Waypoints
   - 
   - 
   - 

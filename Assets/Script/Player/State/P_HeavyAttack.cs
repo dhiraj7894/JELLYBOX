@@ -1,9 +1,9 @@
-using Game.Player;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_HeavyAttack : P_Base
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using Ink.Runtime;
 
-namespace Game.Core
+namespace Jelly.Core
 {
 
     public class DialogueManager : Singleton<DialogueManager>

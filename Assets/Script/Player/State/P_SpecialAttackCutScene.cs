@@ -1,9 +1,9 @@
-using Game.Core;
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
+namespace Jelly.Player
 {
 
     public class P_SpecialAttackCutScene : P_Base

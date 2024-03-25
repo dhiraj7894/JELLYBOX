@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro.EditorUtilities;
 using UnityEngine;
-using Game.Core;
+using Jelly.Core;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     [Serializable] public struct PlayerHealth
     {

@@ -1,4 +1,4 @@
-using Game.Core;
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Profiling;
@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class HealingFontain : IActionTrigger
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Core.Quest
+namespace Jelly.Core.Quest
 {
     [CreateAssetMenu(fileName = "QuestSystemSO", menuName = "Jelly/QuestInfoSO")]
     public class QuestSystemSO : ScriptableObject

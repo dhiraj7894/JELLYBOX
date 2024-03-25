@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Game.Core
+namespace Jelly.Core
 {
 
     public class GameManager : Singleton<GameManager>

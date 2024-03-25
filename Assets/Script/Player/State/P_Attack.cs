@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_Attack : P_Base
     {

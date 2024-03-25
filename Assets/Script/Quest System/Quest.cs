@@ -1,10 +1,10 @@
-using Game.Core.Quest;
+using Jelly.Core.Quest;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Game.Core.Quest
+namespace Jelly.Core.Quest
 {
     public enum QuestState
     {

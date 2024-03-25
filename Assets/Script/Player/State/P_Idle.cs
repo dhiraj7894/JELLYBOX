@@ -1,4 +1,4 @@
-using Game.Core;
+using Jelly.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_Idle : P_Base
     {

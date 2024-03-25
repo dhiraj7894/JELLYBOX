@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game
+namespace Jelly
 {
     public abstract class IActionTrigger : MonoBehaviour
     {

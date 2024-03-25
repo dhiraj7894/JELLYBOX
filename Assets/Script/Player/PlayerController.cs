@@ -1,9 +1,9 @@
-using Game.Core;
+using Jelly.Core;
 using Unity.VisualScripting;
 using UnityEngine;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
 
     public class PlayerController : IActionTrigger

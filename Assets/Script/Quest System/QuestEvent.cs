@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace Game.Core.Quest
+namespace Jelly.Core.Quest
 {
     public static class QuestEvent
     {

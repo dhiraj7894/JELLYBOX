@@ -1,4 +1,4 @@
-using Game.Core;
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.VFX;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class MainPlayer : Singleton<MainPlayer>
     {

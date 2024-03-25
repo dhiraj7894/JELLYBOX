@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Core
+namespace Jelly.Core
 {
     public class EventManager : Singleton<EventManager>
     {

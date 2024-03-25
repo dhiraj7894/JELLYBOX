@@ -1,10 +1,10 @@
-using Game.Core.Quest;
-using Game.Player;
+using Jelly.Core.Quest;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game
+namespace Jelly
 {
     public class PressF_UI : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Enemy
+namespace Jelly.Enemy
 {
     public class E_Idle : E_Base
     {

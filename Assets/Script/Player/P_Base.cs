@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using System.Collections;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public abstract class P_Base
     {
