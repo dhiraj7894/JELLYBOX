@@ -16,7 +16,7 @@ namespace Jelly.Enemy
 
         public List<Transform> visibleTargets = new List<Transform>();
 
-        MainEnemy _enemy;
+       // MainEnemy _enemy;
 
         private void Start()
         {
@@ -46,10 +46,10 @@ namespace Jelly.Enemy
                     if (!Physics.Raycast(transform.position, dirToTarget, distanceToTarget, obstacleMask))
                     {
                         visibleTargets.Add(target);
-                        _enemy.target = target;
+                        //_enemy.target = target;
                     }
-                    else
-                        _enemy.target = null;
+                    /*else
+                        _enemy.target = null;*/
                 }
             }
         }

@@ -1,6 +1,7 @@
 using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -22,6 +23,12 @@ namespace Jelly.Player
         public P_Attack ATTACKING;
         public P_HeavyAttack HEAVYATTACK;
         public P_SpecialAttackCutScene SPECIALATTACK;
+
+
+        P_AttackTypeOne AT1;
+        P_AttackTypeTwo AT2;
+
+        public List<P_Base> AttackTypes = new List<P_Base>();
         #endregion
         
         [Range(0, 1)] public float playerSpeedDamp = 0.1f;
@@ -70,14 +77,23 @@ namespace Jelly.Player
         public VisualEffect shieldParticle;
         private void Start()
         {
+            InitializeStates();
+            _currentState = IDLE;
+            _currentState.EnterState();
+            currentStamina = stats.stats.MaxStamina;
+        }
+
+        public void InitializeStates()
+        {
             IDLE = new P_Idle(this);
             SPRINT = new P_Sprint(this);
             ATTACKING = new P_Attack(this);
             HEAVYATTACK = new P_HeavyAttack(this);
             SPECIALATTACK = new P_SpecialAttackCutScene(this);
-            _currentState = IDLE;
-            _currentState.EnterState();
-            currentStamina = stats.stats.MaxStamina;
+            AT1 = new P_AttackTypeOne(this);
+            AT2 = new P_AttackTypeTwo(this);
+            AttackTypes.Add(AT1);
+            AttackTypes.Add(AT2);
         }
 
         private void Update()
