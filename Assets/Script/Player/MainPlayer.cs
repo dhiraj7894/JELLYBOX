@@ -25,8 +25,6 @@ namespace Jelly.Player
         public P_SpecialAttackCutScene SPECIALATTACK;
 
 
-        P_AttackTypeOne AT1;
-        P_AttackTypeTwo AT2;
 
         public List<P_Base> AttackTypes = new List<P_Base>();
         #endregion
@@ -91,10 +89,6 @@ namespace Jelly.Player
             ATTACKING = new P_Attack(this);
             HEAVYATTACK = new P_HeavyAttack(this);
             SPECIALATTACK = new P_SpecialAttackCutScene(this);
-            AT1 = new P_AttackTypeOne(this);
-            AT2 = new P_AttackTypeTwo(this);
-            AttackTypes.Add(AT1);
-            AttackTypes.Add(AT2);
         }
 
         private void Update()

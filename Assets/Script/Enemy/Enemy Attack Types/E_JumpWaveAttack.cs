@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    public class E_AttackJumpWave : E_Base
+    public class E_JumpWaveAttack : E_Base
     {
         public float currentJumpTime = 0;
         public float currentJumpCount = 0;
@@ -17,7 +17,7 @@ namespace Jelly.Enemy
         public float height;
 
         bool isJumping = false;
-        public E_AttackJumpWave(MainEnemy M_enemy) : base(M_enemy)
+        public E_JumpWaveAttack(MainEnemy M_enemy) : base(M_enemy)
         {
             enemy = M_enemy;
         }

@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8593283228229321684}
   - component: {fileID: 1572075555}
   m_Layer: 0
-  m_Name: IceShardVisual
+  m_Name: Missile Atack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

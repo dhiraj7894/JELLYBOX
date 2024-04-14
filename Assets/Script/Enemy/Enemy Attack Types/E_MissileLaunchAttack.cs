@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    public class E_AttackIceShard : E_Base
+    public class E_MissileLaunchAttack : E_Base
     {
 
-        public E_AttackIceShard(MainEnemy M_enemy) : base(M_enemy)
+        public E_MissileLaunchAttack(MainEnemy M_enemy) : base(M_enemy)
         {
             enemy = M_enemy;
         }

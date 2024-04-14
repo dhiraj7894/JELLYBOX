@@ -87,7 +87,7 @@ namespace Jelly.Player
                     }
                     if (attack && !_isSprint)
                     {
-                        ChangeAttackType();
+                        player.ChangeCurrentState(player.ATTACKING);
                     }
                 }               
             }
@@ -104,7 +104,7 @@ namespace Jelly.Player
         {
             int i = UnityEngine.Random.Range(0, player.AttackTypes.Count);
             Debug.Log($"AttackTypes Count: {player.AttackTypes[0]}");
-            player.ChangeCurrentState(player.AttackTypes[i]);
+            player.ChangeCurrentState(player.ATTACKING);
         }
 
 

@@ -1180,7 +1180,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 319046348}
-  - component: {fileID: 319046351}
   - component: {fileID: 319046350}
   - component: {fileID: 319046349}
   - component: {fileID: 319046352}
@@ -1193,7 +1192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &319046348
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,38 +1231,103 @@ MonoBehaviour:
   m_GameObject: {fileID: 319046347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba03d5b19d61cc4b808cfb482a4e002, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bab4d98417af1f46940ecf6665da2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 319046352}
---- !u!114 &319046351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319046347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3806a6a712eda4488c28cd287330ad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockOnTransform: {fileID: 0}
-  eAnimeManager: {fileID: 0}
-  eStats: {fileID: 0}
-  agent: {fileID: 319046354}
-  enemyRB: {fileID: 0}
-  currentState: {fileID: 1077916863}
-  isPerformingAction: 0
-  isGrounded: 1
-  currentTarget: {fileID: 1253609915191818108}
-  distanceFromTarget: 0
-  rotationSpeed: 0
-  maximumAttackRange: 30
-  detectionRadius: 30
-  viableAngle: 50
-  detectionAngle: 50
-  currentRecoveryTime: 0
+  speed: 0
+  target: {fileID: 1962597936}
+  currentAttackVFX: {fileID: 0}
+  isGrounded: 0
+  rb: {fileID: 0}
+  agent: {fileID: 0}
+  maxJumpTime: 1
+  maxJumpCount: 3
+  jumpWaveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.051355306
+      outSlope: -0.051355306
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.36739975
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 3.783722
+      outSlope: 3.783722
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.17390561
+      outWeight: 0.16045988
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -24.481846
+      outSlope: -24.481846
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.018111229
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpForceVisual: {fileID: 1838901173844419137, guid: 1c99214e42cc370428633d47bb8bdeb4,
+    type: 3}
+  iceShard: {fileID: 8593283228229321687, guid: 4e9c68439bf917f409fae953cfd76b7c,
+    type: 3}
+  speedWaveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.5
+      inSlope: -12.430162
+      outSlope: -12.430162
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.026740436
+    - serializedVersion: 3
+      time: 0.5344468
+      value: 0.51958877
+      inSlope: -6.693643
+      outSlope: -0.006615989
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.26566586
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1
+      value: 2.5
+      inSlope: 15.425426
+      outSlope: 15.425426
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.030536491
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  circleWaveCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  circleAttackVisual: {fileID: 152979062250640179, guid: 8908a0dff626f974b8ec979a5d2b47a7,
+    type: 3}
+  hammerWaveCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hammerAttackVisual: {fileID: 5562243525915038824, guid: 4fe3b604e6a8a9d43b54a6973d5ff791,
+    type: 3}
 --- !u!95 &319046352
 Animator:
   serializedVersion: 5
@@ -1532,7 +1596,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.06433936, y: -0.000000008585365, z: 5.535238e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433936, y: 0.000000008585365, z: -5.535238e-10, w: 0.9979281}
   m_LocalPosition: {x: 0.3, y: 5.5, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2244,7 +2308,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469047482}
-  m_LocalRotation: {x: 0.08248053, y: -1e-45, z: -0, w: 0.9965927}
+  m_LocalRotation: {x: 0.08248053, y: 1e-45, z: -0, w: 0.9965927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3323,11 +3387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a055cdf4d33dbc44ad7bb07525eee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idle: {fileID: 1077916863}
-  combat: {fileID: 1815528415}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &726501360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,9 +3431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81bb67f83662a254696660ccd1a7e531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combat: {fileID: 1815528415}
-  isAttacking: 0
-  isAttackCompleted: 0
 --- !u!1 &781227365
 GameObject:
   m_ObjectHideFlags: 3
@@ -3985,10 +4041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bfe0b7f2acb2f48b428884216e34eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pursue: {fileID: 685468616}
-  detectionLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &1082578511
 GameObject:
   m_ObjectHideFlags: 0
@@ -4033,13 +4085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10e69eace3e4c743a3665257b992686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combat: {fileID: 1815528415}
-  isAttacking: 0
-  isAttackCompleted: 0
-  maxJumpCount: 5
-  jumpTime: 1
-  jumpForce: 5
-  aVisual: {fileID: 5584608800476145929, guid: 08cc1794d76f8734694b5a1daf59854c, type: 3}
 --- !u!1 &1156132660
 GameObject:
   m_ObjectHideFlags: 0
@@ -5163,7 +5208,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458983040}
-  m_LocalRotation: {x: 0.06433937, y: -0.0000000042926827, z: 2.7676195e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433937, y: 0.0000000042926813, z: -2.7676186e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6091,12 +6136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954e862b69aaeff4d9db5d2987b1f0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks:
-  - {fileID: 1082578513}
-  - {fileID: 726501362}
-  pursue: {fileID: 685468616}
-  currentAttack: {fileID: 0}
-  previousAttack: {fileID: 0}
 --- !u!1 &1841113390
 GameObject:
   m_ObjectHideFlags: 0
@@ -6891,7 +6930,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097590190}
-  m_LocalRotation: {x: 0.04622492, y: -0.000000002148499, z: 9.942047e-11, w: 0.99893105}
+  m_LocalRotation: {x: 0.04622492, y: 0.0000000021483397, z: -9.94131e-11, w: 0.99893105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7120,15 +7159,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29bcf45fb2c112e44b0fb0f6838e150f, type: 3}
---- !u!114 &1253609915191818108 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8122886620225834381, guid: 29bcf45fb2c112e44b0fb0f6838e150f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1253609915191818107}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49809e65b73ccf343b1bc9463b906011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

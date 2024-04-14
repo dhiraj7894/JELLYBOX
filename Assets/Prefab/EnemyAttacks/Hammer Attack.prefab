@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5562243525915038830}
   - component: {fileID: -7073529967905310711}
   m_Layer: 0
-  m_Name: Hammer
+  m_Name: Hammer Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
