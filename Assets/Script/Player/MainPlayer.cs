@@ -57,6 +57,7 @@ namespace Jelly.Player
         public float gravityMultiplier = 3.0f;
 
         [Space(10)]
+        public bool isGrounded = false;
         public bool isCooldown;
         public bool isStaminaCoolDown=false;
         public bool isUsableStaminaRestored = false;
@@ -200,5 +201,27 @@ namespace Jelly.Player
         {
             yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = true;
+            HPDrainTrigger(other);
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = false;
+        }
+
+        void HPDrainTrigger(Collider other)
+        {
+            if (other.CompareTag(TagHash.JUMPFORCE))
+            {
+                stats.TakeDamage(other.GetComponentInParent<JumpForceFiled>().HPLoss);
+                return;
+            }
+        }
+
     }
 }

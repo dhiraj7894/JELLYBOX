@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Jelly.Player
+namespace Jelly.Enemy
 {
-    public class P_AttackTypeTwo : P_Base
+    public class E_Attack : E_Base
     {
-        public P_AttackTypeTwo(MainPlayer _player) : base(_player)
+        public E_Attack(MainEnemy _enemy) : base(_enemy)
         {
-            player = _player;
+            enemy = _enemy;
         }
+
         public override void EnterState()
         {
             base.EnterState();
-            player.ChangeCurrentState(player.IDLE);
-        }
-
-        public override void ExitState()
-        {
-            base.ExitState();
         }
 
         public override void LogicUpdateState()
@@ -26,9 +21,9 @@ namespace Jelly.Player
             base.LogicUpdateState();
         }
 
-        public override void ManageInput()
+        public override void ExitState()
         {
-            base.ManageInput();
+            base.ExitState();
         }
     }
 }

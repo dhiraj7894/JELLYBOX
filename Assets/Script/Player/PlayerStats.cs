@@ -83,8 +83,16 @@ namespace Jelly.Player
             player.isSpecialAttack_B_CanBePerforme = true;
         }
 
-        public void TakeDamage(float damage) { 
-            health.currentHealth -= damage;
+        public void TakeDamage(float damage) {
+            if (player.isShieldActivated)
+            {
+                damage = damage / 4;
+            }
+            else
+            {
+                damage = damage;
+            }
+            health.reducedHealth -= damage;
         }
 
         public IEnumerator StaminaRefil()

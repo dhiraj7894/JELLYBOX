@@ -111,7 +111,7 @@ namespace Jelly.Player
 
         public void Jump()
         {
-            if (player.controller.isGrounded)
+            if (player.isGrounded)
             {
                 _velocity.y += player.jumpForce;
                 player.anim.Play(AnimHash.JUMP);

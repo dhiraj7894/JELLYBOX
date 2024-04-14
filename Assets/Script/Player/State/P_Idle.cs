@@ -26,7 +26,7 @@ namespace Jelly.Player
             attack = false;
             if(player.currentStamina >= (player.stats.stats.StaminaNeedToAttack* player.stats.stats.StaminaMultiplier) )
             {
-               // InputActions._heavyAttack.performed += OnHeavyAttack;
+               InputActions._heavyAttack.performed += OnHeavyAttack;
             }         
             
         }

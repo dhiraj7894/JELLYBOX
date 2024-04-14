@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Script/CharacterAnimeManager.cs.meta
 guid: aa2ece45b644ec64a8a47d81f67315d9
+========
+guid: 83f0d1b5a70dee142af582fd0488c900
+>>>>>>>> Stashed changes:Assets/Script/BallLauncher.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

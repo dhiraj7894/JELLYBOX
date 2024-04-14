@@ -38,6 +38,8 @@ public class TagHash
 {
     public const string PLAYER = "Player";
     public const string GROUND = "ground";
+    public const string JUMPFORCE = "jumpForce";
+    public const string ICESHARD = "iceshard";
 }
 
 public class INKTags {
