@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class BallLauncher : MonoBehaviour {
 
@@ -62,7 +63,8 @@ public class BallLauncher : MonoBehaviour {
 	IEnumerator ExplotionProcess()
 	{
 		yield return new WaitForSeconds(.15f);
-        ExplosionEffect.SetActive(true);               
+        ExplosionEffect.SetActive(true);
+        sphereCollider = transform.AddComponent<SphereCollider>();
         while (sphereCollider.radius < 8)
 		{
 			sphereCollider.radius += 50 * Time.deltaTime;			

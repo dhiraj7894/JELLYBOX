@@ -14,11 +14,10 @@ GameObject:
   - component: {fileID: 7525330598771162345}
   - component: {fileID: 42432442}
   - component: {fileID: 42432443}
-  - component: {fileID: 7776270454247904171}
   - component: {fileID: 1634997670584212115}
   - component: {fileID: 5018236131872728867}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +100,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &42432442
 Rigidbody:
@@ -134,7 +133,7 @@ MonoBehaviour:
   parant: {fileID: 0}
   ball: {fileID: 42432442}
   boxCollider: {fileID: 7525330598771162345}
-  sphereCollider: {fileID: 7776270454247904171}
+  sphereCollider: {fileID: 0}
   ExplosionEffect: {fileID: 5789800548047563729}
   target: {fileID: 0}
   movementTime: 1.75
@@ -142,19 +141,6 @@ MonoBehaviour:
   h: 6
   gravity: -18
   debugPath: 0
---- !u!135 &7776270454247904171
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8170940973416347437}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!199 &1634997670584212115
 ParticleSystemRenderer:
   serializedVersion: 6
