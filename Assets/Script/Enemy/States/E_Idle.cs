@@ -23,6 +23,16 @@ namespace Jelly.Enemy
 
         public override void LogicUpdateState()
         {
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+                enemy.ChangeCurrentState(enemy.AttackList[0]);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                enemy.ChangeCurrentState(enemy.AttackList[1]);
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                enemy.ChangeCurrentState(enemy.AttackList[2]);
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+                enemy.ChangeCurrentState(enemy.AttackList[3]);
+
+
             base.LogicUpdateState();
         }
     }

@@ -1200,16 +1200,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319046347}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.4548456, z: 0, w: 0.8905703}
   m_LocalPosition: {x: 0, y: -0.026, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2021705258}
   - {fileID: 1156132661}
+  - {fileID: 394020136}
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -54.11, z: 0}
 --- !u!114 &319046349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,12 +1235,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bab4d98417af1f46940ecf6665da2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStats: 
+  HATTACK:
+    enemy: {fileID: 0}
+    currentJumpTime: 0
+    speed: 0
+    time: 0
+    height: 0
+    jumpExecuted: 0
   speed: 0
   target: {fileID: 1962597936}
   currentAttackVFX: {fileID: 0}
+  attackVisialParant: {fileID: 394020136}
+  rb: {fileID: 319046356}
+  agent: {fileID: 319046354}
   isGrounded: 0
-  rb: {fileID: 0}
-  agent: {fileID: 0}
   maxJumpTime: 1
   maxJumpCount: 3
   jumpWaveCurve:
@@ -1248,29 +1258,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.051355306
-      outSlope: -0.051355306
+      inSlope: -1.4929276
+      outSlope: -1.4929276
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.36739975
+      outWeight: 1
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 3.783722
-      outSlope: 3.783722
+      time: 0.7
+      value: 5
+      inSlope: -0.02835643
+      outSlope: -0.02835643
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.17390561
-      outWeight: 0.16045988
+      inWeight: 0.2626679
+      outWeight: 0.6882723
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -24.481846
-      outSlope: -24.481846
+      inSlope: -49.9803
+      outSlope: -49.9803
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.018111229
+      inWeight: 0.042892296
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1314,7 +1324,52 @@ MonoBehaviour:
     m_RotationOrder: 4
   circleWaveCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 90
+      outSlope: 90
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1
+      value: 9
+      inSlope: 4.1755075
+      outSlope: 4.1755075
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.64364105
+    - serializedVersion: 3
+      time: 0.5
+      value: 10
+      inSlope: -0.028672064
+      outSlope: -0.028672064
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9048265
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9
+      value: 9
+      inSlope: -2.7441936
+      outSlope: -2.7441936
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8940362
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -89.99998
+      outSlope: -89.99998
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -1322,7 +1377,61 @@ MonoBehaviour:
     type: 3}
   hammerWaveCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 13.333333
+      outSlope: 13.333333
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.15
+      value: 2
+      inSlope: 1.1159604
+      outSlope: 1.1159604
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16291249
+    - serializedVersion: 3
+      time: 1.5
+      value: 2
+      inSlope: -0.019172847
+      outSlope: -0.019172847
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.85
+      value: 2
+      inSlope: -1.1687685
+      outSlope: -1.6965486
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.17704117
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2.988799
+      value: 0.15835147
+      inSlope: -14.876563
+      outSlope: -14.876563
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 0
+      inSlope: -14.137382
+      outSlope: -14.137382
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -1381,8 +1490,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1447887, z: 1}
-  m_Center: {x: 0, y: -0.02, z: 0}
+  m_Size: {x: 1, y: 0.33943254, z: 1}
+  m_Center: {x: 0, y: 0.020073742, z: 0}
 --- !u!54 &319046356
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1644,7 +1753,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -1761,6 +1870,37 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &394020135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394020136}
+  m_Layer: 0
+  m_Name: AV
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394020136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394020135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 319046348}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402336495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,9 +3389,7 @@ MonoBehaviour:
   m_AnimatedTarget: {fileID: 651321416}
   m_LayerIndex: 0
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1461135063}
-  - {fileID: 238541626}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: 1432961145
     m_VirtualCamera: {fileID: 1461135063}
@@ -5208,7 +5346,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458983040}
-  m_LocalRotation: {x: 0.06433937, y: 0.0000000042926813, z: -2.7676186e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433937, y: 0.0000000042926827, z: -2.7676195e-10, w: 0.9979281}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6930,7 +7068,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097590190}
-  m_LocalRotation: {x: 0.04622492, y: 0.0000000021483397, z: -9.94131e-11, w: 0.99893105}
+  m_LocalRotation: {x: 0.04622492, y: -0.000000002148499, z: 9.942047e-11, w: 0.99893105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

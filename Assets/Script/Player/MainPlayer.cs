@@ -76,13 +76,13 @@ namespace Jelly.Player
         public VisualEffect shieldParticle;
         private void Start()
         {
-            InitializeStates();
+            StateInitialize();
             _currentState = IDLE;
             _currentState.EnterState();
             currentStamina = stats.stats.MaxStamina;
         }
 
-        public void InitializeStates()
+        public void StateInitialize()
         {
             IDLE = new P_Idle(this);
             SPRINT = new P_Sprint(this);
@@ -93,6 +93,7 @@ namespace Jelly.Player
 
         private void Update()
         {
+            return;
             if (isDead || dialogueManager.isDialoguePlaying)
                 return;
 

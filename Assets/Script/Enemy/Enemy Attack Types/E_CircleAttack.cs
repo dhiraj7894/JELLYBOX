@@ -47,7 +47,7 @@ namespace Jelly.Enemy
             {
                 try
                 {
-                    if(enemy.currentAttackVFX.GetComponent<CircleAttack>().isCircleAttackComplete) {
+                    if(enemy.currentAttackVFX.GetComponent<CircleAttack>().isCircleAttackComplete && enemy.isGrounded) {
                         
                         enemy.ChangeCurrentState(enemy.IDLE);
                         enemy.currentAttackVFX.GetComponent<CircleAttack>().DestroyObject();

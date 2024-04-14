@@ -71,7 +71,7 @@ namespace Jelly.Enemy
             if (time >= enemy.jumpWaveCurve.keys[enemy.jumpWaveCurve.length - 1].time)
             {
                 time = 0f;
-                enemy.ShowAttackVisual(enemy.jumpForceVisual, enemy.transform.position, Quaternion.identity);
+                enemy.ShowAttackVisual(enemy.jumpForceVisual, enemy.transform.position, Quaternion.identity, true);
                 currentJumpTime = enemy.maxJumpTime;
                 currentJumpCount++;
                 Debug.Log($"{currentJumpCount} && {enemy.maxJumpCount}");

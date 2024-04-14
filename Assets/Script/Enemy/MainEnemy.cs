@@ -7,6 +7,7 @@ namespace Jelly.Enemy
 {
     public class MainEnemy : MonoBehaviour
     {
+        public string currentStats; 
         #region States
         E_Base _currentState;        
         public E_Idle IDLE;
@@ -22,12 +23,14 @@ namespace Jelly.Enemy
 
         public Transform target;
         public GameObject currentAttackVFX;
+        public Transform attackVisialParant;
+
+
+        public Rigidbody rb;
+        public NavMeshAgent agent;
 
         public bool isGrounded;
-
-        [HideInInspector] public Rigidbody rb;
-        [HideInInspector] public NavMeshAgent agent;
-
+        
         [Header("Jump Wave Attack"), Space(5)]
         public float maxJumpTime = 1;
         public int maxJumpCount;
@@ -75,6 +78,7 @@ namespace Jelly.Enemy
         private void Update()
         {
             _currentState.LogicUpdateState();
+            currentStats = _currentState.ToString();
         }
 
         public void ChangeCurrentState(E_Base newState)
@@ -85,11 +89,36 @@ namespace Jelly.Enemy
         }
 
 
-        public void ShowAttackVisual(GameObject attackVisual, Vector3 pos, Quaternion quaternion)
+        public void ShowAttackVisual(GameObject attackVisual, Vector3 pos, Quaternion quaternion, bool multiSpwan = false, bool isParant = false)
         {
-            if(!currentAttackVFX)currentAttackVFX = Instantiate(attackVisual, pos, quaternion);
-        }
+            if (multiSpwan)
+            {
+                currentAttackVFX = Instantiate(attackVisual, pos, quaternion);
+            }
+            else
+            {
+                if (!currentAttackVFX) currentAttackVFX = Instantiate(attackVisual, pos, quaternion);
+            }
 
+            if (isParant)
+            {
+                currentAttackVFX.transform.parent = attackVisialParant.transform;
+                currentAttackVFX.transform.localEulerAngles = Vector3.zero;
+            }
+
+            }
+
+
+            private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag(TagHash.GROUND))
+                isGrounded = true;
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = false;
+        }
 
     }
 }

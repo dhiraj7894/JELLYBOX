@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
+    [System.Serializable]
     public class E_HammerAttack : E_Base
     {
         public float currentJumpTime = 0;
@@ -52,7 +53,7 @@ namespace Jelly.Enemy
             {
                 try
                 {
-                    if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete)
+                    if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
                     {
 
                         enemy.ChangeCurrentState(enemy.IDLE);
@@ -93,9 +94,9 @@ namespace Jelly.Enemy
 
             }
 
-            if (time >= enemy.hammerWaveCurve.keys[enemy.hammerWaveCurve.length - 1].time/3)
+            if (time >= .1f)
             {
-                enemy.ShowAttackVisual(enemy.hammerAttackVisual, enemy.transform.position, Quaternion.identity);                
+                enemy.ShowAttackVisual(enemy.hammerAttackVisual, enemy.transform.position, Quaternion.identity, false, true);                
             }
         }
     }
