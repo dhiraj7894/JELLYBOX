@@ -11,6 +11,10 @@ namespace Jelly.Enemy
         #region States
         E_Base _currentState;        
         public E_Idle IDLE;
+        public E_Preparation PREP;
+        public E_Pursuit PURSUIT;
+        public E_Combat COMBAT;
+
         public E_JumpWaveAttack JATTACK;
         public E_MissileLaunchAttack MATTACK;
         public E_CircleAttack CATTACK;
@@ -63,6 +67,9 @@ namespace Jelly.Enemy
         public void StateInitialize()
         {
             IDLE = new E_Idle(this);
+            PREP = new E_Preparation(this);
+            PURSUIT = new E_Pursuit(this);
+            COMBAT = new E_Combat(this);
             JATTACK = new E_JumpWaveAttack(this);
             MATTACK = new E_MissileLaunchAttack(this);
             CATTACK = new E_CircleAttack(this);

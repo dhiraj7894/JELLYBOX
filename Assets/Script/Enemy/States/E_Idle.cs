@@ -35,5 +35,14 @@ namespace Jelly.Enemy
 
             base.LogicUpdateState();
         }
+
+
+
+
+
+        public void TargetMovement()
+        {
+
+        }
     }
 }

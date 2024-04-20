@@ -34,7 +34,7 @@ namespace Jelly.Enemy
                     if (enemy.currentAttackVFX.GetComponent<IceShard>().isExplosionCompleted && enemy.isGrounded)
                     {
                         // Change to combat state
-                        enemy.ChangeCurrentState(enemy.IDLE);
+                        enemy.ChangeCurrentState(enemy.COMBAT);
                     }
                 }
                 catch
