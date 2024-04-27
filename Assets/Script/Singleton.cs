@@ -1,9 +1,10 @@
 
+using Fusion;
 using UnityEngine;
 
 namespace Jelly
 {
-    public abstract class Singleton<T> : MonoBehaviour
+    public abstract class Singleton<T> : NetworkBehaviour, INetworkInput
                     where T : Component
     {
         private static T _Instance = default;

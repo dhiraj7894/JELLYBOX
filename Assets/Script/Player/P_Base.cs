@@ -69,19 +69,26 @@ namespace Jelly.Player
             _isDead = player.isDead;
             
         }
+        public virtual void PhysicsUpdateState()
+        {
+
+        }
 
         public virtual void ExitState() { }
         Vector3 moveDir;
         public void MovementUpdate(float speed = 1)
         {
-            if (!_isDead)
+            player.GetInputValue(_isDead, _playerSpeed, speed, _turnSmoothVelocity);
+
+
+           /* if (!_isDead)
             {
-                float targetAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg + player.cameraTransform.eulerAngles.y;
+                float targetAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg *//*+ player.cameraTransform.eulerAngles.y*//*;
                 float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, player.turnSmoothDamp);
                 player.transform.rotation = Quaternion.Euler(0, angle, 0);
                 moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
                 player.controller.Move(moveDir.normalized * _playerSpeed * speed * Time.deltaTime);
-            }
+            }*/
 
         }
 

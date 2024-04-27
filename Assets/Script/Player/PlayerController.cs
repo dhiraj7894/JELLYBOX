@@ -18,6 +18,10 @@ namespace Jelly.Player
         {
             if(!isPlayerNear) rycaster();
         }
+        private void Start()
+        {
+            cam = Camera.main;
+        }
 
         void rycaster()
         {

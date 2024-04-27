@@ -19,13 +19,13 @@ namespace Jelly.Player
         }
         public override void ManageInput()
         {
-            _input = InputActions._moveAction.ReadValue<Vector2>();
+            //player.data.movement = InputActions._moveAction.ReadValue<Vector2>();
+            //_input = InputActions._moveAction.ReadValue<Vector2>();
 
         }
         public override void LogicUpdateState()
         {
-            base.LogicUpdateState();            
-            if (_input.magnitude >= 0.1f) MovementUpdate(player.sprintSpeedMultiplier);
+            base.LogicUpdateState();                       
             if (_isSprint)
             {
                 player.anim.SetFloat(AnimHash.SPEED, _input.magnitude + 0.5f, player.playerSpeedDamp, Time.deltaTime);                               
@@ -36,6 +36,12 @@ namespace Jelly.Player
                 player.ChangeCurrentState(player.IDLE);
             }
 
+        }
+
+        public override void PhysicsUpdateState()
+        {
+            if (_input.magnitude >= 0.1f) MovementUpdate(player.sprintSpeedMultiplier);
+            base.PhysicsUpdateState();
         }
         public override void ExitState()
         {

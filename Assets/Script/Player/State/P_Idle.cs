@@ -36,7 +36,11 @@ namespace Jelly.Player
         {
             base.ManageInput();
             velocity = _velocity;
-            _input = InputActions._moveAction.ReadValue<Vector2>();  
+            //player.data.movement = InputActions._moveAction.ReadValue<Vector2>();  
+            //_input = InputActions._moveAction.ReadValue<Vector2>();  
+
+
+
             if(InputActions._attack.triggered && player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 attack = true;
@@ -77,7 +81,7 @@ namespace Jelly.Player
             if (!_isDead)
             {
                 player.anim.SetFloat(AnimHash.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
-                if (_input.magnitude >= 0.1f) MovementUpdate();
+                
 
                 if (!player.isSpecialAttackCooldown)
                 {
@@ -98,7 +102,11 @@ namespace Jelly.Player
             
         }
 
+        public override void PhysicsUpdateState()
+        {
+            if (_input.magnitude >= 0.1f) MovementUpdate();
 
+        }
 
         public void ChangeAttackType()
         {

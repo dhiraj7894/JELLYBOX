@@ -145,7 +145,7 @@ namespace Jelly.Player
                 }
                 yield return new WaitForEndOfFrame();
             }
-            Debug.Log("While is looping");
+            Debug.Log("Refieling Special Attack A's charge bar");
             yield return new WaitForSeconds(stats.SpecialAttackACooldownTime);
             player.isSpecialAttack_A_CanBePerforme = true;
             StopCoroutine(RefielSpecialA());

@@ -1,3 +1,4 @@
+using Fusion;
 using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.VFX;
+using UnityEngine.Windows;
 
 namespace Jelly.Player
 {
@@ -74,6 +76,8 @@ namespace Jelly.Player
         public ParticleSystem dashParticle;
         public ParticleSystem jumpParticle;
         public VisualEffect shieldParticle;
+
+        public NetworkInputData data;
         private void Start()
         {
             StateInitialize();
@@ -93,8 +97,7 @@ namespace Jelly.Player
 
         private void Update()
         {
-            return;
-            if (isDead || dialogueManager.isDialoguePlaying)
+            if (isDead/* || dialogueManager.isDialoguePlaying*/)
                 return;
 
             _currentState.LogicUpdateState();
@@ -114,13 +117,16 @@ namespace Jelly.Player
             
             CurrrentState = _currentState.ToString();
 
-            if (Input.GetKeyDown(KeyCode.X))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.X))
             {
                 isDead = true;
             }
             EnemyChecker();
         }
-
+        public override void FixedUpdateNetwork()
+        {
+            _currentState.PhysicsUpdateState();
+        }
         public void ChangeCurrentState(P_Base newState)
         {
             _currentState.ExitState();
@@ -217,6 +223,27 @@ namespace Jelly.Player
                 return;
             }
         }
+        Vector3 moveDir;
+        public void GetInputValue(bool isDead, float pSpeed, float speed, float turnSmoothVelocity)
+        {
+             if(GetInput(out NetworkInputData networkInputData))
+            {
+                if (!isDead)
+                {
+                    float targetAngle = Mathf.Atan2(networkInputData.movement.x, networkInputData.movement.y) * Mathf.Rad2Deg /*+ cameraTransform.eulerAngles.y*/;
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothDamp);
+                    transform.rotation = Quaternion.Euler(0, angle, 0);
+                    moveDir = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+                    controller.Move(moveDir.normalized * pSpeed * speed * Time.deltaTime);
+                }                
+            }
+        }
 
+        public NetworkInputData GetNetworkInputData()
+        {
+            NetworkInputData networkInputData = new NetworkInputData();
+            networkInputData.movement = InputActions._moveAction.ReadValue<Vector2>();
+            return networkInputData;
+        }
     }
 }
