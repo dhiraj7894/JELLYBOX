@@ -58,7 +58,7 @@ namespace Jelly.Player
             {
                 if (player.currentStamina >= player.stats.stats.StaminaNeedToDash)
                 {
-                    if (!player.isCooldown) player.doDash();
+                    player.DoDash();
                     player.currentStamina -= player.stats.stats.StaminaNeedToDash;
                 }
             }

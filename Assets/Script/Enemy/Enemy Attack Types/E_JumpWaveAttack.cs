@@ -40,7 +40,7 @@ namespace Jelly.Enemy
         public override void LogicUpdateState()
         {
             if (currentJumpCount >= enemy.maxJumpCount)
-                enemy.ChangeCurrentState(enemy.COMBAT);
+                enemy.ChangeCurrentState(enemy.IDLE);
             if (currentJumpTime > 0)
             {
                 currentJumpTime -= Time.deltaTime;

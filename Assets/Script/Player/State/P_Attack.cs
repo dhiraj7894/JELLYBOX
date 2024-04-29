@@ -22,6 +22,7 @@ namespace Jelly.Player
         {
             base.EnterState();
             //if (player.targetedEnemy) RotateTowardCamera();
+            RotateTowardCamera();
             attack = false;
             timePassed = 0;
             
@@ -33,8 +34,6 @@ namespace Jelly.Player
                 ///
                 /// Uncomment when making build
                 ///
-
-                if (!player.isCooldown) player.doDash();
                 player.currentStamina -= player.stats.stats.StaminaNeedToAttack;
             }
             else
@@ -42,7 +41,7 @@ namespace Jelly.Player
                 player.ChangeCurrentState(player.IDLE);
                 player.anim.SetTrigger(AnimHash.MOVE);
             }
-            RotateTowardCamera();
+            
 
         }
 

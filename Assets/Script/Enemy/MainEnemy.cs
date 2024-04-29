@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
 
 namespace Jelly.Enemy
 {
@@ -9,9 +11,9 @@ namespace Jelly.Enemy
     {
         public string currentStats; 
         #region States
-        E_Base _currentState;        
+        E_Base _currentState;
+        public E_Prepare PREP;
         public E_Idle IDLE;
-        public E_Preparation PREP;
         public E_Pursuit PURSUIT;
         public E_Combat COMBAT;
 
@@ -28,13 +30,30 @@ namespace Jelly.Enemy
         public Transform target;
         public GameObject currentAttackVFX;
         public Transform attackVisialParant;
-
+        public Transform raycastCheckerTransform;
 
         public Rigidbody rb;
         public NavMeshAgent agent;
 
         public bool isGrounded;
-        
+
+        [Header("EnemyControlls")]
+        public float distanceFromTarget = 0;
+        public LayerMask ignoreLayer;
+        [Space(5)]
+        public int currentAttackPattern = 0;
+        public float dashForwardDistance = 2;
+        public float backOffDistance = .5f;
+        public float pursuitDistance = 4;
+        public float dashDistanceChecker = 15;
+        [Space(5)]
+        public float dashSpeed = 10;
+        public float dashTime = 1;
+
+
+        public bool isDashBackward = false;
+
+
         [Header("Jump Wave Attack"), Space(5)]
         public float maxJumpTime = 1;
         public int maxJumpCount;
@@ -52,6 +71,10 @@ namespace Jelly.Enemy
         [Header("Hammer Attack"), Space(5)]
         public AnimationCurve hammerWaveCurve;
         public GameObject hammerAttackVisual;
+
+        [Header("Basic Attacks"), Space(5)]
+        public Rigidbody bombBall;
+        public Transform bombThrowerPosition;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -60,14 +83,14 @@ namespace Jelly.Enemy
         void Start()
         {
             StateInitialize();
-            _currentState = IDLE;
+            _currentState = PREP;
             _currentState.EnterState();
         }
 
         public void StateInitialize()
         {
+            PREP = new E_Prepare(this);
             IDLE = new E_Idle(this);
-            PREP = new E_Preparation(this);
             PURSUIT = new E_Pursuit(this);
             COMBAT = new E_Combat(this);
             JATTACK = new E_JumpWaveAttack(this);
@@ -75,19 +98,24 @@ namespace Jelly.Enemy
             CATTACK = new E_CircleAttack(this);
             HATTACK = new E_HammerAttack(this);
 
-            AttackList.Add(JATTACK); 
+            AttackList.Add(HATTACK); 
+            AttackList.Add(JATTACK);
             AttackList.Add(MATTACK);
             AttackList.Add(CATTACK);
-            AttackList.Add(HATTACK);
 
         }
 
         private void Update()
         {
             _currentState.LogicUpdateState();
+            DistanceChecker();
             currentStats = _currentState.ToString();
         }
 
+        private void LateUpdate()
+        {
+            _currentState.LateLogicUpdateState();
+        }
         public void ChangeCurrentState(E_Base newState)
         {
             _currentState.ExitState();
@@ -95,6 +123,18 @@ namespace Jelly.Enemy
             _currentState.EnterState();
         }
 
+        public void DistanceChecker()
+        {
+            if (target)
+            {
+                distanceFromTarget = Vector3.Distance(transform.position, target.position);
+            }
+            else
+            {
+                distanceFromTarget = 0;
+            }
+
+        }
 
         public void ShowAttackVisual(GameObject attackVisual, Vector3 pos, Quaternion quaternion, bool multiSpwan = false, bool isParant = false)
         {
@@ -113,12 +153,23 @@ namespace Jelly.Enemy
                 currentAttackVFX.transform.localEulerAngles = Vector3.zero;
             }
 
-            }
+        }
 
-
-            private void OnTriggerEnter(Collider other)
+        public float RandomNumberGenrator(float min, float max)
         {
-            if(other.CompareTag(TagHash.GROUND))
+            float x = UnityEngine.Random.Range(min, max);
+            return x;
+        }
+
+        public Rigidbody BombBallThrow()
+        {
+            Rigidbody rb = Instantiate(bombBall, bombThrowerPosition.position + new Vector3(0,0.5f,0), Quaternion.identity);
+            return rb;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
                 isGrounded = true;
         }
         private void OnTriggerExit(Collider other)
@@ -127,5 +178,27 @@ namespace Jelly.Enemy
                 isGrounded = false;
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(raycastCheckerTransform.position, raycastCheckerTransform.position + raycastCheckerTransform.forward * dashDistanceChecker);
+        }
+        public void doDash(float dashMultiplayer, int id)
+        {
+            if (id == 1) StartCoroutine(Dash(transform.forward, dashSpeed * dashMultiplayer, dashTime)); 
+            else if (id == -1) StartCoroutine(Dash(-transform.forward, dashSpeed * dashMultiplayer, dashTime));
+
+        }
+        public IEnumerator Dash(Vector3 input, float dashSpeed, float dashTime)
+        {
+
+            float startTime = Time.time;
+
+            while (Time.time < startTime + dashTime)
+            {
+                transform.Translate(input * dashSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
     }
 }

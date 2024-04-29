@@ -25,7 +25,7 @@ namespace Jelly.Player
             timePassed = 0;
             player.anim.SetTrigger(AnimHash.HEAVYATTACK);
             player.anim.SetFloat(AnimHash.SPEED, 0);
-            player.doDash(dashMultiplier);
+            player.DoDash(dashMultiplier);
         }
         public override void ManageInput()
         {

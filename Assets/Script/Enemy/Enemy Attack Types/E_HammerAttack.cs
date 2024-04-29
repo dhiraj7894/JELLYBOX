@@ -56,7 +56,7 @@ namespace Jelly.Enemy
                     if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
                     {
 
-                        enemy.ChangeCurrentState(enemy.COMBAT);
+                        enemy.ChangeCurrentState(enemy.IDLE);
                         enemy.currentAttackVFX.GetComponent<HammerAttack>().DestroyObject();
                     }
                 }

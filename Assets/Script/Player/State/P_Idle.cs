@@ -13,6 +13,7 @@ namespace Jelly.Player
     {
         public Vector3 velocity;
         public bool attack;
+
         public P_Idle(MainPlayer _player) : base(_player)
         {
             player = _player;
@@ -24,6 +25,7 @@ namespace Jelly.Player
             _input = Vector2.zero;
             _isSprint = false;
             attack = false;
+
             if(player.currentStamina >= (player.stats.stats.StaminaNeedToAttack* player.stats.stats.StaminaMultiplier) )
             {
                InputActions._heavyAttack.performed += OnHeavyAttack;
@@ -95,7 +97,7 @@ namespace Jelly.Player
             {
                 player.anim.SetFloat(AnimHash.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
             }
-            
+
         }
 
 

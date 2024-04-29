@@ -4,45 +4,56 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
+    [System.Serializable]
     public class E_Idle : E_Base
     {
+        public float chaseRadius = 10;
+        public float combatTimer = 0;
+        public float movementTimer = .5f;
         public E_Idle(MainEnemy M_enemy) : base(M_enemy)
         {
+            
             enemy = M_enemy;
         }
 
         public override void EnterState()
         {
-            base.EnterState();
+
+            enemy.agent.enabled = true;
+            combatTimer = Random.Range(1, 4);
+            movementTimer = .5f;
+            
         }
 
         public override void ExitState()
         {
-            base.ExitState();
+
         }
 
         public override void LogicUpdateState()
         {
-            if(Input.GetKeyDown(KeyCode.Alpha1))
-                enemy.ChangeCurrentState(enemy.AttackList[0]);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                enemy.ChangeCurrentState(enemy.AttackList[1]);
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-                enemy.ChangeCurrentState(enemy.AttackList[2]);
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-                enemy.ChangeCurrentState(enemy.AttackList[3]);
+            combatTimer -= Time.deltaTime;
+            movementTimer -= Time.deltaTime;
 
-
-            base.LogicUpdateState();
+            StateChanger();
         }
 
-
-
-
-
-        public void TargetMovement()
+        public override void LateLogicUpdateState()
         {
-
+            LookAtTarget();
         }
+
+        public void StateChanger()
+        {
+            if(enemy.distanceFromTarget > chaseRadius && movementTimer <= 0)
+            {
+                enemy.agent.SetDestination(enemy.target.position);
+            }else if (enemy.distanceFromTarget <= chaseRadius && combatTimer<=0)
+            {
+                enemy.ChangeCurrentState(enemy.COMBAT);
+            }
+        
+        }
+
     }
 }

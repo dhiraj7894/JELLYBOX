@@ -57,6 +57,7 @@ namespace Jelly.Player
         [Space(10)]
         public bool isGrounded = false;
         public bool isCooldown;
+        public bool isAttackDashCompleted = false;
         public bool isStaminaCoolDown=false;
         public bool isUsableStaminaRestored = false;
         public bool isShieldActivated = false;
@@ -93,7 +94,7 @@ namespace Jelly.Player
 
         private void Update()
         {
-            return;
+            //return;
             if (isDead || dialogueManager.isDialoguePlaying)
                 return;
 
@@ -143,7 +144,6 @@ namespace Jelly.Player
         public void Cooldown()
         {
             isCooldown = true;
-            
         }
         public void StartRefilStamina()
         {
@@ -157,11 +157,18 @@ namespace Jelly.Player
                 isUsableStaminaRestored = false; 
             }
         }
-        public void doDash(float dashMultiplayer = 1)
+        public void DoDash()
         {
-            dashParticle.Play();
-            StartCoroutine(Dash(transform.forward,dashSpeed * dashMultiplayer, dashTime));
+            DoDash(1);
+        }
 
+        public void DoDash(float dashMultiplayer = 1)
+        {
+            if(!isCooldown)
+            {
+                dashParticle.Play();
+                StartCoroutine(Dash(transform.forward, dashSpeed * dashMultiplayer, dashTime));
+            }            
         }
         public void SheildCountDown()
         {
