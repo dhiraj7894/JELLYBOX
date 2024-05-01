@@ -47,7 +47,7 @@ public class IceShard : MonoBehaviour
         float angle = i * angleStep;
         float x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
         float z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
-        Vector3 pos = new Vector3(x, yOffset, z);
+        Vector3 pos = new Vector3(x, yOffset, z) + new Vector3(transform.position.x, 0, transform.position.z);
         target.position = pos;
     }
 

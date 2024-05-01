@@ -9,7 +9,10 @@ public class LookAtCamera : MonoBehaviour
     {
         Camera = Camera.main;
     }
-
+    private void Update()
+    {
+        LookAtCam();
+    }
     public void LookAtCam()
     {
         //transform.LookAt(Camera.main.transform.position);

@@ -1,4 +1,5 @@
 using Jelly.Core;
+using Jelly.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace Jelly.Player
         
         [Range(0, 1)] public float playerSpeedDamp = 0.1f;
         [Range(0, 1)] public float turnSmoothDamp = 0.1f;
-        [Range(0, 10)] public int enemyCheckingRange = 1;
+        [Range(0, 100)] public int enemyCheckingRange = 1;
 
         public DialogueManager dialogueManager;
         public CharacterController controller;
@@ -63,6 +64,7 @@ namespace Jelly.Player
         public bool isShieldActivated = false;
         public bool isSpecialAttackCooldown = false;
         public bool isInCutScene = false;
+        public bool isEnemyLocked = false;
         public bool isDead;
 
         [Space(5)]
@@ -130,7 +132,11 @@ namespace Jelly.Player
         }
         public void EnemyChecker()
         {
-            if(!isDead) nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
+            if (isEnemyLocked)
+                return;
+
+            if(!isDead) 
+                nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
             if (nearByEnemy.Length != 0)
             {
                 Transform target = nearByEnemy[0].transform;
@@ -140,6 +146,32 @@ namespace Jelly.Player
             {
                 targetedEnemy = null;
             }
+        }
+
+
+        public void LockTheTarget()
+        {
+            if (nearByEnemy.Length != 0 && !isEnemyLocked)
+            {
+                Transform target = nearByEnemy[0].transform;
+                targetedEnemy = target;
+                targetedEnemy.GetComponent<EnemyTargetSystem>().enemyCrosshair.SetActive(true);
+                isEnemyLocked = true;
+            }
+            else
+            {
+                try
+                {
+                    targetedEnemy.GetComponent<EnemyTargetSystem>().enemyCrosshair.SetActive(false);
+                }
+                catch
+                {
+                    Debug.Log("No target found");
+                }
+                isEnemyLocked = false;
+            }
+
+
         }
         public void Cooldown()
         {

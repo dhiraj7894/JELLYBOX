@@ -10,14 +10,9 @@ public class BombAttack : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag(TagHash.GROUND))
+        if (other.CompareTag(TagHash.GROUND))
         {
             Destroy(this.gameObject);
         }

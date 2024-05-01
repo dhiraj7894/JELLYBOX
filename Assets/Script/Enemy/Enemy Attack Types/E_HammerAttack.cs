@@ -23,6 +23,7 @@ namespace Jelly.Enemy
         {
             //Initialize
             enemy.agent.enabled = false;
+            jumpExecuted = false;
             base.EnterState();
         }
 
