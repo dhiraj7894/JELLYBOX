@@ -151,7 +151,7 @@ public class TestingPunch : MonoBehaviour {
     void enterMiniGameStart( object val ){
         object[] arr = (object [])val;
         int lvl = int.Parse((string)arr[0]);
-        Debug.Log("level:"+lvl);
+        Debug.Log("levelRequirement:"+lvl);
     }
 
     void updateColor( Color c ){

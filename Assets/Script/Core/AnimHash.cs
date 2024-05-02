@@ -16,6 +16,7 @@ public class AnimHash {
 
     public const string DEATH = "death";
 
+    public const string ATTACKTYP = "atkType";
     public AnimHash(){
         Animator.StringToHash(SPEED);
         Animator.StringToHash(ATTACK);
@@ -27,7 +28,8 @@ public class AnimHash {
         Animator.StringToHash(HEAVYHIT);
         Animator.StringToHash(SHIELD);
         Animator.StringToHash(DEATH);
-        Animator.StringToHash(SPECIAL_A);
+        Animator.StringToHash(SPECIAL_A);        
+        Animator.StringToHash(ATTACKTYP);        
     }
 
 }
@@ -35,6 +37,21 @@ public class AnimHash {
 public class TagHash
 {
     public const string PLAYER = "Player";
+    public const string ENEMY = "Enemy";
+    public const string GROUND = "ground";
+    public const string JUMPFORCE = "jumpForce";
+    public const string ICESHARD = "iceshard";
+
+    // Cinemachine tags
+    public const string PTARGET = "PlayerTarget";
+    public const string ETARGET = "LockOn";
+    public const string PSATTACK = "PSpecial Attack";
 
 }
+
+public class INKTags {
+    public const string SPEAKER = "speaker";    
+    public const string VOICELINE = "voiceline";    
+}
+
 

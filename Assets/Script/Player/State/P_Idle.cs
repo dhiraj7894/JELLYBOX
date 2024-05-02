@@ -1,3 +1,4 @@
+using Jelly.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,12 +7,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_Idle : P_Base
     {
         public Vector3 velocity;
         public bool attack;
+
         public P_Idle(MainPlayer _player) : base(_player)
         {
             player = _player;
@@ -23,9 +25,10 @@ namespace Game.Player
             _input = Vector2.zero;
             _isSprint = false;
             attack = false;
+
             if(player.currentStamina >= (player.stats.stats.StaminaNeedToAttack* player.stats.stats.StaminaMultiplier) )
             {
-                InputActions._heavyAttack.performed += OnHeavyAttack;
+               InputActions._heavyAttack.performed += OnHeavyAttack;
             }         
             
         }
@@ -53,6 +56,7 @@ namespace Game.Player
             {
                 player.isSpecialAttackCooldown = true;
                 player.isSpecialAttack_A_CanBePerforme = false;
+
                 SpecialAttackA();
             }
             if (InputActions._specialAttackB.triggered && !player.isSpecialAttackCooldown && player.isSpecialAttack_B_CanBePerforme)
@@ -60,6 +64,10 @@ namespace Game.Player
                 player.isSpecialAttackCooldown = true;
                 player.isSpecialAttack_B_CanBePerforme = false;
                 SpecialAttackB();
+            }
+            if (InputActions._jumpAction.triggered)
+            {
+                Jump();
             }
         }
 
@@ -89,8 +97,20 @@ namespace Game.Player
             {
                 player.anim.SetFloat(AnimHash.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
             }
-            
+
         }
+
+
+
+        public void ChangeAttackType()
+        {
+            int i = UnityEngine.Random.Range(0, player.AttackTypes.Count);
+            Debug.Log($"AttackTypes Count: {player.AttackTypes[0]}");
+            player.ChangeCurrentState(player.ATTACKING);
+        }
+
+
+
         public override void ExitState()
         {
             InputActions._heavyAttack.performed -= OnHeavyAttack;

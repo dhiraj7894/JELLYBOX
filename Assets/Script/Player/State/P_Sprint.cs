@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_Sprint : P_Base
     {

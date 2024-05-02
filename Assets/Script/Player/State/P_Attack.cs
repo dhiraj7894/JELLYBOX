@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_Attack : P_Base
     {
@@ -22,14 +22,18 @@ namespace Game.Player
         {
             base.EnterState();
             //if (player.targetedEnemy) RotateTowardCamera();
+            RotateTowardCamera();
             attack = false;
             timePassed = 0;
-
-            if(player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
+            
+            if (player.currentStamina >= player.stats.stats.StaminaNeedToAttack)
             {
                 player.anim.SetTrigger(AnimHash.ATTACK);
                 player.anim.SetFloat(AnimHash.SPEED, 0);
-                if (!player.isCooldown) player.doDash();
+                
+                ///
+                /// Uncomment when making build
+                ///
                 player.currentStamina -= player.stats.stats.StaminaNeedToAttack;
             }
             else
@@ -37,8 +41,8 @@ namespace Game.Player
                 player.ChangeCurrentState(player.IDLE);
                 player.anim.SetTrigger(AnimHash.MOVE);
             }
-
             
+
         }
 
         public override void ManageInput()

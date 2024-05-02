@@ -1,9 +1,9 @@
-using Game.Core;
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
+namespace Jelly.Player
 {
 
     public class P_SpecialAttackCutScene : P_Base
@@ -34,6 +34,7 @@ namespace Game.Player
         public override void ExitState()
         {
             base.ExitState();
+            EventManager.OnSpecialAttackEnd();
             //player.shieldParticle.SetFloat("Size", currentShieldSize);
             LeanTween.value(player.gameObject, shieldSizeIncrese, currentShieldSize, 0.2f).setOnUpdate((float val) => { player.shieldParticle.SetFloat("Size", val); });
             player.anim.SetTrigger(AnimHash.ENDSPA);

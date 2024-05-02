@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using System.Collections;
 
-namespace Game.Player
+namespace Jelly.Player
 {
-    
     public abstract class P_Base
     {
         public MainPlayer player;
@@ -50,11 +49,7 @@ namespace Game.Player
 
 
         public virtual void ManageInput() {
-            addGeavity();
-            if (InputActions._jumpAction.triggered)
-            {
-                Jump();
-            }
+            addGeavity();            
             if (InputActions._shieldAction.triggered && !player.isShieldActivated)
             {
                 ShieldActivate();
@@ -63,7 +58,7 @@ namespace Game.Player
             {
                 if (player.currentStamina >= player.stats.stats.StaminaNeedToDash)
                 {
-                    if (!player.isCooldown) player.doDash();
+                    player.DoDash();
                     player.currentStamina -= player.stats.stats.StaminaNeedToDash;
                 }
             }
@@ -92,11 +87,13 @@ namespace Game.Player
 
         public void RotateTowardCamera()
         {
+            if (player.targetedEnemy == null)
+                return;
 
             Vector3 viwDir = (player.targetedEnemy.position - player.transform.position).normalized;
             viwDir.y = 0;
             Quaternion rotation = Quaternion.LookRotation(viwDir);
-            LeanTween.rotate(player.gameObject, rotation.eulerAngles, 0.1f);
+            LeanTween.rotate(player.gameObject, rotation.eulerAngles, 0.01f);
         }
         public void addGeavity()
         {
@@ -114,7 +111,7 @@ namespace Game.Player
 
         public void Jump()
         {
-            if (player.controller.isGrounded)
+            if (player.isGrounded)
             {
                 _velocity.y += player.jumpForce;
                 player.anim.Play(AnimHash.JUMP);

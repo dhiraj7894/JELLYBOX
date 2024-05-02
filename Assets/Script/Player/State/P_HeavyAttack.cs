@@ -1,9 +1,9 @@
-using Game.Player;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_HeavyAttack : P_Base
     {
@@ -25,7 +25,7 @@ namespace Game.Player
             timePassed = 0;
             player.anim.SetTrigger(AnimHash.HEAVYATTACK);
             player.anim.SetFloat(AnimHash.SPEED, 0);
-            player.doDash(dashMultiplier);
+            player.DoDash(dashMultiplier);
         }
         public override void ManageInput()
         {

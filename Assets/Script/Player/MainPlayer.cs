@@ -1,6 +1,8 @@
-using Game.Core;
+using Jelly.Core;
+using Jelly.Enemy;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -8,7 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using UnityEngine.VFX;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class MainPlayer : Singleton<MainPlayer>
     {
@@ -22,12 +24,17 @@ namespace Game.Player
         public P_Attack ATTACKING;
         public P_HeavyAttack HEAVYATTACK;
         public P_SpecialAttackCutScene SPECIALATTACK;
+
+
+
+        public List<P_Base> AttackTypes = new List<P_Base>();
         #endregion
         
         [Range(0, 1)] public float playerSpeedDamp = 0.1f;
         [Range(0, 1)] public float turnSmoothDamp = 0.1f;
-        [Range(0, 10)] public int enemyCheckingRange = 1;
+        [Range(0, 100)] public int enemyCheckingRange = 1;
 
+        public DialogueManager dialogueManager;
         public CharacterController controller;
         public Animator anim;
         public Transform cameraTransform;
@@ -49,12 +56,15 @@ namespace Game.Player
         public float gravityMultiplier = 3.0f;
 
         [Space(10)]
+        public bool isGrounded = false;
         public bool isCooldown;
+        public bool isAttackDashCompleted = false;
         public bool isStaminaCoolDown=false;
         public bool isUsableStaminaRestored = false;
         public bool isShieldActivated = false;
         public bool isSpecialAttackCooldown = false;
         public bool isInCutScene = false;
+        public bool isEnemyLocked = false;
         public bool isDead;
 
         [Space(5)]
@@ -69,21 +79,34 @@ namespace Game.Player
         public VisualEffect shieldParticle;
         private void Start()
         {
-            IDLE = new P_Idle(this);
-            SPRINT = new P_Sprint(this);
-            ATTACKING = new P_Attack(this);
-            HEAVYATTACK = new P_HeavyAttack(this);
-            SPECIALATTACK = new P_SpecialAttackCutScene(this);
+            StateInitialize();
             _currentState = IDLE;
             _currentState.EnterState();
             currentStamina = stats.stats.MaxStamina;
         }
 
+        public void StateInitialize()
+        {
+            IDLE = new P_Idle(this);
+            SPRINT = new P_Sprint(this);
+            ATTACKING = new P_Attack(this);
+            HEAVYATTACK = new P_HeavyAttack(this);
+            SPECIALATTACK = new P_SpecialAttackCutScene(this);
+        }
+
         private void Update()
         {
+            //return;
+            if (isDead || dialogueManager.isDialoguePlaying)
+                return;
+
             _currentState.LogicUpdateState();
+
             if (!isInCutScene)
             {
+                if (UIManager.Instance.isBackScreenFadeActive) 
+                    return;
+
                 _currentState.ManageInput();
                 GameManager.Instance.CSDC.enabled = true;
             }
@@ -98,6 +121,7 @@ namespace Game.Player
             {
                 isDead = true;
             }
+            EnemyChecker();
         }
 
         public void ChangeCurrentState(P_Base newState)
@@ -108,7 +132,11 @@ namespace Game.Player
         }
         public void EnemyChecker()
         {
-            if(!isDead) nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
+            if (isEnemyLocked)
+                return;
+
+            if(!isDead) 
+                nearByEnemy = Physics.OverlapSphere(transform.position, enemyCheckingRange, enemyLayerMask);
             if (nearByEnemy.Length != 0)
             {
                 Transform target = nearByEnemy[0].transform;
@@ -119,10 +147,35 @@ namespace Game.Player
                 targetedEnemy = null;
             }
         }
+
+
+        public void LockTheTarget()
+        {
+            if (nearByEnemy.Length != 0 && !isEnemyLocked)
+            {
+                Transform target = nearByEnemy[0].transform;
+                targetedEnemy = target;
+                targetedEnemy.GetComponent<EnemyTargetSystem>().enemyCrosshair.SetActive(true);
+                isEnemyLocked = true;
+            }
+            else
+            {
+                try
+                {
+                    targetedEnemy.GetComponent<EnemyTargetSystem>().enemyCrosshair.SetActive(false);
+                }
+                catch
+                {
+                    Debug.Log("No target found");
+                }
+                isEnemyLocked = false;
+            }
+
+
+        }
         public void Cooldown()
         {
             isCooldown = true;
-            
         }
         public void StartRefilStamina()
         {
@@ -136,11 +189,18 @@ namespace Game.Player
                 isUsableStaminaRestored = false; 
             }
         }
-        public void doDash(float dashMultiplayer = 1)
+        public void DoDash()
         {
-            dashParticle.Play();
-            StartCoroutine(Dash(transform.forward,dashSpeed * dashMultiplayer, dashTime));
+            DoDash(1);
+        }
 
+        public void DoDash(float dashMultiplayer = 1)
+        {
+            if(!isCooldown)
+            {
+                dashParticle.Play();
+                StartCoroutine(Dash(transform.forward, dashSpeed * dashMultiplayer, dashTime));
+            }            
         }
         public void SheildCountDown()
         {
@@ -175,5 +235,27 @@ namespace Game.Player
         {
             yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = true;
+            HPDrainTrigger(other);
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = false;
+        }
+
+        void HPDrainTrigger(Collider other)
+        {
+            if (other.CompareTag(TagHash.JUMPFORCE))
+            {
+                stats.TakeDamage(other.GetComponentInParent<JumpForceFiled>().HPLoss);
+                return;
+            }
+        }
+
     }
 }

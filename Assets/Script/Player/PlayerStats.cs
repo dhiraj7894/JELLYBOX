@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro.EditorUtilities;
 using UnityEngine;
-using Game.Core;
+using Jelly.Core;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     [Serializable] public struct PlayerHealth
     {
@@ -41,7 +41,7 @@ namespace Game.Player
         public PlayerStamina stamina; 
         public UltCharge charge;
                 
-        public Stats stats;
+        public PlayerStatsSO stats;
         public MainPlayer player;
         public float SpecialACharge = 10;
         private void Awake()
@@ -83,14 +83,22 @@ namespace Game.Player
             player.isSpecialAttack_B_CanBePerforme = true;
         }
 
-        public void TakeDamage(float damage) { 
-            health.currentHealth -= damage;
+        public void TakeDamage(float damage) {
+            if (player.isShieldActivated)
+            {
+                damage = damage / 4;
+            }
+            else
+            {
+                damage = damage;
+            }
+            health.reducedHealth -= damage;
         }
 
         public IEnumerator StaminaRefil()
         {
             
-            Debug.Log("Refil Activated");
+            //Debug.Log("Refil Activated");
             yield return new WaitForSeconds(stats.StaminaCoolDownTime);
             player.isUsableStaminaRestored = false;
             while (player.isStaminaCoolDown && player.currentStamina < stats.MaxStamina)
@@ -100,7 +108,7 @@ namespace Game.Player
                 {
                     player.currentStamina = stats.MaxStamina;
                     player.isStaminaCoolDown = false;
-                    Debug.Log("Refil Complete");
+                    //Debug.Log("Refil Complete");
                 }
                 yield return null;
             }
@@ -114,7 +122,7 @@ namespace Game.Player
                 yield return new WaitForSeconds(vfx_Shield_Lifetime);
                 while (UIManager.Instance.Shield.value < vfx_Shield_Lifetime)
                 {
-                    Debug.Log("ShieldActivated Refieling");
+                    //Debug.Log("ShieldActivated Refieling");
                     UIManager.Instance.Shield.value += vfx_Shield_TimeVariation * Time.deltaTime;
                     yield return null;
                 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Player
+namespace Jelly.Player
 {
     public class P_SpecialAttack : P_Base
     {

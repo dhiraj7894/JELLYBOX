@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a7b2b3fce819a4f976f8aaf7c6dbcd, type: 3}
+  m_Name: VoiceLines
+  m_EditorClassIdentifier: 
+  voiceClips:
+  - {fileID: 8300000, guid: 0d25299686eabd440b9cc97ced7bf336, type: 3}
+  - {fileID: 8300000, guid: bb5c792631993dc498e35843f923224e, type: 3}
+  - {fileID: 8300000, guid: 1a70ac0762350294eadf338886559946, type: 3}
+  - {fileID: 8300000, guid: bf517d9745621b442911f9175a456e06, type: 3}
+  - {fileID: 8300000, guid: bc9e67c4d33c7ee4d9badf628c7f300f, type: 3}
+  - {fileID: 8300000, guid: 58cf8a82de9d1ed4781338910c570537, type: 3}
+  - {fileID: 8300000, guid: a4856ed30f2dadd498c7b1331998e217, type: 3}
+  - {fileID: 8300000, guid: 003fb7959f207b24c8fd795207a00852, type: 3}
+  - {fileID: 8300000, guid: 11ef97b7a826ec64a832d50a25fdfa28, type: 3}
