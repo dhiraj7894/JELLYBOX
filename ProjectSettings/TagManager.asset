@@ -8,6 +8,7 @@ TagManager:
   - ground
   - explosion
   - jumpForce
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Waypoints
   - Missile
   - TargetUI
-  - 
+  - PlayerSword
   - 
   - 
   - 

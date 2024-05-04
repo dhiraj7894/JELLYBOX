@@ -15,7 +15,7 @@ namespace Jelly.Enemy
         public override void EnterState()
         {
             enemy.agent.enabled = false;
-            enemy.ShowAttackVisual(enemy.iceShard, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4, enemy.transform.position.z), Quaternion.identity);
+            enemy.ShowAttackVisual(enemy.bossAttackData.missiles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4, enemy.transform.position.z), Quaternion.identity);
             base.EnterState();
         }
 

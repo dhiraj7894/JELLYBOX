@@ -75,8 +75,8 @@ namespace Jelly.Enemy
             time += Time.deltaTime * speed;
 
             // Evaluate the animation curve at the current time to get the height
-            speed = enemy.speedWaveCurve.Evaluate(time);
-            height = enemy.hammerWaveCurve.Evaluate(time);
+            speed = enemy.bossAttackData.speedWaveCurve.Evaluate(time);
+            height = enemy.bossAttackData.hammerWaveCurve.Evaluate(time);
 
 
             // Calculate the position of the cube based on the height from the curve
@@ -87,7 +87,7 @@ namespace Jelly.Enemy
             enemy.transform.position = newPosition;
 
             // Reset time to 0 when the animation finishes (to loop the animation)
-            if (time >= enemy.hammerWaveCurve.keys[enemy.hammerWaveCurve.length - 1].time)
+            if (time >= enemy.bossAttackData.hammerWaveCurve.keys[enemy.bossAttackData.hammerWaveCurve.length - 1].time)
             {
                 time = 0f;
                 jumpExecuted = true;
@@ -97,7 +97,7 @@ namespace Jelly.Enemy
 
             if (time >= .1f)
             {
-                enemy.ShowAttackVisual(enemy.hammerAttackVisual, enemy.transform.position, Quaternion.identity, false, true);                
+                enemy.ShowAttackVisual(enemy.bossAttackData.hammerAttackVisual, enemy.transform.position, Quaternion.identity, false, true);                
             }
         }
     }

@@ -16,7 +16,10 @@ namespace Jelly.Player
         public float Distance = 3;
         private void Update()
         {
-            if(!isPlayerNear) rycaster();
+            if (isPlayerNear)
+                return;
+                
+                rycaster();
         }
 
         void rycaster()
@@ -62,7 +65,7 @@ namespace Jelly.Player
         {
             if (other.GetComponent<RaycastTarget>())
             {
-                isPlayerNear = true;
+                
                 if (!TargetedObject)
                 {
                     EventManager.Instance.PressFButton += other.transform.GetComponent<IActionTrigger>().Trigger;
@@ -70,8 +73,9 @@ namespace Jelly.Player
                     other.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
                     TargetedObject = other.transform;
                 }
+                isPlayerNear = true;
             }
-            else
+            /*else
             {
                 if (TargetedObject)
                 {
@@ -80,7 +84,7 @@ namespace Jelly.Player
                     TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                     TargetedObject = null;
                 }
-            }
+            }*/
         }
 
         private void OnTriggerExit(Collider other)
@@ -92,6 +96,7 @@ namespace Jelly.Player
                 TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                 TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
                 TargetedObject = null;
+                isPlayerNear = false;
             }
         }
     }

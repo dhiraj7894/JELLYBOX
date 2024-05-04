@@ -1,3 +1,4 @@
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,8 @@ namespace Jelly.Enemy
             enemy.agent.enabled = true;
             combatTimer = Random.Range(1, 4);
             movementTimer = .5f;
-            
+            GameManager.Instance.SetCutScene("PlayerTarget");
+
         }
 
         public override void ExitState()

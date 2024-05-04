@@ -7,6 +7,31 @@ using UnityEngine.InputSystem.XR;
 
 namespace Jelly.Enemy
 {
+    [Serializable]
+    public class BossAttackData
+    {
+        [Header("Jump Wave Attack"), Space(5)]
+        public float maxJumpTime = 1;
+        public int maxJumpCount;
+        public AnimationCurve jumpWaveCurve;
+        public GameObject jumpForceVisual;
+
+        [Header("Missile Attack"), Space(5)]
+        public GameObject missiles;
+
+        [Header("Circle Attack"), Space(5)]
+        public AnimationCurve speedWaveCurve;
+        public AnimationCurve circleWaveCurve;
+        public GameObject circleAttackVisual;
+
+        [Header("Hammer Attack"), Space(5)]
+        public AnimationCurve hammerWaveCurve;
+        public GameObject hammerAttackVisual;
+
+        [Header("Basic Attacks"), Space(5)]
+        public Rigidbody bombBall;
+        public Transform bombThrowerPosition;
+    }
     public class MainEnemy : MonoBehaviour
     {
         public string currentStats; 
@@ -25,22 +50,25 @@ namespace Jelly.Enemy
         public List<E_Base> AttackList = new List<E_Base>();
         #endregion
 
-        public float speed;
+        public GameObject currentAttackVFX;
 
         public Transform target;
-        public GameObject currentAttackVFX;
         public Transform attackVisialParant;
         public Transform raycastCheckerTransform;
-
+        
+        public Animator anim;
         public Rigidbody rb;
         public NavMeshAgent agent;
-
+        public EStats stats;
+        
         public bool isGrounded;
+        public bool isDead = false;
 
         [Header("EnemyControlls")]
         public float distanceFromTarget = 0;
         public LayerMask ignoreLayer;
         [Space(5)]
+        public float speed;
         public int currentAttackPattern = 0;
         public float dashForwardDistance = 2;
         public float backOffDistance = .5f;
@@ -51,30 +79,15 @@ namespace Jelly.Enemy
         public float dashTime = 1;
 
 
+        [Header("UI Controls")]
+        public GameObject UI;
+
+
         public bool isDashBackward = false;
+        public bool isSecondPhase = false;
 
+        public BossAttackData bossAttackData;
 
-        [Header("Jump Wave Attack"), Space(5)]
-        public float maxJumpTime = 1;
-        public int maxJumpCount;
-        public AnimationCurve jumpWaveCurve;
-        public GameObject jumpForceVisual;
-
-        [Header("Missile Attack"), Space(5)]
-        public GameObject iceShard;
-
-        [Header("Circle Attack"), Space(5)]
-        public AnimationCurve speedWaveCurve;
-        public AnimationCurve circleWaveCurve;
-        public GameObject circleAttackVisual;
-
-        [Header("Hammer Attack"), Space(5)]
-        public AnimationCurve hammerWaveCurve;
-        public GameObject hammerAttackVisual;
-
-        [Header("Basic Attacks"), Space(5)]
-        public Rigidbody bombBall;
-        public Transform bombThrowerPosition;
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -107,6 +120,16 @@ namespace Jelly.Enemy
 
         private void Update()
         {
+            if (stats.health.currentHealth<=0 && !isDead)
+            {
+                anim.Play("Dead");
+                isDead = true;  
+            }
+            if (isDead)
+                return;
+
+
+
             _currentState.LogicUpdateState();
             DistanceChecker();
             currentStats = _currentState.ToString();
@@ -163,7 +186,7 @@ namespace Jelly.Enemy
 
         public Rigidbody BombBallThrow()
         {
-            Rigidbody rb = Instantiate(bombBall, bombThrowerPosition.position + new Vector3(0,0.5f,0), Quaternion.identity);
+            Rigidbody rb = Instantiate(bossAttackData.bombBall, bossAttackData.bombThrowerPosition.position + new Vector3(0,0.5f,0), Quaternion.identity);
             return rb;
         }
 
@@ -199,6 +222,11 @@ namespace Jelly.Enemy
                 transform.Translate(input * dashSpeed * Time.deltaTime);
                 yield return null;
             }
+        }
+        public float GetPercentageValue(float getValue, float percentage)
+        {
+            float x = (getValue / percentage) * 100;
+            return x;
         }
     }
 }

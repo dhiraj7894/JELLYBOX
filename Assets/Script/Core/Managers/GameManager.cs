@@ -24,5 +24,21 @@ namespace Jelly.Core
             Cursor.lockState = CursorLockMode.Locked;
         }
 
+        public float GetPercentageValue(float getValue, float percentage)
+        {
+            float x = (getValue / 100) * percentage;
+            return x;
+        }
+
+        public void SetCutScene(string sceneName)
+        {
+            AnimatorStateInfo stateInfo = CinemachineAnimator.GetCurrentAnimatorStateInfo(0);
+            int stateHash = stateInfo.shortNameHash;
+            if (stateHash != Animator.StringToHash(sceneName))
+            {
+                CinemachineAnimator.Play(sceneName);
+            }
+            
+        }
     }
 }

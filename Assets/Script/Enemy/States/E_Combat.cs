@@ -1,3 +1,4 @@
+using Jelly.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,9 +13,8 @@ namespace Jelly.Enemy
         public float timeToSpecialAttack = 3;
         public float timeToPowerAttack = 3;
 
-        public bool isSecondPhase = false;
-
         public int[] phaseOneAttackPattern = new int[] { 0, 0, 1, 0, 1, 0, 0 };
+        //public int[] phaseOneAttackPattern = new int[] { 3, 3, 3, 3, 3, 0, 0 };
         public int[] phaseTwoAttackPattern = new int[] { 3, 2, 2, 3, 2, 1, 3 };
 
         public int currentAttack = 0;
@@ -26,11 +26,11 @@ namespace Jelly.Enemy
         public override void EnterState()
         {
             //Ready things for attack
-            timeToPowerAttack = enemy.RandomNumberGenrator(2.5f, 5f);
-            timeToSpecialAttack = enemy.RandomNumberGenrator(1.5f, 3f);
-            timeToAttack = enemy.RandomNumberGenrator(0.2f, 1f);
+            timeToPowerAttack = enemy.RandomNumberGenrator(7f, 9f);
+            timeToSpecialAttack = enemy.RandomNumberGenrator(3f, 6f);
+            timeToAttack = enemy.RandomNumberGenrator(0.2f, 3f);
 
-            if (!isSecondPhase) 
+            if (!enemy.isSecondPhase) 
                 currentAttack = phaseOneAttackPattern[enemy.currentAttackPattern];
            else
                 currentAttack = phaseTwoAttackPattern[enemy.currentAttackPattern];
@@ -55,7 +55,14 @@ namespace Jelly.Enemy
             /// Check for current HP stats
             /// If HP is less then 50% of max HP then <isSecondPhase> is true            
             ///
-
+            if(!enemy.isSecondPhase && enemy.stats.health.currentHealth <= GameManager.Instance.GetPercentageValue(enemy.stats.stats.MaxHealth, 50))
+            {
+                enemy.isSecondPhase = true;
+                if (enemy.isGrounded)
+                {
+                    enemy.ChangeCurrentState(enemy.PREP);
+                }
+            }
         }
 
 
@@ -74,7 +81,7 @@ namespace Jelly.Enemy
 
         public void GetAttackPhaseOne()
         {
-            if (isSecondPhase)
+            if (enemy.isSecondPhase)
                 return;
 
             timeToAttack -= Time.deltaTime;
@@ -84,8 +91,8 @@ namespace Jelly.Enemy
             {
                 LookAtTarget();
                 Rigidbody rbBall = enemy.BombBallThrow();
-                rbBall.AddForce(enemy.transform.forward * 100, ForceMode.Impulse);
-                timeToAttack = enemy.RandomNumberGenrator(0.12f, .5f);
+                rbBall.AddForce(enemy.transform.forward * 75, ForceMode.Impulse);
+                timeToAttack = enemy.RandomNumberGenrator(1f, 3f);
             }
             if (timeToSpecialAttack <= 0 && timeToAttack > 0)
             {
@@ -97,7 +104,7 @@ namespace Jelly.Enemy
         }
         public void GetAttackPhaseTwo()
         {
-            if (!isSecondPhase)
+            if (!enemy.isSecondPhase)
                 return;
 
             timeToAttack -= Time.deltaTime;
@@ -107,8 +114,8 @@ namespace Jelly.Enemy
             {
                 LookAtTarget();
                 Rigidbody rbBall = enemy.BombBallThrow();
-                rbBall.AddForce(enemy.transform.forward * 100, ForceMode.Impulse);
-                timeToAttack = enemy.RandomNumberGenrator(0.12f, .5f);
+                rbBall.AddForce(enemy.transform.forward * 75, ForceMode.Impulse);
+                timeToAttack = enemy.RandomNumberGenrator(0.5f, 1f);
             }
             if (timeToPowerAttack <= 0 && timeToAttack > 0)
             {

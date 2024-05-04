@@ -26,7 +26,7 @@ namespace Jelly.Enemy
         {
             enemy.agent.enabled = false;
             currentJumpCount = 0;
-            currentJumpTime = enemy.maxJumpTime;
+            currentJumpTime = enemy.bossAttackData.maxJumpTime;
             base.EnterState();
         }
 
@@ -39,7 +39,7 @@ namespace Jelly.Enemy
 
         public override void LogicUpdateState()
         {
-            if (currentJumpCount >= enemy.maxJumpCount)
+            if (currentJumpCount >= enemy.bossAttackData.maxJumpCount)
                 enemy.ChangeCurrentState(enemy.IDLE);
             if (currentJumpTime > 0)
             {
@@ -58,7 +58,7 @@ namespace Jelly.Enemy
             time += Time.deltaTime * speed;
 
             // Evaluate the animation curve at the current time to get the height
-            height = enemy.jumpWaveCurve.Evaluate(time);
+            height = enemy.bossAttackData.jumpWaveCurve.Evaluate(time);
 
             // Calculate the position of the cube based on the height from the curve
             Vector3 newPosition = enemy.transform.position;
@@ -68,13 +68,13 @@ namespace Jelly.Enemy
             enemy.transform.position = newPosition;
 
             // Reset time to 0 when the animation finishes (to loop the animation)
-            if (time >= enemy.jumpWaveCurve.keys[enemy.jumpWaveCurve.length - 1].time)
+            if (time >= enemy.bossAttackData.jumpWaveCurve.keys[enemy.bossAttackData.jumpWaveCurve.length - 1].time)
             {
                 time = 0f;
-                enemy.ShowAttackVisual(enemy.jumpForceVisual, enemy.transform.position, Quaternion.identity, true);
-                currentJumpTime = enemy.maxJumpTime;
+                enemy.ShowAttackVisual(enemy.bossAttackData.jumpForceVisual, enemy.transform.position, Quaternion.identity, true);
+                currentJumpTime = enemy.bossAttackData.maxJumpTime;
                 currentJumpCount++;
-                Debug.Log($"{currentJumpCount} && {enemy.maxJumpCount}");
+                Debug.Log($"{currentJumpCount} && {enemy.bossAttackData.maxJumpCount}");
             }
         }
 

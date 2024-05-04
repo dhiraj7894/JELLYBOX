@@ -69,8 +69,8 @@ namespace Jelly.Enemy
             time += Time.deltaTime * speed;
 
             // Evaluate the animation curve at the current time to get the height
-            speed = enemy.speedWaveCurve.Evaluate(time);
-            height = enemy.circleWaveCurve.Evaluate(time);
+            speed = enemy.bossAttackData.speedWaveCurve.Evaluate(time);
+            height = enemy.bossAttackData.circleWaveCurve.Evaluate(time);
 
 
             // Calculate the position of the cube based on the height from the curve
@@ -81,11 +81,11 @@ namespace Jelly.Enemy
             enemy.transform.position = newPosition;
 
             // Reset time to 0 when the animation finishes (to loop the animation)
-            if (time >= enemy.circleWaveCurve.keys[enemy.circleWaveCurve.length - 1].time)
+            if (time >= enemy.bossAttackData.circleWaveCurve.keys[enemy.bossAttackData.circleWaveCurve.length - 1].time)
             {
                 time = 0f;
                 //Spwan Attack Visuals
-                enemy.ShowAttackVisual(enemy.circleAttackVisual, enemy.transform.position, Quaternion.identity);
+                enemy.ShowAttackVisual(enemy.bossAttackData.circleAttackVisual, enemy.transform.position, Quaternion.identity);
                 jumpExecuted = true;
             }
         }
