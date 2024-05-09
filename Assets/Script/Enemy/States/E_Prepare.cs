@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    [System.Serializable]
     public class E_Prepare : E_Base
     {
         public float maxTimeToWait = 2;
@@ -21,7 +20,6 @@ namespace Jelly.Enemy
             //Complete prepration animation
             //IDLE
             maxTimeToWait = enemy.anim.GetCurrentAnimatorStateInfo(0).length;
-            enemy.UI.SetActive(true);
             enemy.agent.enabled = false;
             currentTimerTime = maxTimeToWait + .5f;
             if (!enemy.isSecondPhase)
@@ -43,7 +41,7 @@ namespace Jelly.Enemy
             if (stateHash == Animator.StringToHash("Prepare") || stateHash == Animator.StringToHash("Phase2"))
                 return;
 
-            if (currentTimerTime <= 0)
+            if (currentTimerTime <= 0 && !enemy.isCutSceneRunning)
                 enemy.ChangeCurrentState(enemy.IDLE);
         }
     }

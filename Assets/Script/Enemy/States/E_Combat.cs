@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    [System.Serializable]
     public class E_Combat : E_Base
     {
         public float timeToAttack = 1;

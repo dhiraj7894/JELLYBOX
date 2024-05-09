@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    [System.Serializable]
     public class E_Idle : E_Base
     {
         public float chaseRadius = 10;

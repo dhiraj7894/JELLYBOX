@@ -46,30 +46,27 @@ namespace Jelly.Enemy
 
             if (currentJumpTime <= 0 && !jumpExecuted)
             {
-                JumpWave();
+                Jump();
 
             }
 
-            if (enemy.currentAttackVFX != null)
+            try
             {
-                try
-                {
-                    if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
-                    {
-
-                        enemy.ChangeCurrentState(enemy.IDLE);
-                        enemy.currentAttackVFX.GetComponent<HammerAttack>().DestroyObject();
-                    }
-                }
-                catch
+                if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
                 {
 
+                    enemy.ChangeCurrentState(enemy.IDLE);
+                    enemy.currentAttackVFX.GetComponent<HammerAttack>().DestroyObject();
                 }
+            }
+            catch
+            {
+
             }
             base.LogicUpdateState();
         }
 
-        public void JumpWave()
+        public void Jump()
         {
             // Increment time based on the elapsed time since the last frame
             time += Time.deltaTime * speed;

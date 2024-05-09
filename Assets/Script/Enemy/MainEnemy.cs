@@ -63,6 +63,7 @@ namespace Jelly.Enemy
         
         public bool isGrounded;
         public bool isDead = false;
+        public bool isCutSceneRunning = true;
 
         [Header("EnemyControlls")]
         public float distanceFromTarget = 0;
@@ -223,10 +224,10 @@ namespace Jelly.Enemy
                 yield return null;
             }
         }
-        public float GetPercentageValue(float getValue, float percentage)
+
+        public void SetCutSceneBoolenValue()
         {
-            float x = (getValue / percentage) * 100;
-            return x;
+            isCutSceneRunning = false;
         }
     }
 }

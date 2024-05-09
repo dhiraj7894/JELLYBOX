@@ -16,6 +16,6 @@ public class LookAtCamera : MonoBehaviour
     public void LookAtCam()
     {
         //transform.LookAt(Camera.main.transform.position);
-        transform.LookAt(new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z));
+        if(Camera.main) transform.LookAt(new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z));
     }
 }
