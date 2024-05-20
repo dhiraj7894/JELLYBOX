@@ -357,7 +357,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.33354187, y: 0.27755237, z: 0.2901953}
+  m_Size: {x: 1.9497604, y: 0.27755237, z: 2.0083768}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1373201421433425255
 GameObject:
@@ -10275,7 +10275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5350652147723086188
 Transform:
   m_ObjectHideFlags: 0
@@ -10283,14 +10283,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7880240046017331614}
-  m_LocalRotation: {x: -0.9731397, y: -0, z: -0, w: 0.2302153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.23, z: -1.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7533272965135760412}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -153.38, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &649413232187255403
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -10306,7 +10306,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
