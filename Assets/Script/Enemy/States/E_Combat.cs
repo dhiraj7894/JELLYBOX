@@ -91,7 +91,7 @@ namespace Jelly.Enemy
                 LookAtTarget();
                 Rigidbody rbBall = enemy.BombBallThrow();
                 rbBall.AddForce(enemy.transform.forward * 75, ForceMode.Impulse);
-                timeToAttack = enemy.RandomNumberGenrator(1f, 3f);
+                timeToAttack = enemy.RandomNumberGenrator(.5f, 1f);
             }
             if (timeToSpecialAttack <= 0 && timeToAttack > 0)
             {

@@ -5,15 +5,40 @@ using UnityEngine;
 public class RacastChecker : MonoBehaviour
 {
     public float Distance;
+    public float Force=10;
+    public LayerMask ignoreLayer;
+    public bool isObjectUp = false;
+    public bool isObjectDown = false;
+    public Rigidbody rb;
 
     void Update()
     {
-        if(Physics.Raycast(transform.position, transform.position + transform.forward, out RaycastHit hit, Distance))
+        if(Physics.Raycast(transform.position, transform.up, out RaycastHit hit , Distance, ignoreLayer))
         {
-            Debug.Log(hit.collider.name);
+            if(hit.transform != null)
+            {
+                isObjectUp = true;                
+            }
+               
+            else isObjectUp = false;
+
         }
+        else if(Physics.Raycast(transform.position, -transform.up, out RaycastHit newHit, Distance, ignoreLayer))
+        {
+            if (newHit.transform != null)
+            {
+                isObjectDown = true;
+            }
+
+        }        
         else
         {
+            isObjectUp = false;
+            
+            if (isObjectDown)
+            {
+                isObjectDown = false;
+            }
             Debug.Log("NONE . . . ");
         }
     }
@@ -21,5 +46,9 @@ public class RacastChecker : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * Distance);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * Distance);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position - transform.up * Distance);
     }
 }

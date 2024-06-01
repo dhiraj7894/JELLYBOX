@@ -30,7 +30,7 @@ namespace Jelly.Enemy
 
         [Header("Basic Attacks"), Space(5)]
         public Rigidbody bombBall;
-        public Transform bombThrowerPosition;
+        public Transform[] bombThrowerPosition;
     }
     public class MainEnemy : MonoBehaviour
     {
@@ -187,7 +187,7 @@ namespace Jelly.Enemy
 
         public Rigidbody BombBallThrow()
         {
-            Rigidbody rb = Instantiate(bossAttackData.bombBall, bossAttackData.bombThrowerPosition.position + new Vector3(0,0.5f,0), Quaternion.identity);
+            Rigidbody rb = Instantiate(bossAttackData.bombBall, bossAttackData.bombThrowerPosition[UnityEngine.Random.Range(0, bossAttackData.bombThrowerPosition.Length)].position + new Vector3(0,0.5f,0), Quaternion.identity);
             return rb;
         }
 
