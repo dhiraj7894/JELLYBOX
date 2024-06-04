@@ -10,7 +10,8 @@ public class BallLauncher : MonoBehaviour {
 	
 	public BoxCollider boxCollider;
 	public SphereCollider sphereCollider;
-	
+
+	public ParticleSystem energyBall;
 	
 	public GameObject ExplosionEffect;
 
@@ -22,7 +23,7 @@ public class BallLauncher : MonoBehaviour {
 	public float gravity = -18;
 
 	public bool debugPath;
-
+	public bool isLastBall = false;
 
 	void Update() {
 		if (Input.GetKeyDown (KeyCode.Space)) {
@@ -65,15 +66,16 @@ public class BallLauncher : MonoBehaviour {
 		yield return new WaitForSeconds(.15f);
         ExplosionEffect.SetActive(true);
         sphereCollider = transform.AddComponent<SphereCollider>();
-        while (sphereCollider.radius < 8)
+        sphereCollider.isTrigger = true;
+        while (sphereCollider.radius < 22)
 		{
 			sphereCollider.radius += 50 * Time.deltaTime;			
 			yield return null;
 		}    
-		if(sphereCollider.radius >= 7.9f)
+		if(sphereCollider.radius >= 21.9f)
 		{
             
-            yield return new WaitForSeconds(.45f);
+            yield return new WaitForSeconds(4f);
             CompleteExplosion();
         }
         
@@ -83,6 +85,7 @@ public class BallLauncher : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag(TagHash.GROUND))
 		{
+            energyBall.Stop();
             Invoke("Explode", timeOffset);
         }
     }
@@ -91,7 +94,7 @@ public class BallLauncher : MonoBehaviour {
 	{
         Destroy(sphereCollider);
 		
-        if (!parant.isExplosionCompleted)
+        if (!parant.isExplosionCompleted && isLastBall)
         {
             parant.isExplosionCompleted = true;
         }

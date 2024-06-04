@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyStatsSO : ScriptableObject
 {
     public float MaxHealth = 100;
+    public float MaxStamina = 100;
     public float ChaseRadius = 25;
     public float AttackRadius = 10;
 }

@@ -85,7 +85,7 @@ namespace Jelly.Enemy
             {
                 time = 0f;
                 //Spwan Attack Visuals
-                enemy.ShowAttackVisual(enemy.bossAttackData.circleAttackVisual, enemy.transform.position, Quaternion.identity);
+                //enemy.ShowAttackVisual(enemy.bossAttackData.circleAttackVisual, enemy.transform.position, Quaternion.identity, null);
                 jumpExecuted = true;
             }
         }

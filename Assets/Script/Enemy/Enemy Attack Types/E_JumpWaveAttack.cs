@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using Jelly.Enemy;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 namespace Jelly.Enemy
 {
+    [System.Serializable]
     public class E_JumpWaveAttack : E_Base
     {
         public float currentJumpTime = 0;
@@ -17,6 +19,8 @@ namespace Jelly.Enemy
         public float height;
 
         bool isJumping = false;
+        bool isWaveOver = false;
+        GameObject WaveGameObject = null;
         public E_JumpWaveAttack(MainEnemy M_enemy) : base(M_enemy)
         {
             enemy = M_enemy;
@@ -24,6 +28,9 @@ namespace Jelly.Enemy
 
         public override void EnterState()
         {
+            isJumping = false;
+            isWaveOver = false;
+            WaveGameObject = null;
             enemy.agent.enabled = false;
             currentJumpCount = 0;
             currentJumpTime = enemy.bossAttackData.maxJumpTime;
@@ -33,22 +40,32 @@ namespace Jelly.Enemy
         public override void ExitState()
         {
             enemy.agent.enabled = true;
+            isJumping = false;
+            isWaveOver = false;
+
             base.ExitState();
         }
 
 
         public override void LogicUpdateState()
         {
-            if (currentJumpCount >= enemy.bossAttackData.maxJumpCount)
+            if (isWaveOver)
                 enemy.ChangeCurrentState(enemy.IDLE);
+
             if (currentJumpTime > 0)
             {
                 currentJumpTime -= Time.deltaTime;
-                if (currentJumpTime <= 1)
+                if (currentJumpTime <= 1 && !isJumping)
                 {
-                    JumpWave();
+                    //JumpWave();
+                    Wave();
                     isJumping = true;
                 }
+            }
+
+            if (WaveGameObject)
+            {
+                isWaveOver = WaveGameObject.GetComponent<WaveAttacks>().isWaveOver;
             }
         }
 
@@ -71,12 +88,16 @@ namespace Jelly.Enemy
             if (time >= enemy.bossAttackData.jumpWaveCurve.keys[enemy.bossAttackData.jumpWaveCurve.length - 1].time)
             {
                 time = 0f;
-                enemy.ShowAttackVisual(enemy.bossAttackData.jumpForceVisual, enemy.transform.position, Quaternion.identity, true);
+                //enemy.ShowAttackVisual(enemy.bossAttackData.jumpForceVisual, enemy.transform.position, Quaternion.identity, true);
                 currentJumpTime = enemy.bossAttackData.maxJumpTime;
                 currentJumpCount++;
                 Debug.Log($"{currentJumpCount} && {enemy.bossAttackData.maxJumpCount}");
             }
         }
-
+        public void Wave()
+        {
+            GameObject obj =  enemy.WaveAttackVisual(enemy.bossAttackData.jumpForceVisual, enemy.bossAttackData.waveParant.position, Quaternion.identity, enemy.bossAttackData.waveParant);
+            WaveGameObject = obj;
+        }
     }
 }

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Jelly.Enemy
 {
-    [System.Serializable]
     public class E_HammerAttack : E_Base
     {
         public float currentJumpTime = 0;
@@ -14,6 +14,9 @@ namespace Jelly.Enemy
         public float height;
 
         public bool jumpExecuted = false;
+        public bool isHammerHitted = false;
+
+        GameObject hammerVisual = null;
         public E_HammerAttack(MainEnemy M_enemy) : base(M_enemy)
         {
             enemy = M_enemy;
@@ -24,6 +27,7 @@ namespace Jelly.Enemy
             //Initialize
             enemy.agent.enabled = false;
             jumpExecuted = false;
+            isHammerHitted = false;
             base.EnterState();
         }
 
@@ -32,6 +36,7 @@ namespace Jelly.Enemy
             //Exit code
             enemy.agent.enabled = true;
             jumpExecuted = false;
+            isHammerHitted = false;
             base.ExitState();
         }
 
@@ -42,27 +47,49 @@ namespace Jelly.Enemy
             //Impact Area
             //Attack
             //Reset
+
+
+
+
+
+
+
             if (currentJumpTime >= 0 && enemy.isGrounded) currentJumpTime -= Time.deltaTime;
 
             if (currentJumpTime <= 0 && !jumpExecuted)
             {
-                Jump();
-
+                //Jump();
+                //enemy.ShowAttackVisual(enemy.bossAttackData.hammerAttackVisual, enemy.transform.position, Quaternion.identity, enemy.bossAttackData.hammerAttackParant);
+                hammerVisual =  enemy.WaveAttackVisual(enemy.bossAttackData.hammerAttackVisual, new Vector3(0,0,0), Quaternion.Euler(0,0,0), enemy.bossAttackData.hammerAttackParant);
+                hammerVisual.transform.localRotation = Quaternion.Euler(0,0,0);
+                jumpExecuted = true;
             }
-
-            try
+            if (hammerVisual)
             {
-                if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
-                {
-
-                    enemy.ChangeCurrentState(enemy.IDLE);
-                    enemy.currentAttackVFX.GetComponent<HammerAttack>().DestroyObject();
-                }
+                isHammerHitted = hammerVisual.GetComponent<HammerAttack>().isHammerAttackComplete;
             }
-            catch
+
+            if (isHammerHitted)
             {
-
+                hammerVisual.transform.parent = null;
+                enemy.ChangeCurrentState(enemy.IDLE);
             }
+                
+
+
+            /* try
+             {
+                 if (enemy.currentAttackVFX.GetComponent<HammerAttack>().isHammerAttackComplete && enemy.isGrounded)
+                 {
+
+                     enemy.ChangeCurrentState(enemy.IDLE);
+                     enemy.currentAttackVFX.GetComponent<HammerAttack>().DestroyObject();
+                 }
+             }
+             catch
+             {
+
+             }*/
             base.LogicUpdateState();
         }
 
@@ -94,7 +121,7 @@ namespace Jelly.Enemy
 
             if (time >= .1f)
             {
-                enemy.ShowAttackVisual(enemy.bossAttackData.hammerAttackVisual, enemy.transform.position, Quaternion.identity, false, true);                
+                               
             }
         }
     }

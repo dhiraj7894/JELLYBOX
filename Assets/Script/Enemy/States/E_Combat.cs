@@ -12,9 +12,10 @@ namespace Jelly.Enemy
         public float timeToSpecialAttack = 3;
         public float timeToPowerAttack = 3;
 
-        public int[] phaseOneAttackPattern = new int[] { 0, 0, 1, 0, 1, 0, 0 };
-        //public int[] phaseOneAttackPattern = new int[] { 3, 3, 3, 3, 3, 0, 0 };
-        public int[] phaseTwoAttackPattern = new int[] { 3, 2, 2, 3, 2, 1, 3 };
+        //public int[] phaseOneAttackPattern = new int[] { 0, 0, 1, 0, 1, 0, 0 };
+        public int[] phaseOneAttackPattern = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+        //public int[] phaseTwoAttackPattern = new int[] { 3, 2, 2, 3, 2, 1, 3 };
+        public int[] phaseTwoAttackPattern = new int[] { 0, 0, 0, 0, 0, 0, 0 };
 
         public int currentAttack = 0;
         E_Base State = null;
@@ -88,9 +89,9 @@ namespace Jelly.Enemy
 
             if (timeToAttack <= 0 && timeToSpecialAttack>0)
             {
-                LookAtTarget();
+                LookAtTarget(.2f);
                 Rigidbody rbBall = enemy.BombBallThrow();
-                rbBall.AddForce(enemy.transform.forward * 75, ForceMode.Impulse);
+                rbBall.AddForce(enemy.transform.forward * (enemy.distanceFromTarget * enemy.bossAttackData.forceMultiplyer), ForceMode.Impulse);
                 timeToAttack = enemy.RandomNumberGenrator(.5f, 1f);
             }
             if (timeToSpecialAttack <= 0 && timeToAttack > 0)
@@ -111,9 +112,9 @@ namespace Jelly.Enemy
 
             if (timeToAttack <= 0 && timeToPowerAttack > 0)
             {
-                LookAtTarget();
+                LookAtTarget(.2f);
                 Rigidbody rbBall = enemy.BombBallThrow();
-                rbBall.AddForce(enemy.transform.forward * 75, ForceMode.Impulse);
+                rbBall.AddForce(enemy.transform.forward * (enemy.distanceFromTarget * enemy.bossAttackData.forceMultiplyer), ForceMode.Impulse);
                 timeToAttack = enemy.RandomNumberGenrator(0.5f, 1f);
             }
             if (timeToPowerAttack <= 0 && timeToAttack > 0)

@@ -9,13 +9,15 @@ namespace Jelly.Player
     {
         public SwordStatsSO currentSwordSO;
         public CinemachineImpulseSource source;
+        public Collider collider;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(TagHash.ENEMY))
             {
                 //Debug.Log("Enemy Tagged");
-                other.GetComponent<IHealthSystem>().TakeDamage(currentSwordSO.Damage);
+                other.GetComponentInParent<IHealthSystem>().TakeDamage(currentSwordSO.Damage);
                 source.GenerateImpulse(Camera.main.transform.forward);
+                collider.enabled = false;
             }
 
         }

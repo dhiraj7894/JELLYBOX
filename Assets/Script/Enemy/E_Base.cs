@@ -21,6 +21,7 @@ namespace Jelly.Enemy
         public virtual void LogicUpdateState()
         {
             _dashDistance = enemy.dashDistanceChecker;
+            KnockDown();
         }
 
         public virtual void LateLogicUpdateState()
@@ -61,13 +62,35 @@ namespace Jelly.Enemy
             }
         }
 
-        public void LookAtTarget()
+        public void LookAtTarget(float duration)
         {
             if (enemy.target)
             {
-                enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z));
+                //enemy.transform.LookAt(new Vector3(enemy.target.position.x, enemy.transform.position.y, enemy.target.position.z));
+                Vector3 direction = enemy.target.position - enemy.transform.position;
+
+                // Create the rotation we need to be in to look at the target
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+                // Start the LeanTween rotation
+                LeanTween.rotate(enemy.gameObject, targetRotation.eulerAngles, duration).setEase(LeanTweenType.easeInOutSine);
+            }
+            
+        }
+        public void GetKnockData(float val)
+        {
+            enemy.currentKnockTime = val;
+        }
+        public void KnockDown()
+        {
+            if (enemy.currentKnockTime > 0)
+            {
+                enemy.currentKnockTime -= Time.deltaTime;
+                if (enemy.currentKnockTime <= 0)
+                {
+                    enemy.ChangeCurrentState(enemy.KNOCKOUT);
+                }
             }
         }
-
     }
 }

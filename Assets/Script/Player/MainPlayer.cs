@@ -252,7 +252,7 @@ namespace Jelly.Player
         {
             if (other.CompareTag(TagHash.JUMPFORCE))
             {
-                stats.TakeDamage(other.GetComponentInParent<JumpForceFiled>().HPLoss);
+                stats.TakeDamage(other.GetComponentInParent<DamagePlayerHP>().HPLoss);
                 return;
             }
         }

@@ -69,9 +69,10 @@ public class IceShard : MonoBehaviour
     {
         PrepareToLaunce();
         shine.Play();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         shine.Stop();
-        Launch();
+        StartCoroutine(NewLaunch());
+        //Launch();
     }
 
     public void PrepareToLaunce()
@@ -105,5 +106,26 @@ public class IceShard : MonoBehaviour
         }
         Invoke("ResetLaunchData", .5f);
         // launch
+    }
+
+    IEnumerator NewLaunch()
+    {
+        for (int i = 0; i < shardCount; i++)
+        {
+            if (i >= shardCount-1)
+            {
+                listOfShards[i].isLastBall = true;
+            }
+            listOfShards[i].gameObject.SetActive(true);
+            listOfShards[i].Launch();
+            
+            yield return new WaitForSeconds(.15f);
+        }
+        Invoke("ResetLaunchData", .5f);
+    }
+
+    public void CheckGroundDistance()
+    {
+
     }
 }

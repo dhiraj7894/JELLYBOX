@@ -44,7 +44,7 @@ namespace Jelly.Enemy
         }
         public override void LateLogicUpdateState()
         {
-            LookAtTarget();
+            LookAtTarget(.2f);
             base.LateLogicUpdateState();
         }
 
@@ -69,7 +69,7 @@ namespace Jelly.Enemy
                     Debug.Log($"Target following");
                     enemy.agent.enabled = true;
                     enemy.agent.SetDestination(enemy.target.position);
-                    LookAtTarget();
+                    LookAtTarget(.2f);
                 }
                 if (enemy.distanceFromTarget < dashForwardDistance)
                 {

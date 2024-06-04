@@ -12,10 +12,13 @@ namespace Jelly.Enemy
             enemy = M_enemy;
         }
 
+        public Vector3 spwanPos;
+
         public override void EnterState()
         {
+            spwanPos = enemy.bossAttackData.missileLauncherPosition.position;
             enemy.agent.enabled = false;
-            enemy.ShowAttackVisual(enemy.bossAttackData.missiles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4, enemy.transform.position.z), Quaternion.identity);
+            enemy.WaveAttackVisual(enemy.bossAttackData.missiles, new Vector3(spwanPos.x, spwanPos.y + 4, spwanPos.z), Quaternion.identity);
             base.EnterState();
         }
 

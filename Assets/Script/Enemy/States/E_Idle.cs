@@ -23,7 +23,8 @@ namespace Jelly.Enemy
             combatTimer = Random.Range(1, 4);
             movementTimer = .5f;
             GameManager.Instance.SetCutScene("PlayerTarget");
-
+            enemy.GFXHEightManager(4);
+            if(enemy.currentKnockTime<=0)GetKnockData(10);
         }
 
         public override void ExitState()
@@ -33,15 +34,15 @@ namespace Jelly.Enemy
 
         public override void LogicUpdateState()
         {
+            base.LogicUpdateState();
             combatTimer -= Time.deltaTime;
             movementTimer -= Time.deltaTime;
-
             StateChanger();
         }
 
         public override void LateLogicUpdateState()
         {
-            LookAtTarget();
+            LookAtTarget(.2f);
         }
 
         public void StateChanger()
