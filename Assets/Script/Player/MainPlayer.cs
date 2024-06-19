@@ -76,6 +76,7 @@ namespace Jelly.Player
 
         public ParticleSystem dashParticle;
         public ParticleSystem jumpParticle;
+        public ParticleSystem swordSlashVfx;
         public VisualEffect shieldParticle;
         private void Start()
         {
@@ -141,7 +142,7 @@ namespace Jelly.Player
             if (nearByEnemy.Length != 0)
             {
                 Transform target = nearByEnemy[0].transform;
-                targetedEnemy = target;
+                //targetedEnemy = target;
             }
             else
             {
@@ -258,5 +259,9 @@ namespace Jelly.Player
             }
         }
 
+        public void DoSlashVFX()
+        {
+            swordSlashVfx.Play();
+        }
     }
 }

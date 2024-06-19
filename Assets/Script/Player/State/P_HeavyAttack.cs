@@ -21,7 +21,7 @@ namespace Jelly.Player
         public override void EnterState()
         {
             base.EnterState();
-            dashMultiplier = 2;
+            dashMultiplier = 4;
             timePassed = 0;
             player.anim.SetTrigger(AnimHash.HEAVYATTACK);
             player.anim.SetFloat(AnimHash.SPEED, 0);

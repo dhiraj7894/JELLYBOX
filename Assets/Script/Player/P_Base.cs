@@ -59,6 +59,7 @@ namespace Jelly.Player
                 if (player.currentStamina >= player.stats.stats.StaminaNeedToDash)
                 {
                     player.DoDash();
+                    player.anim.SetFloat(AnimHash.SPEED, 1.5f);
                     player.currentStamina -= player.stats.stats.StaminaNeedToDash;
                 }
             }
