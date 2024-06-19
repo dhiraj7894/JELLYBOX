@@ -15,6 +15,7 @@ namespace Jelly.Enemy
         public float height;
 
         public bool jumpExecuted = false;
+        GameObject visual;
         public E_CircleAttack(MainEnemy M_enemy) : base(M_enemy)
         {
             enemy = M_enemy;
@@ -43,14 +44,14 @@ namespace Jelly.Enemy
                 JumpWave();
                 
             }
-            if(enemy.currentAttackVFX != null)
+            if(visual != null)
             {
                 try
                 {
-                    if(enemy.currentAttackVFX.GetComponent<CircleAttack>().isCircleAttackComplete && enemy.isGrounded) {
+                    if(visual.GetComponent<CircleAttack>().isCircleAttackComplete) {
                         
                         enemy.ChangeCurrentState(enemy.IDLE);
-                        enemy.currentAttackVFX.GetComponent<CircleAttack>().DestroyObject();
+                        visual.GetComponent<CircleAttack>().DestroyObject();
                     }
                 }
                 catch
@@ -85,7 +86,7 @@ namespace Jelly.Enemy
             {
                 time = 0f;
                 //Spwan Attack Visuals
-                //enemy.ShowAttackVisual(enemy.bossAttackData.circleAttackVisual, enemy.transform.position, Quaternion.identity, null);
+                visual = enemy.WaveAttackVisual(enemy.bossAttackData.circleAttackVisual, enemy.bossAttackData.circleparant.position, Quaternion.identity, enemy.bossAttackData.circleparant);
                 jumpExecuted = true;
             }
         }

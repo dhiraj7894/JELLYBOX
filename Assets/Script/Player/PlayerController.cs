@@ -1,4 +1,6 @@
+using Ink;
 using Jelly.Core;
+using Jelly.Enemy;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -61,6 +63,8 @@ namespace Jelly.Player
             }
         }
 
+
+
         private void OnTriggerStay(Collider other)
         {
             if (other.GetComponent<RaycastTarget>())
@@ -85,6 +89,7 @@ namespace Jelly.Player
                     TargetedObject = null;
                 }
             }*/
+
         }
 
         private void OnTriggerExit(Collider other)

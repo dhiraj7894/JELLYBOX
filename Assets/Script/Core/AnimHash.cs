@@ -5,7 +5,7 @@ public class AnimHash {
     public const string ATTACK = "attack";
     public const string HEAVYATTACK = "heavyAtk";
     public const string MOVE = "move";
-    public const string JUMP = "Jump";
+    public const string JUMP = "Jump In";
     public const string BLOCK = "block";
     public const string HIT = "hit";
     public const string HEAVYHIT = "heavyHit";

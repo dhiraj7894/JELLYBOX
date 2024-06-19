@@ -26,6 +26,7 @@ namespace Jelly.Enemy
         public AnimationCurve speedWaveCurve;
         public AnimationCurve circleWaveCurve;
         public GameObject circleAttackVisual;
+        public Transform circleparant;
 
         [Header("Hammer Attack"), Space(5)]
         public Transform hammerAttackParant;
@@ -125,10 +126,10 @@ namespace Jelly.Enemy
             CATTACK = new E_CircleAttack(this);
             HATTACK = new E_HammerAttack(this);
 
-            //AttackList.Add(HATTACK); 
-            //AttackList.Add(JATTACK);
+            AttackList.Add(HATTACK); 
+            AttackList.Add(JATTACK);
             AttackList.Add(MATTACK);
-            //AttackList.Add(CATTACK);
+            AttackList.Add(CATTACK);
 
         }
 

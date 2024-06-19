@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnergyBall
   - Wave
+  - jumpForce
   layers:
   - Default
   - TransparentFX

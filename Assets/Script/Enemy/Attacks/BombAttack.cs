@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class BombAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public GameObject bombHitEffet;
+    public float splashDuration;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(TagHash.GROUND))
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            Destroy(Instantiate(bombHitEffet, transform.position, Quaternion.Euler(0, 0, 0)), splashDuration);
         }
     }
 }

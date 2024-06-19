@@ -122,6 +122,7 @@ namespace Jelly.Player
                 isDead = true;
             }
             EnemyChecker();
+            anim.SetBool("isGrounded", isGrounded);
         }
 
         public void ChangeCurrentState(P_Base newState)
@@ -240,7 +241,7 @@ namespace Jelly.Player
         {
             if (other.CompareTag(TagHash.GROUND))
                 isGrounded = true;
-            HPDrainTrigger(other);
+            //HPDrainTrigger(other);
         }
         private void OnTriggerExit(Collider other)
         {
@@ -252,7 +253,7 @@ namespace Jelly.Player
         {
             if (other.CompareTag(TagHash.JUMPFORCE))
             {
-                stats.TakeDamage(other.GetComponentInParent<DamagePlayerHP>().HPLoss);
+                stats.TakeDamage(other.GetComponentInParent<DamagePlayerHP>().damage);
                 return;
             }
         }
