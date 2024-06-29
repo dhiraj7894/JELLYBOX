@@ -46,6 +46,14 @@ namespace Jelly.Player
         public LayerMask enemyLayerMask;
 
         [Space(10)]
+        public PlayerStats stats;
+
+        public ParticleSystem dashParticle;
+        public ParticleSystem jumpParticle;
+        public ParticleSystem swordSlashVfx;
+        public VisualEffect shieldParticle;
+
+        [Space(10)]
         public float currentStamina = 10;
         public float staminaSpeed = 5;
         public float playerSpeed = 15;
@@ -71,13 +79,7 @@ namespace Jelly.Player
         public bool isSpecialAttack_A_CanBePerforme = false;
         public bool isSpecialAttack_B_CanBePerforme = false;
         
-        [Space(10)]
-        public PlayerStats stats;
 
-        public ParticleSystem dashParticle;
-        public ParticleSystem jumpParticle;
-        public ParticleSystem swordSlashVfx;
-        public VisualEffect shieldParticle;
         private void Start()
         {
             StateInitialize();

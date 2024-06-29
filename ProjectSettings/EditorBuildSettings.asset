@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Player Control.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scene/Enemy Arena.unity
+    guid: 1544954f307fb0d498c932b208ace777
+  - enabled: 1
+    path: Assets/Scene/Environment.unity
+    guid: c2e9c55abbcb75545b5683659f256feb
+  - enabled: 1
+    path: Assets/Scene/Env Testing.unity
+    guid: 8b5d76e1d41d8fa45b3d2245b82c8b42
+  - enabled: 1
+    path: Assets/3LE Low Poly Cloud Pack/Scenes/Clouds Test Scene.unity
+    guid: b64d949e6fa390c4da2f5c0564923aba
+  - enabled: 1
+    path: Assets/Scene/Level Design.unity
+    guid: 9a131c97b45d0ff48991bcc5be42c11b
   m_configObjects: {}
