@@ -1,8 +1,9 @@
+using Jelly;
 using Jelly.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputActions : MonoBehaviour
+public class InputActions : Singleton<InputActions>
 {
     public static InputAction _moveAction;
     public static InputAction _dashAction;

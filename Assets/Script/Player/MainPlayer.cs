@@ -103,19 +103,19 @@ namespace Jelly.Player
             if (isDead || dialogueManager.isDialoguePlaying)
                 return;
 
-            _currentState.LogicUpdateState();
 
+            _currentState.LogicUpdateState();
             if (!isInCutScene)
             {
                 if (UIManager.Instance.isBackScreenFadeActive) 
                     return;
 
-                _currentState.ManageInput();
-                GameManager.Instance.CSDC.enabled = true;
+                _currentState.ManageInput();                
+                //GameManager.Instance.CSDC.enabled = true;
             }
             else
             {
-                GameManager.Instance.CSDC.enabled = false;
+                //GameManager.Instance.CSDC.enabled = false;
             }
             
             CurrrentState = _currentState.ToString();

@@ -11,6 +11,7 @@ TagManager:
   - EnergyBall
   - Wave
   - jumpForce
+  - playerSword
   layers:
   - Default
   - TransparentFX

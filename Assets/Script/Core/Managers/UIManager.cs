@@ -26,6 +26,9 @@ namespace Jelly.Core
         [Space(5)]
         public TextMeshProUGUI CoinCount;
 
+        public TextMeshProUGUI cutSceneCameraTexts;
+        public CanvasGroup cutSceneCamera;
+
 
         public void CutSceneFadeOutIn(float cooldown)
         {

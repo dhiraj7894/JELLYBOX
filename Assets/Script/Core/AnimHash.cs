@@ -37,6 +37,7 @@ public class AnimHash {
 public class TagHash
 {
     public const string PLAYER = "Player";
+    public const string PlayerSword = "playerSword";
     public const string ENEMY = "Enemy";
     public const string GROUND = "ground";
     public const string JUMPFORCE = "jumpForce";
@@ -46,6 +47,13 @@ public class TagHash
     public const string PTARGET = "PlayerTarget";
     public const string ETARGET = "LockOn";
     public const string PSATTACK = "PSpecial Attack";
+
+
+
+    public const string CutScene = "cutScene";
+    public const string PlayerTarget = "PlayerTarget";
+    public const string PSpecialAttack = "PSpecial Attack";
+    public const string LockOn = "LockOn";
 
 }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  MaxStamina: 1000
+  MaxStamina: 50
   StaminaNeedToAttack: 5
   StaminaNeedToJump: 1
   StaminaNeedToDash: 10

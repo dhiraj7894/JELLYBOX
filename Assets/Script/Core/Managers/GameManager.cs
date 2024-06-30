@@ -1,4 +1,5 @@
 using Cinemachine;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Jelly.Core
     {
         public Animator CinemachineAnimator;
         public CinemachineStateDrivenCamera CSDC; // Cinemachine State Driven Camera for player special attack animation angle
+        public CinemachineVirtualCamera VirtualCamera;
 
         [Header("World Config")]
         public int worldLevel = 1;
@@ -39,6 +41,15 @@ namespace Jelly.Core
                 CinemachineAnimator.Play(sceneName);
             }
             
+        }
+        public void CutSceneStart()
+        {
+            MainPlayer.Instance.isInCutScene = true;
+            SetCutScene("PlayerTarget");
+        }
+        public void CutSceneEnd()
+        {
+            MainPlayer.Instance.isInCutScene = false;
         }
     }
 }

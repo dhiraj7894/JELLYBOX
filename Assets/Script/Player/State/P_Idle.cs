@@ -78,7 +78,10 @@ namespace Jelly.Player
             
             if (!_isDead)
             {
-                player.anim.SetFloat(AnimHash.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
+                if(!player.isInCutScene) 
+                    player.anim.SetFloat(AnimHash.SPEED, _input.magnitude, player.playerSpeedDamp, Time.deltaTime);
+                else
+                    player.anim.SetFloat(AnimHash.SPEED, 0, player.playerSpeedDamp, Time.deltaTime);
                 if (_input.magnitude >= 0.1f) MovementUpdate();
 
                 if (!player.isSpecialAttackCooldown)
@@ -91,7 +94,8 @@ namespace Jelly.Player
                     {
                         player.ChangeCurrentState(player.ATTACKING);
                     }
-                }               
+                }  
+                
             }
             else
             {

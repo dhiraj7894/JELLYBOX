@@ -75,7 +75,7 @@ namespace Jelly.Player
         Vector3 moveDir;
         public void MovementUpdate(float speed = 1)
         {
-            if (!_isDead)
+            if (!_isDead && !player.isInCutScene)
             {
                 float targetAngle = Mathf.Atan2(_input.x, _input.y) * Mathf.Rad2Deg + player.cameraTransform.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, player.turnSmoothDamp);

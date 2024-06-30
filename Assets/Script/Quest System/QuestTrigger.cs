@@ -1,4 +1,5 @@
 using Jelly.Core.Quest;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,22 +11,34 @@ namespace Jelly.Core.Quest
         public QuestPoint QuestPoint;
         public PressF_UI PressF_UI;
         public Collider Collider;
+
+        public bool isAutoStart = false;
         private void OnEnable()
         {
             Collider = GetComponent<Collider>();
         }
         public override void Trigger()
         {                        
-            if(QuestPoint != null )
+            if(!isAutoStart && QuestPoint != null )
             {
                 QuestPoint.ActivateQuest();                
             }
         }
-
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag(TagHash.PLAYER))
+            {
+                if (isAutoStart && QuestPoint != null)
+                {
+                    GameManager.Instance.CutSceneStart();
+                    QuestPoint.ActivateQuest();
+                }
+            }
+        }
 
         public void Update()
         {
-            //QuestCollisionChecking();
+            QuestCollisionChecking();
         }
 
         void QuestCollisionChecking()
@@ -46,6 +59,7 @@ namespace Jelly.Core.Quest
                     break;
                 case QuestState.FINISHED: 
                     Collider.enabled = false;
+                    GameManager.Instance.CutSceneEnd();
                     break;
 
             }
