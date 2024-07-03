@@ -217,7 +217,7 @@
                 {
                     "name": "",
                     "id": "20b77bfd-6230-4e08-95aa-498643de55ff",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -315,6 +315,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2576b62c-8e2a-45af-80b5-10b148e00abe",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b3d23087-bc6e-4e68-ad44-eaa1f9c2ea11",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -326,11 +337,22 @@
                 },
                 {
                     "name": "",
+                    "id": "3ee9653d-20fc-4268-94de-2835fcefd687",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "PressF",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7df1e70e-83ae-40a1-8516-c61efe94567d",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard & Mouse",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -341,7 +363,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard & Mouse",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -350,6 +372,17 @@
                     "name": "",
                     "id": "397a140c-0d29-4b7a-a345-cee1c44b8896",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c633b227-f917-4b80-825d-e616a524b62e",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -364,6 +397,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77e24d19-0824-47df-ab1a-2a422cada27a",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
                     "action": "LockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
