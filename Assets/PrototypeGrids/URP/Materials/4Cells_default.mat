@@ -23,8 +23,6 @@ Material:
   m_Name: 4Cells_default
   m_Shader: {fileID: -6465566751694194690, guid: 25096cc823012c14e846190de786a755,
     type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
@@ -40,7 +38,6 @@ Material:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - RayTracingPrepass
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -220,7 +217,7 @@ Material:
     - Vector1_460ffa4bae104b48914a44b28551646f: 0
     - Vector1_47b5cb2f7ef54b9390f26067348bfde2: 2.5
     - Vector1_49788e15aefd43d4b3665cea74fcc218: 0
-    - Vector1_56ebcaf99d2a4553982aef7074c6b088: 2
+    - Vector1_56ebcaf99d2a4553982aef7074c6b088: 0.1
     - Vector1_5c7bc4d9a01b44b0846af50f267cf4d5: 1
     - Vector1_60237dcd7a1145bdb557fd10ac305e14: 0.5
     - Vector1_694384145e2044349ec43d4dd5245dca: 1
@@ -401,7 +398,6 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &6024876142690450464
 MonoBehaviour:
   m_ObjectHideFlags: 11
