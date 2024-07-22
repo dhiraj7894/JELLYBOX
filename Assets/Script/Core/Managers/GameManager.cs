@@ -20,10 +20,19 @@ namespace Jelly.Core
         [Header("Player Config")]
         public int playerLevel = 0;
 
-        private void Start()
+      /*  private void Start()
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+        }*/
+
+        private void Update()
+        {
+           /* if (!Input.GetKey(KeyCode.LeftAlt))
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }*/
         }
 
         public float GetPercentageValue(float getValue, float percentage)

@@ -239,16 +239,11 @@ namespace Jelly.Player
         {
             yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
-
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag(TagHash.GROUND))
                 isGrounded = true;
-            //HPDrainTrigger(other);
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag(TagHash.GROUND))
+            else
                 isGrounded = false;
         }
 

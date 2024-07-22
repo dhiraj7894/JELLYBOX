@@ -1,4 +1,5 @@
 using Jelly.Core;
+using Jelly.Player;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,6 +30,8 @@ namespace Jelly.Core
         public TextMeshProUGUI cutSceneCameraTexts;
         public CanvasGroup cutSceneCamera;
 
+        public GameObject inventory;
+
 
         public void CutSceneFadeOutIn(float cooldown)
         {
@@ -46,6 +49,26 @@ namespace Jelly.Core
                         }).setOnComplete(() => isBackScreenFadeActive = false); 
                     }); 
                 });
+        }
+
+        private void Update()
+        {
+            OpenCloseInventory();
+        }
+        public void OpenCloseInventory()
+        {
+            if (InputActions._inventory.triggered)
+            {
+                if (inventory.activeSelf)
+                {
+                    inventory.SetActive(false);
+                }
+                else
+                {
+                    inventory.SetActive(true);
+                    InventoryManager.Instance.ManageListItem();
+                }
+            }
         }
 
     }

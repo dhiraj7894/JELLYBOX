@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Level Design.unity
     guid: 9a131c97b45d0ff48991bcc5be42c11b
-  - enabled: 1
-    path: Assets/Bitgem/StylisedWater/URP/Examples/Example-Scene-01.unity
-    guid: fc967860e2508924e943ba0223c2ed3b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

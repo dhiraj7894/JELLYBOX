@@ -21,7 +21,7 @@ public class InputActions : Singleton<InputActions>
     public static InputAction _pressF;
     public static InputAction _submit;
     public static InputAction _lockOn;
-
+    public static InputAction _inventory;
 
     public PlayerInput playerInput;
 
@@ -41,6 +41,7 @@ public class InputActions : Singleton<InputActions>
         _pressF = playerInput.actions["PressF"];
         _submit = playerInput.actions["Submit"];
         _lockOn = playerInput.actions["LockOn"];
+        _inventory = playerInput.actions["Inventory"];
     }
 
     private void Update()
