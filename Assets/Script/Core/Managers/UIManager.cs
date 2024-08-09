@@ -32,6 +32,9 @@ namespace Jelly.Core
 
         public GameObject inventory;
 
+        [Header("Interaction UI"), Space(5)]
+        public CanvasGroup interactionUI;
+
 
         public void CutSceneFadeOutIn(float cooldown)
         {

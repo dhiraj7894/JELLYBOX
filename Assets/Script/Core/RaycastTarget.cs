@@ -1,5 +1,6 @@
 
 using Jelly;
+using Jelly.Core;
 using UnityEngine;
 
 public class RaycastTarget : MonoBehaviour
@@ -14,7 +15,7 @@ public class RaycastTarget : MonoBehaviour
     {
         try
         {
-            GetComponent<PressF_UI>().CanvasGroup.alpha = 0.0f;
+            UIManager.Instance.interactionUI.alpha = 0;
         }
         catch
         {

@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Healing Herb
       objectReference: {fileID: 0}
+    - target: {fileID: 5187529488519014744, guid: 9fa020eea37c62f46a4d9a658b6de11b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 5187529488519014749, guid: 9fa020eea37c62f46a4d9a658b6de11b,
         type: 3}
       propertyPath: m_RootOrder
@@ -87,4 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8323c84ec16ff4c42be6f9e254a16359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 3a18dec9472cacb4b9f7615f17b34e47, type: 2}
+  item: {fileID: 11400000, guid: ae4b5db95620c4f4fb8e58b28b3b0541, type: 2}
+  itemDetails:
+    icon: {fileID: 0}
+    itemCount: {fileID: 0}

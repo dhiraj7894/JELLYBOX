@@ -39,11 +39,11 @@ namespace Jelly.Core.Quest
         {
             if (other.CompareTag(TagHash.PLAYER) && currentQuestState == QuestState.IN_PROGRESS && pressF_UI)
             {
-                pressF_UI.CanvasGroup.gameObject.SetActive(false);
+                UIManager.Instance.interactionUI.alpha = 0;
             }
             else
             {
-                pressF_UI.CanvasGroup.gameObject.SetActive(true);
+                UIManager.Instance.interactionUI.alpha = 1;
             }
         }
         private void OnTriggerExit(Collider other)
