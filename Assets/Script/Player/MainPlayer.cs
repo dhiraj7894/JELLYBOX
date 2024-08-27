@@ -1,3 +1,4 @@
+using DiabolicalGames;
 using Jelly.Core;
 using Jelly.Enemy;
 using System.Collections;
@@ -62,6 +63,7 @@ namespace Jelly.Player
         public float sprintSpeedMultiplier = 4;
         public float jumpForce = 15;
         public float gravityMultiplier = 3.0f;
+        public float forceRequireToBrakeItem = 15;
 
         [Space(10)]
         public bool isGrounded = false;
@@ -239,14 +241,28 @@ namespace Jelly.Player
         {
             yield return new WaitForSeconds(stats.stats.SpecialAttackACooldownTime);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
+                isGrounded = true;
+
+            if(other.TryGetComponent<DestructibleObject>(out DestructibleObject dsObj))
+            {
+                if(controller.velocity.magnitude > forceRequireToBrakeItem)
+                    dsObj.Break(rb);
+            }
+        }
         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag(TagHash.GROUND))
                 isGrounded = true;
-            else
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag(TagHash.GROUND))
                 isGrounded = false;
         }
-
         void HPDrainTrigger(Collider other)
         {
             if (other.CompareTag(TagHash.JUMPFORCE))

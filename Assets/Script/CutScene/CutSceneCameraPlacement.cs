@@ -19,8 +19,8 @@ public class CutSceneCameraPlacement : MonoBehaviour
 
     public void StartCameraCutScene()
     {
-        Debug.Log("test");
         GameManager.Instance.VirtualCamera.m_Follow = transform;
+        
         GameManager.Instance.CutSceneStart();
         UIManager.Instance.cutSceneCameraTexts.text = textForCutScene;
         LeanTween.value(this.gameObject, 0, 1, cutSceneStartDelay).setOnUpdate((float val) =>
@@ -28,8 +28,7 @@ public class CutSceneCameraPlacement : MonoBehaviour
             UIManager.Instance.cutSceneCamera.alpha = val;
             if (val >= 1)
             {
-                Debug.Log("test Complete");
-                GameManager.Instance.SetCutScene(TagHash.CutScene);
+                //GameManager.Instance.SetCutScene(TagHash.CutScene);
                 LeanTween.delayedCall(cutSceneEndTime, () =>
                 {
                     GameManager.Instance.CutSceneEnd();

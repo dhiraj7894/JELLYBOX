@@ -28,7 +28,6 @@ namespace Jelly.Player
                     if (itemData.itemType == item.itemType)
                     {
                         itemData.count += 1;
-                        Debug.Log("1");
                         itemExists = true;
                         break; // Exit the loop as we have found and updated the item
                     }

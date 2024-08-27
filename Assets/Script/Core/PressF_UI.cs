@@ -11,6 +11,7 @@ namespace Jelly
     {
         public PlayerStats stats;
         public RaycastTarget RaycastTarget;
+        public Sprite itemIcon;
 
         private void Awake()
         {
@@ -22,6 +23,7 @@ namespace Jelly
             if (RaycastTarget == null)
                 return;
             LeanTween.value(this.gameObject, 0, 1, 0.1f).setOnUpdate((float val) => { UIManager.Instance.interactionUI.alpha = val; });
+            UIManager.Instance.itemUI.sprite = itemIcon;
            // LACamera.LookAtCam();
         }
         public void hideInteractUI()
@@ -30,6 +32,7 @@ namespace Jelly
                 return;
             
             LeanTween.value(this.gameObject, 1, 0, 0.1f).setOnUpdate((float val) => { UIManager.Instance.interactionUI.alpha = val; });
+            //UIManager.Instance.itemUI.sprite = null;
             //LACamera.LookAtCam();
 
         }

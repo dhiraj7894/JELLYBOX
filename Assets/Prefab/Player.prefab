@@ -5161,6 +5161,7 @@ GameObject:
   - component: {fileID: 1962597943}
   - component: {fileID: 1253609915191818111}
   - component: {fileID: 1253609915191818115}
+  - component: {fileID: 1962597945}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5208,12 +5209,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 1
+  m_Radius: 1.2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.45, z: 0}
 --- !u!54 &936284004696580410
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5225,7 +5226,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -5276,13 +5277,18 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  stats: {fileID: 8122886620225834381}
+  dashParticle: {fileID: 8871187446278206916}
+  jumpParticle: {fileID: 1681983355138057918}
+  swordSlashVfx: {fileID: 8156445660652757084}
+  shieldParticle: {fileID: 927852997}
   currentStamina: 50
   staminaSpeed: 5
-  playerSpeed: 15
+  playerSpeed: 7
   dashSpeed: 15
   dashTime: 0.2
   sprintSpeedMultiplier: 4
-  jumpForce: 25
+  jumpForce: 15
   gravityMultiplier: 5
   isGrounded: 0
   isCooldown: 0
@@ -5296,11 +5302,6 @@ MonoBehaviour:
   isDead: 0
   isSpecialAttack_A_CanBePerforme: 0
   isSpecialAttack_B_CanBePerforme: 0
-  stats: {fileID: 8122886620225834381}
-  dashParticle: {fileID: 8871187446278206916}
-  jumpParticle: {fileID: 1681983355138057918}
-  swordSlashVfx: {fileID: 8156445660652757084}
-  shieldParticle: {fileID: 927852997}
 --- !u!114 &8122886620225834381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5345,10 +5346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17706d2ee0512374ea116e7006b472d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ditectionLayer:
+    serializedVersion: 2
+    m_Bits: 65536
   cam: {fileID: 0}
   TargetedObject: {fileID: 0}
   isPlayerNear: 0
-  Distance: 15
+  Distance: 20
 --- !u!65 &1253609915191818111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5360,8 +5364,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9497604, y: 0.27755237, z: 2.0083768}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.9497604, y: 0.45379353, z: 2.0083768}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &1253609915191818115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5375,6 +5379,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 1691426238}
+--- !u!135 &1962597945
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221622553054704616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.359107
+  m_Center: {x: 0, y: 1.1790504, z: 0}
 --- !u!1 &1373201421433425255
 GameObject:
   m_ObjectHideFlags: 0
@@ -5389,7 +5406,7 @@ GameObject:
   - component: {fileID: 1691426240}
   m_Layer: 12
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: playerSword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35954,6 +35971,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3896653344195120461, guid: 9dcbdffb344bc314ca30f97444eff114,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9dcbdffb344bc314ca30f97444eff114,
         type: 3}
       propertyPath: m_Name
@@ -35972,7 +35994,7 @@ PrefabInstance:
     - target: {fileID: 4116305898275362229, guid: 9dcbdffb344bc314ca30f97444eff114,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.5
+      value: -0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: 4864258598605833689, guid: 9dcbdffb344bc314ca30f97444eff114,
         type: 3}

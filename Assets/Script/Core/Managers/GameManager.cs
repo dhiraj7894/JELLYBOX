@@ -11,7 +11,6 @@ namespace Jelly.Core
     public class GameManager : Singleton<GameManager>
     {
         public Animator CinemachineAnimator;
-        public CinemachineStateDrivenCamera CSDC; // Cinemachine State Driven Camera for player special attack animation angle
         public CinemachineVirtualCamera VirtualCamera;
 
         [Header("World Config")]
@@ -20,19 +19,31 @@ namespace Jelly.Core
         [Header("Player Config")]
         public int playerLevel = 0;
 
-      /*  private void Start()
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }*/
+        public bool isMouseLock = false;
 
-        private void Update()
+        private void Start()
         {
-           /* if (!Input.GetKey(KeyCode.LeftAlt))
+            /*if (isMouseLock)
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }*/
+            
+        }
+
+        private void Update()
+        {
+            if (isMouseLock)
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            isMouseLock = !MainPlayer.Instance.isInCutScene;
         }
 
         public float GetPercentageValue(float getValue, float percentage)
@@ -47,7 +58,7 @@ namespace Jelly.Core
             int stateHash = stateInfo.shortNameHash;
             if (stateHash != Animator.StringToHash(sceneName))
             {
-                CinemachineAnimator.Play(sceneName);
+                //CinemachineAnimator.Play(sceneName);
             }
             
         }

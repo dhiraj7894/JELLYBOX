@@ -34,6 +34,7 @@ namespace Jelly.Core
 
         [Header("Interaction UI"), Space(5)]
         public CanvasGroup interactionUI;
+        public Image itemUI;
 
 
         public void CutSceneFadeOutIn(float cooldown)
@@ -65,10 +66,13 @@ namespace Jelly.Core
                 if (inventory.activeSelf)
                 {
                     inventory.SetActive(false);
+                    MainPlayer.Instance.isInCutScene = false;
                 }
                 else
                 {
                     inventory.SetActive(true);
+                    MainPlayer.Instance.isInCutScene = true;  
+                    
                     InventoryManager.Instance.ManageListItem();
                 }
             }

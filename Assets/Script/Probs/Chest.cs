@@ -11,6 +11,7 @@ namespace Jelly
         public Animator checstAnime;
         public float itemThrowForce = 10;
         public float spawnInterval = .1f;
+        public Collider[] chestColliders;
 
         private void Start()
         {
@@ -44,7 +45,10 @@ namespace Jelly
         {
             //Play Animation of opening chest and then spwan the items            
             checstAnime.Play("Open");
-            GetComponent<BoxCollider>().enabled = false;
+            foreach (Collider item in chestColliders)
+            {
+                item.enabled = false;
+            }
         }
     }
 }

@@ -11,8 +11,11 @@ namespace Jelly.Player
     public class PlayerController : IActionTrigger
     {        
         RaycastHit hit;
+        public LayerMask ditectionLayer;
+
         public Camera cam;
         public Transform TargetedObject;
+        public PlayerStats playerStats;
         public bool isPlayerNear = false;
 
         public float Distance = 3;
@@ -26,15 +29,15 @@ namespace Jelly.Player
 
         void rycaster()
         {
-            if(Physics.Raycast(cam.transform.position,cam.transform.forward, out hit, Distance))
+            if(Physics.Raycast(cam.transform.position,cam.transform.forward, out hit, Distance, ditectionLayer))
             {
                 if (hit.transform.GetComponent<RaycastTarget>())
                 {
                     if (!TargetedObject)
                     {
                         EventManager.Instance.PressFButton += hit.transform.GetComponent<IActionTrigger>().Trigger;                        
+                        hit.transform.GetComponent<PressF_UI>().stats = playerStats;
                         hit.transform.GetComponent<PressF_UI>().showInteractUI();
-                        hit.transform.GetComponent<PressF_UI>().stats = transform.GetComponent<PlayerStats>();
                         TargetedObject = hit.transform;
                     }
                     
@@ -44,8 +47,8 @@ namespace Jelly.Player
                     if (TargetedObject)
                     {
                         EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
-                        TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                         TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
+                        TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                         TargetedObject = null;
                     }
                 }
@@ -56,8 +59,8 @@ namespace Jelly.Player
                 if (TargetedObject)
                 {
                     EventManager.Instance.PressFButton -= TargetedObject.GetComponent<IActionTrigger>().Trigger;
-                    TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                     TargetedObject.transform.GetComponent<PressF_UI>().stats = null;
+                    TargetedObject.GetComponent<PressF_UI>().hideInteractUI();
                     TargetedObject = null;
                 }
             }
@@ -68,8 +71,7 @@ namespace Jelly.Player
         private void OnTriggerStay(Collider other)
         {
             if (other.GetComponent<RaycastTarget>())
-            {
-                
+            {                
                 if (!TargetedObject)
                 {
                     EventManager.Instance.PressFButton += other.transform.GetComponent<IActionTrigger>().Trigger;

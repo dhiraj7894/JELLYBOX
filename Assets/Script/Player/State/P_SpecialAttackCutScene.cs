@@ -28,7 +28,7 @@ namespace Jelly.Player
             CurrentTime = 0;
             player.anim.Play(AnimHash.SPECIAL_A);
 
-            GameManager.Instance.CinemachineAnimator.Play(AnimHash.PSA);
+            //GameManager.Instance.CinemachineAnimator.Play(AnimHash.PSA);
         }
 
         public override void ExitState()
